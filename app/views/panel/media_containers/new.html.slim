@@ -1,0 +1,32 @@
+- if @image_params.present?
+  - set_var 'mediaContent', @image_params
+
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+    = link_to _('Videos'), panel_media_containers_path
+    span.path-separator
+  h1 = _('Add New Video')
+= render 'layouts/alerts'
+= simple_form_for '', html: { enctype: 'multipart/form-data', class: 'dropzone form-content', id: 'media_container_form' }, method: :post do |f|
+  = f.input :file, as: :hidden
+
+= simple_form_for @form, as: :media_container_form, url: panel_media_containers_path, method: :post do |f|
+  - if f.object.errors.any?
+    .alert.alert-danger
+      ul
+        - f.object.errors.full_messages.each do |msg|
+          li
+            = msg
+  .fields
+    = f.input :name
+    = f.input :description, as: :text
+    = f.input :additional_description, as: :text
+    = f.input :owner, label: _('Owner'), collection: @presenter.owner_options, include_blank: true
+    = render partial: 'media_content_file_show', locals: { media_content: @media_container.media_content } if @media_container
+    = f.input :media_content_id, as: :hidden, input_html: { id: 'media_content_id' }
+
+  .actions
+    = link_to _('Back'), panel_media_containers_path, class: 'btn btn-default'
+    = f.submit _('Save'), class: 'btn btn-primary'

@@ -1,0 +1,4 @@
+- if media_owner.feed_active?
+  = render 'feed_active', media_owner: media_owner
+- else
+  = render 'feed_inactive', media_owner: media_owner

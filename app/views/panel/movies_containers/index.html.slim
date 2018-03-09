@@ -1,0 +1,39 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+  h1.pull-left
+    = _('Movie Sets')
+    span.counter
+      | (
+      = @movies_containers.length
+      | )
+  = link_to new_panel_movies_container_path, class: 'btn btn-primary pull-right' do
+    = image_tag("icons/ic-add.svg")
+    = _('Add New Movie Set')
+  .clearfix
+= render 'layouts/alerts'
+.table-responsive
+  table.table
+    thead
+      tr
+        th
+          = sortable 'name', _('Set Name')
+          = simple_form_for '', url: panel_movies_containers_path, method: :get, html: {class: 'form-inline'} do |f|
+            == render partial: 'shared/search_panel', locals: {f: f}
+        th = sortable 'movies', _('Elements')
+        th = sortable 'created_at', _('Created')
+        th = _('Actions')
+    tbody
+      - @movies_containers.each do |movie_container|
+        tr
+          td = movie_container.name
+          td = movie_container.movies.count
+          td = l movie_container.created_at
+          td.actions
+            - if can?(:update, movie_container)
+              = link_to edit_panel_movies_container_path(movie_container) do
+                = image_tag("icons/ic-edit.svg")
+            - if !@reserved_containers.include?(movie_container.name.downcase) && can?(:destroy, movie_container)
+              = link_to [:panel, movie_container], data: {confirm: _('Are you sure?')}, method: :delete do
+                = image_tag("icons/ic-delete.svg")

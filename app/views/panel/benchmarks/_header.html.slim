@@ -1,0 +1,4 @@
+.breadcrumbs
+  = link_to _('Crop & shop benchmarks'), panel_benchmarks_path(@search_params)
+h1
+  = "#{@benchmark.created_at.utc.strftime('%b %d %Y %H:%M:%S')} (UTC)"

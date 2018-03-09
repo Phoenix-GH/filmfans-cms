@@ -1,0 +1,22 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+    = link_to _('Celebrities'), panel_media_owners_path
+    span.path-separator
+  h1 = _('New Celebrity')
+= render 'layouts/alerts'
+= simple_form_for @form, as: :media_owner_form, url: panel_media_owners_path, method: :post do |f|
+  .fields
+    = f.input :name, label: _('Celebrity Name')
+    = f.input :dialogfeed_url, label: _('Dialogfeed URL')
+    = f.simple_fields_for :picture, @picture do |picture_fields|
+      = picture_fields.input :file, as: :file, label: _('Celebrity Profile Picture')
+    = f.simple_fields_for :background_image, @background_image do |background_image_fields|
+      = background_image_fields.input :file, as: :file, label: _('Celebrity Background Image')
+    .form-group
+      = image_tag @picture.file_url if @media_owner
+      = image_tag @background_image.file_url if @media_owner
+  .actions
+    = link_to _('Back'), panel_media_owners_path, class: 'btn btn-default'
+    = f.submit _('Save'), class: 'btn btn-primary'

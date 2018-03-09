@@ -1,0 +1,21 @@
+.modal-dialog
+  = simple_form_for @form, as: :social_following_categories_form, url: update_categories_panel_social_following_path(@following, params: @search_params, anchor: "f#{@following.id}"), method: :put do |f|
+    .modal-content
+      .modal-header
+        button.close type="button" data-dismiss="modal"
+          |&times;
+        h4.modal-title
+          = _('Assign Social Categories')
+      .modal-body
+        .row
+          .col-sm-4.col-md-4
+            = image_tag @following.avatar_url, class: 'img-responsive'
+            h4 style="text-align: center"
+              = @following.name
+
+          .col-sm-8.col-md-8
+            = f.input :social_category_ids, collection: @social_categories, selected: @selected_category_ids, label: _(''), input_html: { id: 'social-following-categories-selector', multiple: true }
+
+      .modal-footer
+        = f.submit _('Save'), class: 'btn btn-primary btn-save'
+        = link_to _('Close'), '', class: 'btn btn-default btn-cancel', type: 'button', :'data-dismiss' => 'modal'

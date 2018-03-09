@@ -1,0 +1,33 @@
+.disney-product-category-mapping {
+  .product-image {
+    margin: 2px;
+    border: 1px solid #eee;
+    height: 195px;
+    overflow-y: hidden;
+    img {
+      max-width: 100%;
+      max-height: 150px
+    }
+    .product-name {
+      text-align: center;
+      font-size: 0.8em;
+    }
+  }
+  .fields {
+    margin: 0 5px 0 0;
+  }
+  .actions {
+    margin: 0 5px 5px 0;
+  }
+  .alerts-container--margin {
+    margin: 0;
+  }
+  .disney-cat-list,
+  .ff-cat-list {
+    overflow-y: scroll;
+    max-height: 600px;
+  }
+  .list-group-item > .badge {
+    background-color: #31708f
+  }
+}

@@ -1,0 +1,29 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+    = link_to _('Products'), panel_products_path
+    span.path-separator
+  h1 = _('Add New Product')
+  .tabs
+    = link_to new_panel_product_path do
+      = _('Details')
+      span.underline
+    = link_to new_panel_product_path do
+      = _('Parameters')
+      span.underline
+    = link_to new_panel_product_path do
+      = _('SIMILAR PRODUCTS')
+      span.underline
+= render 'layouts/alerts'
+.fields
+  = simple_form_for @form, as: :product_form, url: panel_products_path, method: :post do |f|
+    = f.error_notification
+    .form-inputs
+      = f.input :name
+      = f.input :brand
+      = f.input_field :category_ids, collection: @presenter.category_main_options, as: :grouped_select, group_method: :subcategories, class: 'js-category-type', prompt: "Choose Category"
+      = f.input :vendor_url
+      = f.input :shipping_info
+    .form-actions
+      = f.button :submit, _('Next'), class: 'btn btn-success'

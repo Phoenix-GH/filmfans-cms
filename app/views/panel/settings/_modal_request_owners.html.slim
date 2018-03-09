@@ -1,0 +1,54 @@
+#requestOwners.modal.fade aria-labelledby="requestOwners" role="dialog" tabindex="-1"
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        h3.modal-title Request access to new media owners
+      .modal-body.tabs-container
+        .row.tabsetion
+          .col-md-12
+            .tabs.media-owner-tabs
+              = link_to '#', class: 'active', data: {owner: '.channels-tab'} do
+                = _('Channels')
+                span.underline
+              = link_to '#', data: {owner: '.celebrities-tab'} do
+                = _('Celebrities')
+                span.underline
+            .search-field
+              .form-group
+                input.search.form-control placeholder="Search"
+        .row.media-owner-container-select
+          .col-md-12.channels-tab.current
+            .media-owner
+              input type="checkbox" value="1"
+              img.media-owner__img src="http://localhost:3000/uploads/media_owner_picture/6/3/6/custom_bella_thorne_banner.jpg"
+              .media-owner__name
+                | MTV
+            .media-owner
+              input type="checkbox" value="2"
+              img.media-owner__img src="http://localhost:3000/uploads/media_owner_picture/6/3/6/custom_bella_thorne_banner.jpg"
+              .media-owner__name
+                | VIVA
+            .media-owner
+              input type="checkbox" value="3"
+              img.media-owner__img src="http://localhost:3000/uploads/media_owner_picture/6/3/6/custom_bella_thorne_banner.jpg"
+              .media-owner__name
+                | SMZG
+          .col-md-12.celebrities-tab
+            .media-owner
+              input type="checkbox" value="4"
+              img.media-owner__img src="http://localhost:3000/uploads/media_owner_picture/6/3/6/custom_bella_thorne_banner.jpg"
+              .media-owner__name
+                | Bella Thorne
+            .media-owner
+              input type="checkbox" value="5"
+              img.media-owner__img src="http://localhost:3000/uploads/media_owner_picture/6/3/6/custom_bella_thorne_banner.jpg"
+              .media-owner__name
+                | Heidi Klum
+            .media-owner
+              input type="checkbox" value="6"
+              img.media-owner__img src="http://localhost:3000/uploads/media_owner_picture/6/3/6/custom_bella_thorne_banner.jpg"
+              .media-owner__name
+                | Chrissy Teigen
+      .modal-footer
+        button.btn.btn-default data-dismiss="modal" type="button"  Cancel
+        button.btn.btn-primary type="button"  Send

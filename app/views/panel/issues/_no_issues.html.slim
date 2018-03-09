@@ -1,0 +1,11 @@
+
+/ br
+/ = link_to @channel.name, panel_channel_path(@channel)
+/ |  has no Magazines set yet
+
+
+/ br
+/ br
+/ = link_to 'Skip', panel_channel_path(@channel), class: 'btn btn-default'
+/ br
+/ = link_to 'Add Magazine', new_panel_channel_magazine_path(@channel), class: 'btn btn-primary'

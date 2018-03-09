@@ -1,0 +1,42 @@
+#myModal.frame-content-modal.hide
+  .container-popup.clearfix
+    .container-body
+      .pull-left
+        .rectangle-158
+          h4.title-popup #{title}
+          .container-edit-profile
+            div.custom-image.clearfix
+              div.col-custom-image
+                div.zoom-range-double
+                  span.zoom-in-photo -
+                  input#rangeZoom max="3" min="-3" step=".1" type="range" value="0" /
+                  span.zoom-out-photo +
+                  #oldRangeValue.hidden 0
+              div.col-custom-image
+                div.swap-image.clearfix
+                  a#cover.active cover
+                  a#background background
+          .action-popup.docs-buttons.clearfix
+            div.btn-save Save
+            div.btn-cancel Cancel
+      .pull-right
+        .review-phone-event.hide
+          .w-review-background
+            .img-preview-background
+          .w-review-cover
+            .img-preview-cover
+        .review-phone-tv-show.hide
+          .w-review-background
+            .img-preview-background
+          .w-review-cover
+            .img-preview-cover
+        .review-phone-magazine.hide
+          .w-review-background
+            .img-preview-background
+          .w-review-cover
+            .img-preview-cover
+        .review-phone-collection.hide
+          .w-review-background
+            .img-preview-background
+          .w-review-cover
+            .img-preview-cover

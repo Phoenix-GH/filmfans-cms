@@ -1,0 +1,27 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+    = link_to _('Events'), panel_events_path
+    span.path-separator
+  h1 = _('Add New Event')
+  .tabs
+    = link_to new_panel_event_path, class: 'active' do
+      span.step 1
+      = _('Details')
+      span.underline
+    = link_to '#' do
+      span.step 2
+      = _('Set Containers')
+      span.underline
+= render 'layouts/alerts'
+= simple_form_for @form, as: :event_form, url: panel_events_path, method: :post do |f|
+  .fields
+    = f.input :name, label: _('Event Name')
+    = f.simple_fields_for :background_image, @background_image do |background_image_fields|
+      = background_image_fields.input :file, as: :file, label: _('Event Image')
+    .form-group
+      = image_tag @background_image.file_url if @event
+  .actions
+    = link_to _('Back'), panel_events_path, class: 'btn btn-default'
+    = f.submit _('Save'), class: 'btn btn-primary'

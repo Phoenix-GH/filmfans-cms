@@ -1,0 +1,43 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+  h1.pull-left
+    = _('Events')
+    span.counter
+      | (
+      = @events.length
+      | )
+  = link_to new_panel_event_path, class: 'btn btn-primary pull-right' do
+    = image_tag("icons/ic-add.svg")
+    = _('Add Event')
+  .clearfix
+= render 'layouts/alerts'
+.table-responsive
+  table.table
+    thead
+      tr
+        th
+          = sortable 'name', _('Collection Title')
+          = simple_form_for '', url: panel_events_path, method: :get, html: { class: 'form-inline' } do |f|
+            == render partial: 'shared/search_panel', locals: { f: f }
+        th = _('Background Image')
+        th = sortable 'event_contents', _('Containers')
+        th = sortable 'created_at', _('Created')
+        th = _('Actions')
+
+    tbody
+      - @events.each do |event|
+        tr
+          td
+            big = event.name
+          td.image = image_tag event.background_image.custom_url
+          td= event.event_contents.count
+          td = l event.created_at
+          td.actions
+            - if can?(:update, event)
+              = link_to edit_panel_event_path(event) do
+                = image_tag("icons/ic-edit.svg")
+            - if can?(:destroy, event)
+              = link_to [:panel, event], data: { confirm: _('Are you sure?') }, method: :delete do
+                = image_tag("icons/ic-delete.svg")

@@ -1,0 +1,22 @@
+.header
+  .row
+    .col-md-6.text-left
+      .breadcrumbs
+        = link_to _('Home')
+        span.path-separator
+      h1 = _('Help and Support')
+= render 'layouts/alerts'
+.fields
+  .row
+    .col-md-6
+      h4 Contact Support Team
+      = simple_form_for @form, as: :enquiry_form, url: enquiry_panel_support_index_path, method: :put do |f|
+        = f.input :subject, label: _('Subject'), placeholder: 'Your problem subject'
+        = f.input :content, as: :text, label: _('Description'), placeholder: 'Your problem description'
+        .form-group
+          button.btn.btn-primary.pull-right Submit
+    .col-md-6.text-center.support-call
+      = image_tag("icons/ic-help-contact.svg")
+      p
+        | Call support at
+        span.number  +48 468 124 157

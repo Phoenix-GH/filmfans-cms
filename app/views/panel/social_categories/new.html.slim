@@ -1,0 +1,11 @@
+.header
+  = render 'header', { title: 'New Social Category'}
+= render 'layouts/alerts'
+.social-categories
+  = simple_form_for @form, as: :social_category_form, url: panel_social_categories_path, method: :post do |f|
+    .fields
+      = f.input :name, label: _('Name'), autofocus: true
+      = f.input :image, as: :file, label: _('Background Image')
+    .actions
+      = link_to _('Back'), panel_social_categories_path, class: 'btn btn-default'
+      = f.submit _('Save'), class: 'btn btn-primary'

@@ -1,0 +1,11 @@
+.header
+  = render 'header', {title: 'New 3D/AR'}
+  = render 'header_new'
+
+= render 'layouts/alerts'
+= simple_form_for @form, as: :threed_ar_form, url: panel_threed_ars_path, method: :post do |f|
+  .fields
+    = render partial: 'fields', locals: {f: f}
+  .actions
+    = link_to _('Back'), panel_threed_ars_path, class: 'btn btn-default'
+    = f.submit _('Save'), class: 'btn btn-primary'

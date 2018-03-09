@@ -1,0 +1,43 @@
+.sortable {
+  width: 100%;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.sortable.grid {
+  overflow: hidden;
+}
+
+.sortable li {
+  list-style: none;
+  border: 1px solid #CCC;
+  background: #F6F6F6;
+  color: #1C94C4;
+  margin: 1%;
+  padding: 5px;
+  height: 300px;
+}
+
+.sortable.grid li {
+  float: left;
+  width: 48%;
+  text-align: center;
+}
+.handle {
+  cursor: move;
+}
+li.disabled {
+  opacity: 0.5;
+}
+
+li.sortable-placeholder {
+  border: 1px dashed #CCC;
+  background: none;
+}
+
+.js-mp-elements-container{
+  .sortable-placeholder{
+    height: 100px;
+  }
+}

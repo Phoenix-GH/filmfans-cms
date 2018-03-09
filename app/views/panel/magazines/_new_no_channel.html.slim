@@ -1,0 +1,24 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+    = link_to _('Magazines'), panel_magazines_path
+    span.path-separator
+  h1 = _('New Magazine')
+= render 'layouts/alerts'
+= simple_form_for @form, as: :magazine_form, url: panel_magazines_path, method: :post do |f|
+  .fields
+    = f.input :form_type, as: :hidden, input_html: { value: 'no_channel' }
+    = f.input :title, label: _('Magazine Title')
+    = f.input :description, label: _('Description'), as: :text
+    = f.input :channel_id, label: _('Channel'), collection: Channel.where(id: current_admin.channel_ids).map{ |c| [c.name, c.id] }, include_blank: false
+    = f.simple_fields_for :cover_image, @cover_image do |cover_image_fields|
+      = cover_image_fields.input :file, as: :file, label: _('Magazine image')
+    .form-group
+      = image_tag @cover_image.custom_url if @magazine
+
+  .actions
+    = link_to _('Back'), panel_magazines_path, class: 'btn btn-default'
+    = f.submit _('Save'), class: 'btn btn-primary'
+
+= render partial: 'shared/cropper', locals: {title: 'Edit Magazine Cover', caption: 'new background image'}

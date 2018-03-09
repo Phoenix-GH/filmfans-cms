@@ -1,0 +1,46 @@
+.table-actions
+  - if @channel.present?
+    - if can?(:update, @channel)
+      = link_to 'Add New TV Show', new_panel_channel_tv_show_path(@channel), class: 'btn btn-default btn-action'
+    - else
+      = link_to 'Add New TV Show', new_panel_tv_show_path, class: 'btn btn-default btn-action'
+
+.table-responsive
+  = simple_form_for '', url: @channel.present? ? panel_channel_tv_shows_path(@channel) : panel_tv_shows_path, method: :get, html: {class: 'form-inline'} do |f|
+    table.table
+      thead
+        tr
+          th{ colspan = "5" }
+            = _('TV Shows list')
+        tr
+          th
+            = sortable 'title', _('TV Show Title')
+            == render partial: 'shared/search_panel', locals: {f: f}
+          th = _('Image')
+          th = _('Description')
+          th = _('Episodes')
+          th = _('Actions')
+
+      tbody
+        - @tv_shows.each do |tv_show|
+          tr
+            td = tv_show.title
+            td.image = image_tag tv_show.try(:cover_image).try(:custom_url)
+            td = tv_show.description
+            td
+              = "#{tv_show.episodes.count} "
+              = link_to 'Manage Episodes', panel_tv_show_episodes_path(tv_show), class: 'btn btn-default'
+            td.actions
+              - if can?(:update, tv_show.channel)
+                = link_to edit_panel_channel_tv_show_path(tv_show.channel, tv_show) do
+                  = image_tag("icons/ic-edit.svg")
+              - if can?(:update, tv_show.channel)
+                = link_to [:panel, tv_show.channel, tv_show], data: { confirm: _('Are you sure?') }, method: :delete do
+                  = image_tag("icons/ic-delete.svg")
+.text-center
+  = paginate @tv_shows if @tv_shows.count > 0
+
+- if @channel
+  .actions
+    = link_to 'Back', edit_panel_channel_path(@channel, step: :trending), class: 'btn btn-default'
+    = link_to 'Next', panel_channel_magazines_path, class: 'btn btn-primary'

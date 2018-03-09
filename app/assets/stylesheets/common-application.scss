@@ -1,0 +1,51 @@
+body {
+  color: $light;
+  font-size: 18px;
+}
+
+h1, h2, h3, h4, h5, h6, h7 {
+  color: $gray-lighter;
+}
+
+.btn {
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 0 22px;
+  line-height: 45px;
+  height:45px;
+  outline: none;
+}
+
+.form-control,
+.form-control:focus {
+  font-size: inherit;
+  height: auto;
+  box-shadow: none;
+  border-radius: 4px;
+  padding: 15px 17px;
+  border: solid 2px $gray-semidark;
+  background-color: rgba($gray-darkest, 0.7);
+  font-weight: $font-weight-book;
+  color: $gray-light;
+
+  &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    $light;
+    opacity:  0.7;
+  }
+
+  &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    $light;
+    opacity:  0.7;
+  }
+
+  &::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    $light;
+    opacity:  0.7;
+  }
+
+  &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color:    $light;
+    opacity:  0.7;
+  }
+}

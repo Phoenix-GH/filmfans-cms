@@ -1,0 +1,10 @@
+- judgement ||= nil
+
+= link_to judge_panel_benchmark_path(benchmark, format: 'js', judgement: judgement), method: :put, remote: true do
+  - if benchmark.judgement.blank?
+    i.fa.fa-star.grey
+  - else
+    - if judgement.blank?
+      i.fa.fa-star.blue
+    - else
+      i.fa.fa-star.grey

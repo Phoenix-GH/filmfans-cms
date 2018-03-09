@@ -1,0 +1,6 @@
+:queues:
+  - default
+  - [benchmark, 2]
+  - elasticsearch_index
+  - [export_product_image, 3]
+  - [gracenote_prefetcher, 4]

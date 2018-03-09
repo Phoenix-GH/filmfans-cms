@@ -1,0 +1,13 @@
+= f.error_notification
+
+.form-inputs
+  = f.input :name
+  = image_tag @category.icon_url if @category
+  = f.input :icon, as: :file, label: _('Icon')
+  = image_tag @category.image_url if @category
+  = f.input :image, as: :file, label: _('Image')
+  = f.input :parent_id, collection: Category.all, selected: params[:parent_id], include_blank: true
+
+.form-actions
+   = f.button :submit, _('Save Category'), class: 'btn btn-success'
+   = link_to _('Back'), panel_categories_path, class: 'btn btn-default'

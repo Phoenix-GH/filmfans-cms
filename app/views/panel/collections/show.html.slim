@@ -1,0 +1,28 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+    = link_to _('Collections'), panel_collections_path
+    span.path-separator
+  h1 = _('Edit Collection')
+  .tabs
+    = link_to edit_panel_collection_path(@collection) do
+      = _('Details')
+      span.underline
+    = link_to [:panel, @collection], class: 'active' do
+      = _('Containers order')
+      span.underline
+      
+- set_var 'collectionId', @collection.id
+ul.sortable.collection-sortable.grid
+  - @collection.collection_contents.order(:position).each do |content|
+    - if content.content_type == 'MediaContainer'
+      li{ data= { id: "#{content.id}" } }
+        h3 = content.content.name
+        = image_tag content.content.cover_image&.thumb
+
+    - if content.content_type == 'ProductsContainer'
+      li{ data= { id: "#{content.id}" } }
+        h3 = content.content.name
+        - content.content.products.limit(4).each do |product|
+          = image_tag product.primary_image_object&.small_cover_image_url

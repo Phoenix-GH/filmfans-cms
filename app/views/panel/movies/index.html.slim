@@ -1,0 +1,52 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+  h1.pull-left
+    = _('Movies')
+    span.counter
+      | (
+      = @movies.total_count
+      | )
+  = link_to gracenote_search_panel_movies_path, class: 'btn btn-primary pull-right' do
+    = image_tag("icons/ic-add.svg")
+    = _('Add a movie from Gracenote')
+  .clearfix
+
+= render 'layouts/alerts'
+.table-responsive
+  table.table
+    thead
+      = simple_form_for '', url: panel_movies_path, method: :get, html: {class: 'form-inline'} do |f|
+
+        tr
+          th
+            = sortable 'title', _('Movie Title')
+            == render partial: 'shared/search_panel', locals: {f: f}
+          th = _('Poster')
+          th = _('Gracenote ID')
+          th = sortable 'created_at', _('Created')
+          th = _('Actions')
+
+    tbody
+      - @movies.each do |movie|
+        tr
+          td
+            big = movie.title
+          td.image
+            -if movie.gracenote_id.blank?
+              = image_tag movie.poster_image_thumbnail
+            -else
+              = image_tag GracenoteMoveDetailSerializer::full_image_url(movie.poster_image_thumbnail)
+          td = movie.gracenote_id
+          td = l movie.created_at
+          td.actions
+            - if can?(:update, movie)
+              = link_to products_panel_movie_path(movie) do
+                = image_tag("icons/ic-edit.svg")
+
+            - if can?(:destroy, movie)
+              = link_to [:panel, movie], data: {confirm: _('Are you sure?')}, method: :delete do
+                = image_tag("icons/ic-delete.svg")
+  .text-center
+    = paginate @movies if @movies.count > 0

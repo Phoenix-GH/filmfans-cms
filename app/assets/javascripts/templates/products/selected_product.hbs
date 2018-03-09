@@ -1,0 +1,7 @@
+<li class="product" data-id="{{ id }}">
+    <i class="fa fa-close"></i>
+    {{#unless available}}
+        <div class="out-of-stock"></div>
+    {{/unless}}
+    <img class="product__image" src="{{ image }}">
+</li>

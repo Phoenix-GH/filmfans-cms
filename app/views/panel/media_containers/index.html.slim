@@ -1,0 +1,46 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+  h1.pull-left
+    = _('Videos')
+    span.counter
+      | (
+      = _(@media_containers.kind_of?(Array) ? @media_containers.count.to_s : @media_containers.total_count.to_s)
+      | )
+  = link_to new_panel_media_container_path, class: 'btn btn-primary pull-right' do
+    = image_tag("icons/ic-add.svg")
+    = _('Add Video')
+  .clearfix
+= render 'layouts/alerts'
+.table-responsive
+  = simple_form_for '', url: panel_media_containers_path, method: :get do |f|
+    table.table
+      thead
+        tr
+          th.media-container
+            = sortable 'name', _('Media Containers')
+            == render partial: 'shared/search_panel', locals: {f: f}
+          th = _('Video')
+          th
+            = _('Media Owner')
+            .search
+              = f.input :owner_id, collection: @owners_for_select, selected: params[:owner_id], label: false, include_blank: 'All'
+          th = sortable 'created_at', _('Created')
+          th = _('Actions')
+      tbody
+        - @media_containers.each do |media_container|
+          tr
+            td.media-container = media_container.name
+            td.video = video_tag media_container.media_content.mp4_version_file, autoplay: false, controls: true
+            td = media_container.owner&.name
+            td = l media_container.created_at
+            td.actions
+              - if can?(:update, media_container)
+                = link_to edit_panel_media_container_path(media_container) do
+                  = image_tag("icons/ic-edit.svg")
+              - if can?(:destroy, media_container)
+                = link_to [:panel, media_container], data: { confirm: _('Are you sure?') }, method: :delete do
+                  = image_tag("icons/ic-delete.svg")
+.text-center
+  = paginate @media_containers if @media_containers.count > 0

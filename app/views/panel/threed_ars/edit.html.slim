@@ -1,0 +1,13 @@
+.header
+  = render 'header', {title: 'Edit 3D/AR'}
+  = render 'header_edit'
+
+= render 'layouts/alerts'
+= simple_form_for @form, as: :threed_ar_form, url: panel_threed_ar_path(@threed_ar), method: :put do |f|
+  .fields
+    = render partial: 'fields', locals: {f: f}
+    .form-group
+      = image_tag @threed_ar.trigger_image_url
+  .actions
+    = link_to _('Back'), panel_threed_ars_path, class: 'btn btn-default'
+    = f.submit _('Save'), class: 'btn btn-primary'

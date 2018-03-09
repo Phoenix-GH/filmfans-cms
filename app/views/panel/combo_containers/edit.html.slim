@@ -1,0 +1,28 @@
+- set_var 'mediaContent', @image_params
+
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+    = link_to _('Containers'), panel_combo_containers_path
+    span.path-separator
+  h1 = _('Edit Combo Container')
+  .tabs
+    = link_to edit_panel_combo_container_path(@products_container), class: 'active' do
+      = _('Details')
+      span.underline
+    = link_to panel_combo_container_path(@products_container) do
+      = _('Products order')
+      span.underline
+= render 'layouts/alerts'
+= simple_form_for '', html: { enctype: 'multipart/form-data', class: 'dropzone form-content', id: 'media_container_form' }, method: :post do |f|
+  = f.input :file, as: :hidden
+  
+= simple_form_for @form, as: :products_container_form, url: panel_combo_container_path(@products_container), method: :patch do |f|
+  - if f.object.errors.any?
+    .alert.alert-danger
+      ul
+        - f.object.errors.full_messages.each do |msg|
+          li
+            = msg
+  == render partial: 'fields', locals: {f: f}

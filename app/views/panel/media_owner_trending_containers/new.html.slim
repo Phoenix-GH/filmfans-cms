@@ -1,0 +1,10 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+    = link_to _('Manual Post Sets'), panel_media_owner_trending_containers_path
+    span.path-separator
+  h1 = _('New Manual Post Set')
+= render 'layouts/alerts'
+= simple_form_for @form, as: :manual_post_container_form, url: panel_media_owner_trending_containers_path, method: :post do |f|
+  == render partial: 'panel/media_owner_trending_containers/fields', locals: {f: f}

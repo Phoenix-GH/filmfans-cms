@@ -1,0 +1,10 @@
+.fields
+  = f.input :name
+  = f.input :description, as: :text
+  = f.input :product_ids, label: _("Products"), input_html: { data: { pre: @form.products_linked.map { |id| similar_option_from_token(id) } }, class: 'product_ids' }
+  = f.input :channel_id, label: _('Channel'), collection: @presenter.channel_options, include_blank: true, input_html: { class: 'channel-selector' }
+  = f.input :media_owner_id, label: _('Media Owner'), collection: @presenter.media_owner_options, input_html: { class: 'media-owner-selector', data: {selected_id: f.object.media_owner_id } }, include_blank: true
+  = f.input :media_content_id, as: :hidden, input_html: { id: 'media_content_id' }
+.actions
+  = link_to _('Back'), panel_combo_containers_path, class: 'btn btn-default'
+  = f.submit _('Save'), class: 'btn btn-primary'

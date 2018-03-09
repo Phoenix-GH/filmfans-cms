@@ -1,0 +1,10 @@
+.tabs
+  = link_to edit_panel_threed_ar_path(@threed_ar), class: ('active' if (request.path_info.include?('/edit') and not request.path_info.include?('/threed_models'))) do
+    .step-number 1
+    = _('TRIGGER')
+    span.underline
+
+  = link_to panel_threed_ar_threed_models_path(@threed_ar), class: ('active' if request.path_info.include?('/threed_models')) do
+    .step-number 2
+    = _('MODELS')
+    span.underline

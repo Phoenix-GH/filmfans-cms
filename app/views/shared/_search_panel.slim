@@ -1,0 +1,11 @@
+- field ||= :search
+- second_search ||= nil
+
+- unless second_search.blank?
+  = f.input :sort, as: :hidden, input_html: { value: params[:sort] }
+  = f.input :direction, as: :hidden, input_html: { value: params[:direction].blank? ? 'asc' : params[:direction] }
+
+div.search
+  = f.input field, label: false, placeholder: _('Search'), input_html: { value: params[field] }
+  button
+    = image_tag("icons/ic-search.svg")

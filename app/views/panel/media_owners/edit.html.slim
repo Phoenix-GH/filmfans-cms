@@ -1,0 +1,19 @@
+.header
+  = render 'header', { active: 'details', :@source_owner => @media_owner }
+= render 'layouts/alerts'
+= simple_form_for @form, as: :media_owner_form, url: panel_media_owner_path(@media_owner), method: :patch do |f|
+  .fields
+    = f.input :name, label: _('Celebrity Name')
+    = f.input :dialogfeed_url, label: _('Dialogfeed URL')
+    = f.simple_fields_for :picture, @media_owner.picture do |picture_fields|
+      = picture_fields.input :file, as: :file, label: _('Celebrity Profile Picture')
+    = f.simple_fields_for :background_image, @media_owner.background_image do |background_image_fields|
+      = background_image_fields.input :file, as: :file, label: _('Celebrity Background Image')
+    .form-group
+      = image_tag @media_owner.picture.custom_url, data: @media_owner.picture.cropper_data, class: 'cropper'
+      = image_tag @media_owner.background_image.custom_url, data: @media_owner.background_image.cropper_data, class: 'cropper'
+  .actions
+    = link_to _('Back'), panel_media_owners_path, class: 'btn btn-default'
+    = f.submit _('Save'), class: 'btn btn-primary'
+
+= render partial: 'shared/cropper', locals: { title: 'Edit Picture', caption: 'new background image'}

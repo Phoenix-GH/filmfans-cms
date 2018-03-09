@@ -1,0 +1,20 @@
+= simple_form_for form, url: panel_admins_path, method: :post do |f|
+  .fields
+    .row
+      .col-lg-6
+        .field
+          = f.input :email, label: _('Invite New Admin'), placeholder: _('Email address')
+        .field
+          .form-group
+            = f.label :role, class: "control-label" do
+              = _('Set Role')
+              span.form-hint data-toggle="tooltip" href="#" title="#{_('Moderator can only change content for owned channel/celebrity. Curator can only change content for owned celebrity')}"
+                i.fa.fa-info-circle
+            = f.input_field :role, collection: @presenter.role_options, include_blank: false, class: "form-control"
+        .field#channel-ids
+          = f.input :channel_ids, label: _('Channel'), collection: @presenter.channel_options, include_blank: true, input_html: { multiple: true, class: 'chosen-select'  }
+        .field#media-owner-ids
+          = f.input :media_owner_ids, label: _('Media Owner'), collection: @presenter.media_owner_options, include_blank: true, input_html: { multiple: true, class: 'chosen-select' }
+  .actions
+    = link_to _('Back'), panel_admins_path, class: 'btn btn-default'
+    = f.submit _('Send Invitation'), class: 'btn btn-primary'

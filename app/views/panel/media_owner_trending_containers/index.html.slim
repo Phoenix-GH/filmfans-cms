@@ -1,0 +1,39 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+  h1.pull-left
+    = _('Manual Post Sets')
+    span.counter
+      | (
+      = @manual_post_containers.length
+      | )
+  = link_to new_panel_media_owner_trending_container_path, class: 'btn btn-primary pull-right' do
+    = image_tag("icons/ic-add.svg")
+    = _('Add Post Set')
+  .clearfix
+= render 'layouts/alerts'
+.table-responsive
+  table.table
+    thead
+      tr
+        th
+          = sortable 'name', _('Trending Set Name')
+          = simple_form_for '', url: panel_media_owner_trending_containers_path, method: :get, html: {class: 'form-inline'} do |f|
+            == render partial: 'shared/search_panel', locals: {f: f}
+        th = sortable 'posts', _('Elements')
+        th = sortable 'created_at', _('Created')
+        th = _('Actions')
+    tbody
+      - @manual_post_containers.each do |container|
+        tr
+          td = container.name
+          td = container.manual_posts.count
+          td = l container.created_at
+          td.actions
+            - if can?(:update, container)
+              = link_to edit_panel_media_owner_trending_container_path(container) do
+                = image_tag("icons/ic-edit.svg")
+              - if can?(:destroy, container)
+                = link_to panel_media_owner_trending_container_path(container), data: {confirm: _('Are you sure?')}, method: :delete do
+                  = image_tag("icons/ic-delete.svg")

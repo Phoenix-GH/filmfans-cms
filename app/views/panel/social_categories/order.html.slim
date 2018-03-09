@@ -1,0 +1,17 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+  h1
+    = _('Order Categories')
+    span.counter
+      | (
+      = @social_categories.length
+      | )
+  .clearfix
+= render 'layouts/alerts'
+= simple_form_for '', url: save_order_panel_social_categories_path, method: :post do |f|
+  = render 'shared/order', {sources: @social_categories, picture: :image, title: :name}
+  .actions
+    = link_to _('Back'), panel_social_categories_path, class: 'btn btn-default'
+    = f.submit _('Save'), class: 'btn btn-primary'

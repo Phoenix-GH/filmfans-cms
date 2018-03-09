@@ -1,0 +1,50 @@
+.header
+  = simple_form_for '', as: :productproduct_image_index_export_form, url: export_now_panel_product_image_indexes_path, method: :post do |f|
+    .breadcrumbs
+      = link_to _('Home'), "/"
+      span.path-separator
+    h1.text-left.pull-left
+        = _('Product image index exports')
+    = f.submit _('Export now'), class: 'btn btn-primary pull-right'
+    .clearfix
+= render 'layouts/alerts'
+.table-responsive.product-image-indexes-table
+  = simple_form_for '', url: panel_product_image_indexes_path, method: :get, html: {class: 'form-inline'} do |f|
+    table.table
+      thead
+        tr
+          th.vision-system
+            = sortable 'system', _('Vision system')
+            == render partial: 'shared/search_panel', locals: { f: f, field: :system }
+          th.delta-add
+            = _('Delta add')
+          th.delta-remove
+            = _('Delta remove')
+          th.status
+            = _('Status')
+          th = sortable 'created_at', _('Export date')
+      tbody
+        - @data_rows.each do |row|
+          tr
+            td
+              = row.system
+            td
+              - if row.delta_add_num > 0
+                = link_to "#{row.delta_add_num} products", row.delta_add_file_url
+            td
+              - if row.delta_remove_num > 0
+                = link_to "#{row.delta_remove_num} products", row.delta_remove_file_url
+            td
+              - if row.running
+                | Export in-progress
+              - elsif row.used
+                | Used (marked as imported)
+              - else
+                | Not used
+              - unless row.progress.blank?
+                div
+                  = row.progress
+            td
+              = row.created_at.utc.strftime('%b %d %Y, %H:%M:%S')
+.text-center
+  = paginate @data_rows if @data_rows.count > 0

@@ -1,0 +1,20 @@
+.header
+  - if @channel.present?
+    = render 'panel/channels/header', {active: 'magazines', :@source_owner => @channel}
+  - else
+    .breadcrumbs
+      = link_to _('Home'), "/"
+      span.path-separator
+    h1.pull-left
+      = _('Order Magazine')
+      /span.counter
+      /  | (
+      /  = @magazines.count
+      /  | )
+    .clearfix
+= render 'layouts/alerts'
+= simple_form_for '', url: save_order_panel_magazines_path, method: :post do |f|
+  = render 'shared/order', {sources: @magazines, picture: :cover_image, title: :title}
+  .actions
+    = link_to _('Back'), panel_magazines_path, class: 'btn btn-default'
+    = f.submit _('Save'), class: 'btn btn-primary'

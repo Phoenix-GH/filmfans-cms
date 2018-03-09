@@ -1,0 +1,11 @@
+h2 = _('Please Enter Your New Password')
+hr
+= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
+  = f.input :reset_password_token, as: :hidden
+  = f.full_error :reset_password_token
+  .fields
+    = f.input :password, label: false, required: true, autofocus: true, placeholder: _('New password'), hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length)
+    = f.input :password_confirmation, label: false, required: true, placeholder: _('Confirm password')
+  .actions
+    = f.submit _('Change my password'), class: "btn btn-primary"
+    = render "devise/shared/links"

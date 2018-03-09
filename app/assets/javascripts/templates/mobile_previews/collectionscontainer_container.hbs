@@ -1,0 +1,25 @@
+<div class="media-box-wrapper media-box-wrapper--full">
+<div class="thumbnail media-box media-box--collections">
+  <div class="media-box-img-set">
+    <div class="media-box-img-set__wrapper">
+        {{#each varImagesUrls}}
+          <div class="media-box-img media-box-img--ratio media-box-img--ratio-7-4 media-box-img--width-70">
+            <div class="media-box-img-container" style="background-image: url('{{ this }}');"></div>
+          </div>
+        {{else}}
+          <div class="media-box-img media-box-img--ratio media-box-img--ratio-7-4 media-box-img--width-70">
+            <div class="media-box-img-container media-box-img-container--blank"></div>
+          </div>
+          <div class="media-box-img media-box-img--ratio media-box-img--ratio-7-4 media-box-img--width-70">
+            <div class="media-box-img-container media-box-img-container--blank"></div>
+          </div>
+        {{/each}}
+    </div>
+  </div>
+  <div class="caption">
+    <h3>
+      {{ varTitle }}
+    </h3>
+  </div>
+</div>
+</div>

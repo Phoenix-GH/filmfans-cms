@@ -1,0 +1,12 @@
+.fields
+  = f.input :name
+  ul.dropdown-list.containers-list
+    = f.simple_fields_for :linked_collections do |ff|
+      == render 'linked_collections_fields', f: ff
+  .row
+    .col-md-12
+      = link_to_add_association_fields _('Add next Collection'), f, :linked_collections, 'panel/collections_containers/linked_collections_fields', btn_class: 'btn btn-default newContainer', target_container: '.dropdown-list'
+
+.actions
+  = link_to _('Back'), panel_collections_containers_path, class: 'btn btn-default'
+  = f.submit _('Save'), class: 'btn btn-primary'

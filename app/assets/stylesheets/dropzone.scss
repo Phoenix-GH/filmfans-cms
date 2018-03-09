@@ -1,0 +1,29 @@
+.dropzone {
+  .dz-preview,
+  .dz-preview.dz-file-preview {
+    .dz-image {
+      border-radius: 1px;
+      width: auto;
+      height: auto;
+      min-height: 120px;
+    }
+    .dz-details {
+      white-space: nowrap;
+    }
+  }
+
+  .dz-preview.dz-file-preview {
+    .dz-details {
+      opacity: 0;
+    }
+  }
+  .dz-preview.dz-file-preview:hover .dz-details {
+    opacity: 1;
+  }
+  .dz-preview.dz-image-preview:hover {
+    // the info (file size, file name) is not avail after saved
+    .dz-details {
+      display: none;
+    }
+  }
+}

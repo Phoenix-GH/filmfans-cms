@@ -1,0 +1,16 @@
+<div class="media-box-wrapper {{ classForWidth varWidth 'media-box-wrapper--half' 'media-box-wrapper--full' }}">
+    <div class="thumbnail media-box media-box--media">
+        <div class="media-box-img media-box-img--ratio {{classForWidth varWidth 'media-box-img--ratio-17-12' 'media-box-img--ratio-9-4' }}">
+            {{#if varImageUrl}}
+                <div class="media-box-img-container play-media-icon" style="background-image: url('{{ varImageUrl }}');"></div>
+            {{else}}
+                <div class="media-box-img-container play-media-icon media-box-img-container--blank"></div>
+            {{/if}}
+        </div>
+        <div class="caption">
+            <h3>
+                {{ varTitle }}
+            </h3>
+        </div>
+    </div>
+</div>

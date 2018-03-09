@@ -1,0 +1,15 @@
+.breadcrumbs
+  = link_to _('Home'), "/"
+  span.path-separator
+  = link_to _('Channels'), panel_channels_path
+  span.path-separator
+h1 = _('Edit Channel')
+.tabs
+  = link_to edit_panel_channel_path(@source_owner), class: ('active' if active == 'details') do
+    .step-number 1
+    = _('Details')
+    span.underline
+    = link_to feed_panel_channel_posts_path(@source_owner), class: ('active' if active == 'feed') do
+      .step-number 2
+      = _('Feed')
+      span.underline

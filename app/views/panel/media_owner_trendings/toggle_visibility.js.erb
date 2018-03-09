@@ -1,0 +1,7 @@
+if ("<%=@manual_post.visible %>" == "true") {
+  $("#manual_post_visibility_<%=@manual_post.id%>").find('a').addClass('btn-status-active');
+  $("#manual_post_visibility_<%=@manual_post.id%>").find('a > span.status').empty().html('Visible');
+} else {
+  $("#manual_post_visibility_<%=@manual_post.id%>").find('a').removeClass('btn-status-active');
+  $("#manual_post_visibility_<%=@manual_post.id%>").find('a > span.status').empty().html('Invisible');
+}

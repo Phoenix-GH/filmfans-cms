@@ -1,0 +1,42 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+  h1.pull-left
+    = _('Social Categories')
+    span.counter
+      = _("(#{(@social_categories.kind_of?(Array) ? @social_categories.count.to_s : @social_categories.total_count.to_s)})")
+  = link_to new_panel_social_category_path, class: 'btn btn-primary pull-right' do
+    = image_tag("icons/ic-add.svg")
+    = _('Add New Social Category')
+  = link_to order_panel_social_categories_path, class: 'btn btn-primary pull-right' ,style: 'margin-right:15px' do
+    = _('Order Categories')
+  .clearfix
+= render 'layouts/alerts'
+.table-responsive.social-categories
+  = simple_form_for '', url: panel_social_categories_path, method: :get, html: { class: 'form-inline' } do |f|
+    table.table
+      thead
+        tr
+          th
+            = sortable 'name', _('Name')
+            = render partial: 'shared/search_panel', locals: { f: f }
+          th = _('Background Image')
+          th = _('Actions')
+
+      tbody
+        - @social_categories.each do |category|
+          tr
+            td = category.name
+            td
+              - unless category.is_top
+                = image_tag category.try(:image).try(:small_thumb).try(:url), class: 'social-category-background'
+            td.actions
+              - if can?(:update, category)
+                = link_to edit_panel_social_category_path(category)
+                  = image_tag("icons/ic-edit.svg")
+              - if !category.is_top && can?(:destroy, category)
+                = link_to panel_social_category_path(category), data: { confirm: _('Are you sure?') }, method: :delete do
+                  = image_tag("icons/ic-delete.svg")
+.text-center
+  = paginate @social_categories if @social_categories.length > 0

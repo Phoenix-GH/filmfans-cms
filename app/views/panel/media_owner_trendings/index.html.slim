@@ -1,0 +1,61 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+  h1.pull-left
+    = _('Manual Posts ')
+    span.counter
+      | (
+      = @manual_posts.total_count
+      | )
+  = link_to new_panel_media_owner_trending_path, class: 'btn btn-primary pull-right' do
+    = image_tag("icons/ic-add.svg")
+    = _('Add Post')
+  .clearfix
+= render 'layouts/alerts'
+.table-responsive
+  table.table
+    thead
+      tr
+        th
+        th= _('Owner')
+        th
+          = sortable 'name', _('Description')
+          = simple_form_for '', url: panel_media_owner_trendings_path, method: :get, html: {class: 'form-inline'} do |f|
+            == render partial: 'shared/search_panel', locals: {f: f}
+        th= _('Image')
+        th= _('Product')
+        th= sortable 'visible', _('Visible')
+        th = _('Actions')
+
+    tbody
+      - @manual_posts.each do |trending|
+        tr
+          td
+            div.picture-circle style='background-image: url(#{trending.try(:owner_avatar)})'
+          td = trending.owner_name
+          td = trending.name
+          td.celebrity-background-image
+            - if trending.image?
+              = image_tag trending.try(:custom_url)
+            - if trending.video?
+              = video_tag trending.try(:video), autoplay: false, controls: true
+          td
+            - unless trending.first_product&.image_display_url.blank?
+              = image_tag trending.first_product&.image_display_url, class: 'img-responsive'
+
+          td
+            - if can?(:update, trending)
+              div id = "manual_post_visibility_#{trending.id}"
+                = link_to toggle_visibility_panel_media_owner_trending_path(trending, format: 'js'), method: :put, remote: true, class: (trending.visible ? 'btn btn-status btn-status-active' : 'btn btn-status') do
+                  span.status = trending.visible ? _('Visible') : _('Invisible')
+                  span.circle
+          td.actions
+            - if can?(:update, trending)
+              = link_to edit_panel_media_owner_trending_path(trending) do
+                = image_tag("icons/ic-edit.svg")
+                - if can?(:destroy, trending)
+                  = link_to panel_media_owner_trending_path(trending), data: {confirm: _('Are you sure?')}, method: :delete do
+                    = image_tag("icons/ic-delete.svg")
+.text-center
+  = paginate @manual_posts if @manual_posts.length > 0

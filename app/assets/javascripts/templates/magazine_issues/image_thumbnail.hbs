@@ -1,0 +1,56 @@
+<div class="col-sm-4 col-sd-4">
+    <div class="image-page" data-id="{{ id }}">
+
+        <div style="display:table-cell; position:relative">
+            <img src="{{ url }}" class="hidden-on-phone">
+            {{#if overlayText}}
+                <div class="image-page-overlay">
+                    <div class="overlay-text">
+                        <div class="hs-icon-ic-add icon"></div>
+                        <div class="text">{{ overlayText }}</div>
+                    </div>
+                </div>
+            {{/if}}
+
+            {{#if supportHideShow}}
+                {{#if visible}}
+                    <div class="image-page-do-hide">
+                        <div class="overlay-text">
+                            <div class="fa fa-eye-slash icon"></div>
+                            <div class="text">Hide this page on phone</div>
+                        </div>
+                    </div>
+                {{else}}
+                    <div class="image-page-hidden">
+                        <div class="overlay-text">
+                            <div class="fa fa-eye-slash icon"></div>
+                            <div class="text">Hidden on phone<br>Click to show</div>
+                        </div>
+                    </div>
+                {{/if}}
+            {{/if}}
+        </div>
+
+        <div class="image-page-label">{{ description }}</div>
+        <div class="image-page-bub-stat">
+            {{#if numberOfTags}}
+                {{#ifCond numberOfTags '>' 1}}
+                    <span class="figure">{{numberOfTags}}</span> tags -
+                {{else}}
+                    <span class="figure">{{numberOfTags}}</span> tag -
+                {{/ifCond}}
+
+                <span class="figure">{{numberOfProducts}}</span>
+                {{#ifCond numberOfProducts '>' 1}}
+                    products
+                {{/ifCond}}
+                {{#ifCond numberOfProducts '==' 0}}
+                    products
+                {{/ifCond}}
+                {{#ifCond numberOfProducts '==' 1}}
+                    product
+                {{/ifCond}}
+            {{/if}}
+        </div>
+    </div>
+</div>

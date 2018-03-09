@@ -1,0 +1,27 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+    = link_to _('Crop & shop benchmarks'), panel_benchmarks_path(@search_params)
+
+  h1 = _('Edit Thresholds')
+
+- if !@error.blank?
+  = render 'layouts/alerts'
+- else
+  .benchmark-thresholds
+    = simple_form_for '', url: '', method: :post, html: {class: 'form-inline'} do |f|
+      .table-responsive
+        table.table
+          thead
+            tr
+              th = "Category Name"
+              th = "Threshold value"
+          tbody
+            - @thresholds.each do |threshold|
+              tr
+                td = threshold['name']
+                td
+                  = f.input '', label: false, input_html: { name: threshold['name'], value: threshold['value'] }
+      .actions
+        = link_to _('Back'), edit_thresholds_panel_benchmarks_path, class: 'btn btn-default'

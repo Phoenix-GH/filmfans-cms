@@ -1,0 +1,34 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+    = link_to _('Admins'), panel_admins_path
+    span.path-separator
+  h1 = _('Edit Admin')
+= render 'layouts/alerts'
+= simple_form_for @form, url: panel_admin_path(@admin), method: :patch do |f|
+  .fields
+    .row
+      .col-md-6
+        .field
+          .form-group
+            = f.label :role, class: "control-label" do
+              = _('Set Role')
+              span.form-hint data-toggle="tooltip" href="#" title="#{_('Channel Moderator can only change content from select channel/media owner')}"
+                i.fa.fa-info-circle
+            = f.input_field :role, collection: @presenter.role_options, include_blank: false, class: "form-control"
+        .field.status-checkbox
+          .form-group
+            = f.label :active, class: "control-label", label: _('Status')
+            .status-checkbox-wrapper
+              = f.input_field :active, as: :boolean, boolean_style: :inline
+              = f.label :active
+              .for-active
+        .field#channel-ids
+          = f.input :channel_ids, label: _('Channel'), collection: @presenter.channel_options, include_blank: true, input_html: { multiple: true, class: "chosen-select" }
+        .field#media-owner-ids
+          = f.input :media_owner_ids, label: _('Media Owner'), collection: @presenter.media_owner_options, include_blank: true, input_html: { multiple: true, class: "chosen-select" }
+  .actions
+    = link_to _('Back'), panel_admins_path, class: 'btn btn-default'
+    = f.submit _('Update'), class: 'btn btn-primary'
+

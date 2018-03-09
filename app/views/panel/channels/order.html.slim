@@ -1,0 +1,17 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+  h1
+    = _('Order Channels')
+    span.counter
+      | (
+      = @channels.length
+      | )
+  .clearfix
+= render 'layouts/alerts'
+= simple_form_for '', url: save_order_panel_channels_path, method: :post do |f|
+  = render 'shared/order', {sources: @channels, picture: :picture, title: :name}
+  .actions
+    = link_to _('Back'), panel_channels_path, class: 'btn btn-default'
+    = f.submit _('Save'), class: 'btn btn-primary'

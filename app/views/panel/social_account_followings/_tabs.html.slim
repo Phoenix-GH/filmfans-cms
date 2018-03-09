@@ -1,0 +1,10 @@
+.tabs
+  = link_to edit_panel_social_account_path(@social_account) do
+    .step-number 1
+    = _('DETAILS')
+    span.underline
+
+  = link_to panel_social_account_followings_path(@social_account), class: 'active' do
+    .step-number 2
+    = _('FOLLOWINGS')
+    span.underline

@@ -1,0 +1,31 @@
+.header
+  = render 'header', {title: "Edit 3D/AR - Add New Models"}
+  = render 'header_edit'
+
+= render 'layouts/alerts'
+
+= simple_form_for @form, as: :threed_model_form, url: panel_threed_ar_threed_models_path(@threed_ar), html: {multipart: true}, method: :post do |f|
+  .fields
+    = f.error_notification
+    - if @form.errors.any?
+      #error_notification
+        ul
+          - @form.errors.full_messages.each do |msg|
+            li= msg
+    = f.input :description, label: _('Description')
+    = f.input :file, as: :file, label: _('Model File')
+
+    .products-search
+      .row
+        .col-md-5.container-name-col
+          .linked-products-collection data={template: threed_model_product_template_fields(f).gsub("\n", "")}
+            = f.simple_fields_for :threed_model_products, include_id: false  do |ff|
+              = render 'panel/linked_products/fields', f: ff
+
+      = render partial: 'shared/product_selection_container', locals: {title: 'Linked Products'}
+
+  .actions
+    = link_to _('Cancel'), panel_threed_ar_threed_models_path(@threed_ar), class: 'btn btn-default'
+    = f.submit _('Save Model'), class: 'btn btn-primary'
+
+  = render partial: 'shared/popup_product_detail'

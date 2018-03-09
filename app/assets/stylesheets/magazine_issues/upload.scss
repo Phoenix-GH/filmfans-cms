@@ -1,0 +1,40 @@
+.magazine-issue-details.upload {
+  .dropzone {
+    min-height: 250px;
+    .dz-preview {
+      .dz-error-message {
+        bottom: -50px;
+        left: 0;
+        opacity: 1;
+        top: initial;
+        width: 180px;
+      }
+      .dz-error-message:after {
+        left: 6px;
+      }
+      .dz-details {
+        opacity: 1;
+      }
+    }
+    .ic-cloud-upload {
+      font-size: 1.3em;
+    }
+    .upload-intro {
+      font-size: 0.9em;
+    }
+    .upload-notice {
+      font-size: 1.1em;
+      font-weight: bold;
+    }
+  }
+  .dz-progress{
+    .loading-upload-file{
+      background: image-url("loading-upload-file.gif");
+      margin: 0 auto;
+      background-size: contain;
+      background-position: center;
+      width:80px;
+      height:16px;
+    }
+  }
+}

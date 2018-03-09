@@ -1,0 +1,77 @@
+html
+  head
+    meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+    style
+      |  .padding-mobile{ padding:15px 0 15px 40px; } .fonthithere{ font-size:18px; } .padding-mobile-right{ padding:10px 40px 10px 0; } .padding-video-hotspot{ padding:10px 15% 20px; } @media only screen and (max-device-width: 480px) { .mobile-appstore img, .mobile-googleplay img{ width: 65px; } .learmore-mobile img{ width:150px; } .padding-mobile{ padding:10px 5px; } .fonthithere{ font-size:13px; } .padding-mobile-right{ padding:10px 5px; } } @media only screen and (max-device-width: 900px) { .padding-mobile{ padding:10px 5px; } .padding-mobile-right{ padding:10px 5px; } }
+
+  / the data-force-encoding bellow is essential to overcome the following problem:
+  /   - in production mode: pretty mode is disabled. Meaning all manual line breaks will be removed.
+  /   - when sending a very long (html) line, a line break will be introduced (by the mail sender server)
+  /     at the 998th character!!!
+  / See: https://github.com/slim-template/slim/issues/123
+  //     http://stackoverflow.com/questions/11619029/how-do-i-set-a-maximum-line-length-for-rails-slim-html-email-templates
+  body data-force-encoding="✓"
+    div style="max-width:780px;margin:auto;"
+      table[style="color:#000;width: 100%; font-family: gotham, open sans, helvetica neue, arial,sans-serif;background-color:#f1f2f2;font-size: 13px !important;padding:0 15px;" cellpadding="0" cellspacing="0"]
+        /tr
+        /  td[colspan="2" style="padding:13px 0;border-bottom:1px solid #E6E7E8;color:#666666;" align="center"]
+        /    |  If you can not read this email, please
+        /    a[href="#" style="color:#000;font-weight:400;"]
+        /      | click here
+        = yield :email_content_head
+
+        tr
+          td[colspan="2" style="padding-top:40px;"]
+            = yield
+        tr
+          td[colspan="2" style="padding-top:50px;"]
+            div style='line-height:0;'
+              img[src="http://ulab.com/wp-content/uploads/2016/08/footer-hotspotting.png" width="100%"]
+            div[style="background-color: #fff;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;margin-bottom: 30px;padding:0 0 20px;"]
+              table[width="100%" cellpadding="0" cellspacing="0"]
+                tr
+                  td.padding-mobile[style="width: 50%;"]
+                    p[style="text-transform: uppercase;margin:0;font-size: 11px;"]
+                      | AVAILABLE NOW ON:
+                  td.padding-mobile-right[style="width: 50%;"]
+                    p[style="text-transform: uppercase;text-align: right;margin:0;font-size: 11px;"]
+                      | CONNECT WITH US
+                tr
+                  td.padding-mobile[style="border-bottom: 1px solid #E6E7E8;width: 50%;"]
+                    a.mobile-appstore[href="https://itunes.apple.com/us/app/hotspotting-world/id1109526969?mt=8" style="text-decoration: none;float: left;"]
+                      img[src="http://ulab.com/wp-content/uploads/2016/08/logo-appstore-new1.png" width="120"]
+                    a.mobile-googleplay[href="https://play.google.com/store/apps/details?id=com.ulab.hotspotting.v3.original" style="text-decoration: none;float: left;margin-left: 7px;"]
+                      img[src="http://ulab.com/wp-content/uploads/2016/08/logo-googleplay-new.png" width="120"]
+                  td.padding-mobile-right[style="border-bottom: 1px solid #E6E7E8;width: 50%;" align="right"]
+                    a[target="_blank" href="https://www.facebook.com/uniqornlab/" style="text-decoration: none;margin-right: 5px;"]
+                      img[src="http://ulab.com/wp-content/uploads/2016/08/facebook-hotpot.png" width="25"]
+                    a[target="_blank" href="https://www.instagram.com/hotspotting_account/?hl=en " style="text-decoration: none;margin-right: 7px;"]
+                      img[src="http://ulab.com/wp-content/uploads/2016/08/instagram-hotpot.png" width="25"]
+                    a[target="_blank" href="https://twitter.com/Uniqornlabs" style="text-decoration: none;margin-right: 5px;"]
+                      img[src="http://ulab.com/wp-content/uploads/2016/08/twitter-hotspot.png" width="25"]
+                    a[target="_blank" href="https://vimeo.com/user43421115" style="text-decoration: none;"]
+                      img[src="http://ulab.com/wp-content/uploads/2016/08/vimeo-square-logo.png" width="25"]
+                tr
+                  td[colspan="2" style="padding: 30px 10px 0;"]
+                    p[style="text-align: center;color:#808285;line-height: 1.3;font-size: 13px;"]
+                      |  To ensure that our messages arrive (and don't go to your junk or bulk email folders), please add
+                      span[style="color:#222;"]
+                      a href='mailto:info@hotspotting.com'
+                      |   info@hotspotting.com
+                      |  to your address book.
+                      br
+                      br
+                      |  HOTSPOTTING is a registered trademark of UNIQORN LAB SINGAPORE PTE.
+                      br
+                      br
+                      |  Registered office: Unit 1302, 13/F CS Tower 50 Wing Lok St, Hong Kong
+                      br
+                      |  VAT Number is: 2295339.
+                      br
+                      br
+                      |  To view our Privacy Policy
+                      = _(" ")
+                      a[href="http://ulab.com/privacy.html" style="color:#222"]
+                        | click here
+                      br
+                      br

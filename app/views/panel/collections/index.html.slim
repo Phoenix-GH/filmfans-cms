@@ -1,0 +1,47 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+  h1.pull-left
+    = _('Collections')
+    span.counter
+      | (
+      = @collections.length
+      | )
+  = link_to new_panel_collection_path, class: 'btn btn-primary pull-right' do
+    = image_tag("icons/ic-add.svg")
+    = _('Add Collection')
+  .clearfix
+= render 'layouts/alerts'
+.table-responsive
+  table.table
+    thead
+      tr
+        th
+          = sortable 'name', _('Collection Title')
+          = simple_form_for '', url: panel_collections_path, method: :get, html: { class: 'form-inline' } do |f|
+            == render partial: 'shared/search_panel', locals: { f: f }
+        th = _('Background Image')
+        th = sortable 'collection_contents', _('Containers')
+        th = sortable 'products', _('Products')
+        th = sortable 'created_at', _('Created')
+        th = _('Actions')
+
+    tbody
+      - @collections.each do |collection|
+        tr
+          td
+            big = collection.name
+          td.collection-background-image = image_tag collection.try(:background_image).try(:custom_url)
+          td = collection.collection_contents.count
+          td = collection.products_count
+          td = l collection.created_at
+          td.actions
+            - if can?(:update, collection)
+              = link_to edit_panel_collection_path(collection) do
+                = image_tag("icons/ic-edit.svg")
+            - if can?(:destroy, collection)
+              = link_to [:panel, collection], data: { confirm: _('Are you sure?') }, method: :delete do
+                = image_tag("icons/ic-delete.svg")
+.text-center
+  = paginate @collections if @collections.length > 0

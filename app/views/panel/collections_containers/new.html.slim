@@ -1,0 +1,10 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+    = link_to _('Collection Sets'), panel_collections_containers_path
+    span.path-separator
+  h1 = _('Add New Collection Set')
+= render 'layouts/alerts'
+= simple_form_for @form, as: :collections_container_form, url: panel_collections_containers_path, method: :post do |f|
+  == render partial: 'fields', locals: {f: f}

@@ -1,0 +1,32 @@
+.header
+  - if @channel.key.blank?
+    = render 'header', {active: 'details', :@source_owner => @channel}
+  - else
+    = render 'header_special', {active: 'details', :@source_owner => @channel}
+= render 'layouts/alerts'
+= simple_form_for @form, as: :channel_form, url: panel_channel_path(@channel), method: :patch do |f|
+  .fields
+    - if @channel.key.blank?
+      = f.input :name, label: _('Channel Name')
+    - else
+      = f.input :name, disabled: true, label: _('Channel Name')
+    = f.input :dialogfeed_url, label: _('Dialogfeed URL')
+    - if @channel.key.blank?
+      = f.input :media_owner_ids, collection: @presenter.media_owner_options, label: _('Linked Media Owners'), input_html: {multiple: true, class: "chosen-select"}
+      = f.input :countries, collection: @presenter.channel_countries, label: _('Countries'), input_html: {multiple: true, class: "chosen-select"}
+      .field.visibility-checkbox
+        .form-group
+          = f.label :visibility, class: "control-label", label: _('Visibility')
+          .status-checkbox-wrapper
+            = f.input_field :visibility, as: :boolean, boolean_style: :inline
+            = f.label :visibility
+            .for-active
+      = f.simple_fields_for :picture, @channel.picture do |picture_fields|
+        = picture_fields.input :file, as: :file, label: _('Channel Picture')
+      .form-group
+        = image_tag @channel.picture.custom_url, data: @channel.picture.cropper_data, class: 'cropper'
+  .actions
+    = link_to _('Back'), panel_channels_path, class: 'btn btn-default'
+    = f.submit _('Save'), class: 'btn btn-primary'
+
+= render partial: 'shared/cropper', locals: {title: 'Edit Channel Picture', caption: 'new background image'}

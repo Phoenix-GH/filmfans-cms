@@ -1,0 +1,569 @@
+.show {
+    display: block;
+}
+.hide {
+    display: none;
+}
+.title-popup {
+    font-size: 20px;
+    font-weight: 500;
+    text-transform: capitalize;
+    margin: 0;
+    padding: 15px 20px;
+    border-bottom: 1px solid #eaeef5;
+}
+.last-text {
+    padding-left: 30px;
+    padding-top: 20px;
+}
+.container-edit-profile {
+    padding: 15px 20px;
+    border-bottom: 2px solid #eaeef5;
+}
+.container-edit-profile .box-note-photo {
+    border-radius: 4px;
+    background-color: #f7f9fd;
+    border: solid 1px #dfe4ed;
+    color: #8d99a7;
+    padding: 10px 12px;
+    margin-top: 10px;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.frame-content-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+    background-color: rgba(0, 0, 0, .85);
+}
+.container-edit-profile .box-note-photo .note {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 600;
+}
+.container-edit-profile .box-note-photo .note span {
+    color: #10a0fc;
+    position: relative;
+    display: inline-block;
+}
+.container-edit-profile .box-note-photo .note span input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+.action-popup {
+    padding: 15px 20px;
+}
+.action-popup .btn-cancel, .action-popup .btn-save {
+    height: 40px;
+    border-radius: 4px;
+    padding: 0 12px;
+    font-weight: 600;
+    color: #666;
+    display: inline-block;
+    line-height: 40px;
+    float: right;
+    text-decoration: none;
+}
+.action-popup .btn-cancel {
+    color: #2a3034;
+    background-color: #fff;
+    margin-right: 15px;
+    border: 1px solid #ccc;
+}
+.action-popup .btn-save {
+    color: #fff;
+    background-color: #4389ff;
+}
+
+.img-container img {
+    height: 300px;
+}
+
+.img-container-background img {
+    height: 300px;
+}
+
+.img-container-cover img {
+    height: 300px;
+}
+
+.icon-picture {
+    width: 20px;
+    margin-right: 10px;
+    margin-top: 7px;
+}
+
+.zoom-in-photo, .zoom-out-photo {
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    font-weight: 600;
+    font-size: 16px;
+    height: 20px;
+    line-height: 18px;
+    width: 15px;
+    text-align: center;
+}
+.zoom-in-photo {
+    left: 5px;
+}
+.zoom-out-photo {
+    right: 5px;
+}
+.rectangle-158 {
+    width: 400px;
+    border-radius: 6px;
+    background-color: #ffffff;
+}
+.cropper-container {
+    border: dashed 1px;
+}
+.cropper-view-box {
+    outline: 1px dashed rgba(204, 204, 204, 0.75);
+}
+.cropper-point {
+    background: none;
+}
+.title-popup {
+    font-size: 20px;
+    font-weight: 500;
+    text-transform: capitalize;
+    margin: 0;
+    padding: 15px 20px;
+    border-bottom: 1px solid #eaeef5;
+}
+.container-edit-profile {
+    padding: 15px 20px;
+    border-bottom: 2px solid #eaeef5;
+}
+
+.container-edit-profile .box-note-photo {
+    border-radius: 4px;
+    background-color: #f7f9fd;
+    border: solid 1px #dfe4ed;
+    color: #8d99a7;
+    padding: 10px 12px;
+    margin-top: 10px;
+}
+.container-edit-profile .box-note-photo .note {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 600;
+}
+.container-edit-profile .box-note-photo .note span {
+    color: #10a0fc;
+    position: relative;
+    display: inline-block;
+}
+.container-edit-profile .box-note-photo .note span input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+
+.action-popup {
+    padding: 15px 20px;
+}
+.action-popup .btn-cancel {
+    height: 40px;
+    border-radius: 4px;
+    padding: 0 12px;
+    font-weight: 600;
+    display: inline-block;
+    line-height: 40px;
+    float: right;
+    text-decoration: none;
+    color: #2a3034;
+    background-color: #fff;
+    margin-right: 15px;
+    border: 1px solid #ccc;
+}
+.action-popup .btn-save {
+    height: 40px;
+    border-radius: 4px;
+    padding: 0 12px;
+    font-weight: 600;
+    display: inline-block;
+    line-height: 40px;
+    float: right;
+    text-decoration: none;
+    color: #fff;
+    background-color: #4389ff;
+}
+
+.container-popup {
+    width: 700px;
+    margin: 40px auto 0;
+}
+
+.w-review .img-preview img,
+.w-review-background .img-preview-background img,
+.w-review-cover .img-preview-cover img {
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0 !important;
+    vertical-align: top;
+}
+
+.review-phone-avatar {
+    background: image-url('cropper/iphone_6_avatar.png') no-repeat;
+    width: 260px;
+    height: 530px;
+    position: relative;
+}
+.review-phone-avatar .w-review {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 68px;
+    text-align: center;
+}
+.review-phone-avatar .w-review .img-preview {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.review-phone-avatar .w-review .img-preview img {
+    vertical-align: middle;
+}
+
+.review-phone-grid {
+    background: image-url('cropper/iphone_6_grid.png') no-repeat;
+    width: 260px;
+    height: 530px;
+    position: relative;
+}
+.review-phone-grid .w-review {
+    position: absolute;
+    left: 25px;
+    top: 70px;
+}
+.review-phone-grid .w-review .img-preview {
+    width: 150px;
+    height: 125px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.review-phone-grid-with-product {
+    background: image-url('cropper/iphone_6_grid.png') no-repeat;
+    width: 260px;
+    height: 530px;
+    position: relative;
+}
+
+.review-phone-grid-with-product .w-review {
+    float: left;
+    width: 102px;
+    height: 125px;
+    margin: 68px 25px;
+}
+
+.review-phone-grid-with-product .w-review .img-preview {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.review-phone-circles {
+    background: image-url('cropper/iphone_6_circles.png') no-repeat;
+    width: 260px;
+    height: 530px;
+    position: relative;
+}
+.review-phone-circles .w-review {
+    position: absolute;
+    left: 76px;
+    top: 88px;
+    text-align: center;
+}
+.review-phone-circles .w-review .img-preview {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.review-phone-magazine {
+    background: image-url('cropper/iphone_6_magazine.png') no-repeat;
+    width: 260px;
+    height: 530px;
+    position: relative;
+}
+.review-phone-magazine .w-review-background {
+    position: absolute;
+    left: 26px;
+    top: 82px;
+    text-align: center;
+}
+
+.review-phone-magazine .img-preview-background {
+    width: 212px;
+    height: 100px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.review-phone-magazine .w-review-cover {
+    position: absolute;
+    left: 26px;
+    top: 218px;
+    text-align: center;
+}
+
+.review-phone-magazine .img-preview-cover {
+    width: 103px;
+    height: 125px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.review-phone-tv-show {
+    background: image-url('cropper/iphone_6_big_grid.png') no-repeat;
+    width: 260px;
+    height: 530px;
+    position: relative;
+}
+.review-phone-tv-show .w-review-background {
+    position: absolute;
+    left: 15px;
+    top: 64px;
+    text-align: center;
+}
+
+.review-phone-tv-show .img-preview-background {
+    width: 230px;
+    height: 150px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.review-phone-tv-show .w-review-cover {
+    position: absolute;
+    left: 23px;
+    top: 265px;
+    text-align: center;
+}
+
+.review-phone-tv-show .img-preview-cover {
+    width: 102px;
+    height: 120px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.review-phone-collection {
+    background: image-url('cropper/iphone_6_big_grid.png') no-repeat;
+    width: 260px;
+    height: 530px;
+    position: relative;
+}
+.review-phone-collection .w-review-background {
+    position: absolute;
+    left: 14px;
+    top: 64px;
+    text-align: center;
+}
+
+.review-phone-collection .img-preview-background {
+    width: 230px;
+    height: 150px;
+    margin: 0 auto;
+    overflow: hidden;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.review-phone-collection .w-review-cover {
+    position: absolute;
+    left: 23px;
+    top: 265px;
+    text-align: center;
+}
+
+.review-phone-collection .img-preview-cover {
+    width: 102px;
+    height: 120px;
+    margin: 0 auto;
+    overflow: hidden;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.review-phone-event {
+    background: image-url('cropper/iphone_6_event.png') no-repeat;
+    width: 260px;
+    height: 530px;
+    position: relative;
+}
+.review-phone-event .w-review-background {
+    position: absolute;
+    left: 18px;
+    top: 48px;
+    text-align: center;
+}
+.review-phone-event .w-review-cover {
+    position: absolute;
+    left: 26px;
+    top: 260px;
+    text-align: center;
+}
+.review-phone-event .img-preview-background {
+    width: 227px;
+    height: 160px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.review-phone-event .img-preview-cover {
+    width: 210px;
+    height: 96px;
+    margin: 0 auto;
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+.review-phone-background {
+    background: image-url('cropper/iphone_6_background.png') no-repeat;
+    width: 260px;
+    height: 530px;
+    position: relative;
+}
+.review-phone-background .w-review {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 55px;
+    text-align: center;
+}
+.review-phone-background .img-preview {
+    width: 228px;
+    height: 250px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.review-phone-big-grid {
+    background: image-url('cropper/iphone_6_big_grid.png') no-repeat;
+    width: 260px;
+    height: 530px;
+    position: relative;
+}
+.review-phone-big-grid .bg-magazine {
+    position: absolute;
+    width: 229px;
+    height: 150px;
+    top: 64px;
+    left: 15px;
+    text-align: center;
+}
+.review-phone-big-grid .w-review {
+    position: absolute;
+    left: 25px;
+    top: 265px;
+}
+.review-phone-big-grid .img-preview {
+    width: 150px;
+    height: 125px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.review-phone-big-grid .bg-top img {
+    max-height: 150px;
+}
+
+.zoom-range {
+    width: 100%;
+    margin: 10px auto;
+    position: relative;
+    padding: 0 25px;
+    border: 1px solid #e8e8e9;
+    border-radius: 30px;
+}
+.zoom-range input {
+    height: 20px;
+}
+.custom-image {
+    margin-left: -5px;
+    margin-right: -5px;
+}
+
+.custom-image .col-custom-image {
+    width: 50%;
+    padding-left: 5px;
+    padding-right: 5px;
+    float: left;
+}
+
+.swap-image {
+    margin: 10px auto;
+    border-radius: 30px;
+    border: 1px solid #ccc;
+    overflow: hidden;
+}
+
+.swap-image a {
+    float: left;
+    display: block;
+    height: 20px;
+    line-height: 20px;
+    font-size: 12px;
+    text-align: center;
+    color: #ccc;
+    width: 50%;
+    text-decoration: none;
+}
+
+.swap-image .active {
+    background-color: #4389ff;
+    color: #fff;
+}
+
+.zoom-range-double {
+    float: left;
+    margin: 10px auto;
+    position: relative;
+    padding: 0 25px;
+    border: 1px solid #e8e8e9;
+    border-radius: 30px;
+}
+.zoom-range-double input {
+    height: 20px;
+}
+
+.zoom-in-photo {
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    font-weight: 600;
+    font-size: 16px;
+    height: 20px;
+    line-height: 18px;
+    width: 15px;
+    text-align: center;
+    left: 5px;
+}
+.zoom-out-photo {
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    font-weight: 600;
+    font-size: 16px;
+    height: 20px;
+    line-height: 18px;
+    width: 15px;
+    text-align: center;
+    right: 5px;
+}

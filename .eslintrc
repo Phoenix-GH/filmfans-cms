@@ -1,0 +1,30 @@
+{
+  "ecmaFeatures": {
+    "jsx": false
+  },
+  "env": {
+    "browser": true,
+    "jquery": true
+  },
+  "extends": "eslint-config-airbnb-es5",
+  "globals": {
+    "app": true
+  },
+  "plugins": [
+    "react",
+  ],
+  "rules": {
+    "func-names": 0,
+    "jsx-quotes": [2, "prefer-double"],
+    "key-spacing": [
+      2, {
+        "afterColon": true,
+        "beforeColon": false
+      }
+    ],
+    "no-empty-label": 0,
+    "react/jsx-quotes": 0,
+    "space-after-keywords": 0,
+    "space-return-throw-case": 0
+  }
+}

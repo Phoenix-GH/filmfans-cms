@@ -1,0 +1,11 @@
+- category_following = SocialAccountFollowingCategory.where(social_category_id: category.id, social_account_following_id: following.id).first
+= link_to toggle_trending_panel_social_category_social_account_followings_path(category, format: 'js', social_account_following_id: following.id),
+        method: :put,
+        remote: true,
+        class: (if category_following.trending then 'btn btn-status btn-status-active' else 'btn btn-status' end) do
+  span.status
+    - if category_following.trending?
+      = _('YES')
+    - else
+      = _('NO')
+  span.circle

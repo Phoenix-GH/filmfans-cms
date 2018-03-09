@@ -1,0 +1,39 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+    = link_to _('Movies'), panel_movies_path
+    span.path-separator
+  h1 = _('Movie details')
+
+.movie_details
+  = render 'layouts/alerts'
+  = simple_form_for @form, as: :movie_products_form, url: products_panel_movie_path(@movie), method: :patch do |f|
+    .movie_info
+      div
+        = f.label :movie_title, class: "control-label", label: _(@movie.title)
+      - if @movie.gracenote_id.blank?
+        = image_tag @movie.poster_image_thumbnail
+      - else
+        = image_tag GracenoteMoveDetailSerializer::full_image_url(@movie.poster_image_thumbnail)
+
+    .fields.products-search
+      = f.error_notification
+      - if @form.errors.any?
+        #error_notification
+          ul
+            - @form.errors.full_messages.each do |msg|
+              li= msg
+      .row
+        .col-md-5.container-name-col
+          .linked-products-collection data={template: movie_product_template_fields(f).gsub("\n", "")}
+            = f.simple_fields_for :movie_products, include_id: false  do |ff|
+              = render 'panel/linked_products/fields', f: ff
+
+      = render partial: 'shared/product_selection_container', locals: {title: 'Linked Products'}
+
+    .actions
+      = link_to _('Back'), panel_movies_path, class: 'btn btn-default'
+      = f.button :submit, _('Save'), class: 'btn btn-success'
+
+  = render partial: 'shared/popup_product_detail'

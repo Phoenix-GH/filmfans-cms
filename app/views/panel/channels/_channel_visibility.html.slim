@@ -1,0 +1,7 @@
+= link_to toggle_visibility_panel_channel_path(channel, format: 'js'), method: :put, remote: true, class: (if channel.visibility then 'btn btn-status btn-status-active' else 'btn btn-status' end) do
+  span.status
+    - if channel.visibility?
+      = _('Visible')
+    - else
+      = _('Invisible')
+  span.circle

@@ -1,0 +1,34 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+    = link_to _('Collections'), panel_collections_path
+    span.path-separator
+  h1 = _('Add New Collection')
+  .clearfix
+  .tabs
+    = link_to new_panel_collection_path, class: 'active' do
+      .step-number 1
+      = _('Details')
+      span.underline
+    = link_to '#' do
+      .step-number 2
+      = _('Set Containers')
+      span.underline
+= render 'layouts/alerts'
+= simple_form_for @form, as: :collection_form, url: panel_collections_path, method: :post do |f|
+  = f.error_notification
+  - if @form.errors.any?
+  #error_notification
+    ul
+      - @form.errors.full_messages.each do |msg|
+        li= msg
+  .fields
+    = f.input :name, label: _('Collection Name')
+    = f.simple_fields_for :background_image, @background_image do |background_image_fields|
+      = background_image_fields.input :file, as: :file, label: _('Background Image')
+    .form-group
+      = image_tag @background_image.custom_url if @collection
+  .actions
+    = link_to _('Back'), panel_collections_path, class: 'btn btn-default'
+    = f.submit _('Save'), class: 'btn btn-primary'

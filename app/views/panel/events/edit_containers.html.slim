@@ -1,0 +1,52 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+    = link_to _('Events'), panel_events_path
+    span.path-separator
+  h1 = _('Edit Event')
+  .tabs
+    = link_to edit_panel_event_path(@event, step: :details) do
+      span.step 1
+      = _('Details')
+      span.underline
+    = link_to edit_panel_event_path(@event, step: :containers), class: 'active' do
+      span.step 2
+      = _('Set Containers')
+      span.underline
+= render 'layouts/alerts'
+= simple_form_for @form, as: :event_contents_form, url: panel_event_path(@event, step: :containers), html: { method: :patch } do |f|
+  .events
+    .row
+      .col-md-8
+        .content-panel.content-panel--container
+          .content-panel-body
+            .content-panel-heading
+              .row
+                .col-sm-6.text-left
+                  h2.content-heading= _('Containers list')
+                .col-sm-6.text-right
+                  = link_to_add_association_fields _('Add new container'), f, :event_contents, 'event_content_fields', btn_class: 'btn btn-default', target_container: '.content-containers ol'
+
+            .content-containers
+              ol.js-mp-elements-container { data= { emulator: '#mobile_preview' } }
+                = f.simple_fields_for :event_contents do |ff|
+                  == render 'event_content_fields', f: ff
+
+      .col-md-4
+        h2.content-heading= _('Preview')
+        = link_to '#', data: { placement: :top, toggle: :tooltip, title: 'For best layout look try to keep two  following half-width containers in the same type'},
+          class: 'preview-tooltip-link' do
+          = image_tag 'icons/ic-help-circle.svg'
+        #mobile_preview.content-panel.content-panel--preview.js-mp-emulator
+          .event-logo.text-center
+            = image_tag @event.cover_image_url, class: 'logo-preview-img'
+            span.event-name= @event.name
+          .media-container
+            .row.js-mp-emulator__screen
+
+  .actions
+    = link_to _('Back'), '#', class: 'btn btn-default'
+    = f.submit _('Save'), class: 'btn btn-primary'
+
+

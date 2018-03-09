@@ -1,0 +1,16 @@
+<div id="confirm-js" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Confirm</h4>
+            </div>
+            <div class="modal-body">
+                {{#if message}} {{message}} {{else}}Are you sure?{{/if}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-primary btn-confirm">Confirm</button>
+                <button type="button" data-dismiss="modal" class="btn btn-cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

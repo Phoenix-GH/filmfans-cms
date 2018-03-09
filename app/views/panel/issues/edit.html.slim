@@ -1,0 +1,27 @@
+.header
+  = render 'header', {title: "#{@magazine.title.capitalize} : #{@issue.title}"}
+  = render 'header_edit'
+
+div.magazine-issue-details.edit
+  = render 'layouts/alerts'
+  = simple_form_for @form, as: :issue_form, url: panel_magazine_issue_path(@magazine, @issue), method: :put do |f|
+    .fields
+      = f.input :title, label: _('Title')
+      - if @issue.pdf_pages
+        = f.input :pdf_pages_not_save, label: _('Number of pages'), readonly: true
+        = f.input :pages, as: :hidden
+      - else
+        = f.input :pages, label: _('Number of pages')
+      = f.input :publication_date, label: _('Publication date'), class: 'datepicker', input_html: { 'data-provide' => 'datepicker' }
+      = f.input :url, label: _('Link to magazine issue')
+
+      = f.simple_fields_for :cover_image, @cover_image do |cover_image_fields|
+       = cover_image_fields.input :file, as: :file, label: _('Magazine cover')
+      .form-group
+        = image_tag @issue.cover_image&.custom_url, data: @issue.cover_image&.cropper_data, class: 'cropper'
+
+    .actions
+      = link_to _('Back'), panel_magazine_issues_path(@magazine), class: 'btn btn-default'
+      = f.submit _('Save & Next'), class: 'btn btn-primary'
+
+  = render partial: 'shared/cropper', locals: {title: 'Edit Channel Picture', caption: 'new background image'}

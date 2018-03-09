@@ -1,0 +1,42 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+  h1.pull-left
+    = _('Social Accounts')
+    span.counter
+      = _("(#{(@social_accounts.kind_of?(Array) ? @social_accounts.count.to_s : @social_accounts.total_count.to_s)})")
+  = link_to new_panel_social_account_path, class: 'btn btn-primary pull-right' do
+    = image_tag("icons/ic-add.svg")
+    = _('Add New Account')
+  .clearfix
+= render 'layouts/alerts'
+.table-responsive
+  = simple_form_for '', url: panel_social_accounts_path, method: :get, html: { class: 'form-inline' } do |f|
+    table.table
+      thead
+        tr
+          th
+            = sortable 'name', _('Account Name')
+            = render partial: 'shared/search_panel', locals: { f: f }
+          th = sortable 'username', _('Username')
+          th = sortable 'provider', _('Provider')
+          th = sortable 'social_account_followings', _('Total followings')
+          th = _('Actions')
+
+      tbody
+        - @social_accounts.each do |account|
+          tr
+            td = account.name
+            td = account.username
+            td = account.provider.to_s.upcase
+            td = account.total_following
+            td.actions
+              - if can?(:update, account)
+                = link_to edit_panel_social_account_path(account)
+                  = image_tag("icons/ic-edit.svg")
+              - if can?(:destroy, account)
+                = link_to panel_social_account_path(account), data: { confirm: _('Are you sure?') }, method: :delete do
+                  = image_tag("icons/ic-delete.svg")
+.text-center
+  = paginate @social_accounts if @social_accounts.length > 0

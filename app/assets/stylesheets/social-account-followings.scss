@@ -1,0 +1,20 @@
+@media (min-width: 796px) {
+  .social-account-followings {
+    .modal-dialog {
+      min-width: 800px;
+    }
+    .followers_posts_num {
+      font-size: 0.8em;
+      color: #666;
+    }
+  }
+}
+
+.sorted_table tr {
+    cursor: pointer;
+}
+
+.sorted_table .ui-sortable-helper {
+    border: 1px solid #e3e3e3;
+    background: #e3e3e3;
+}

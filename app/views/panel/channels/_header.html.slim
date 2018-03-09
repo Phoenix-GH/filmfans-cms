@@ -1,0 +1,29 @@
+.breadcrumbs
+  = link_to _('Home'), "/"
+  span.path-separator
+  = link_to _('Channels'), panel_channels_path
+  span.path-separator
+h1 = _('Edit Channel')
+.tabs
+  = link_to edit_panel_channel_path(@source_owner), class: ('active' if active == 'details') do
+    .step-number 1
+    = _('Details')
+    span.underline
+    = link_to feed_panel_channel_posts_path(@source_owner), class: ('active' if active == 'feed') do
+      .step-number 2
+      = _('Feed')
+      span.underline
+    = link_to edit_panel_channel_path(@source_owner, step: :trending), class: ('active' if active == 'trending') do
+      .step-number 3
+      = _('Trending')
+      span.underline
+
+    = link_to panel_channel_tv_shows_path(@source_owner), class: ('active' if active == 'tv_shows') do
+      .step-number 4
+      = _('TV shows')
+      span.underline
+
+    = link_to panel_channel_magazines_path(@source_owner), class: ('active' if active == 'magazines') do
+      .step-number 5
+      = _('Magazines')
+      span.underline

@@ -1,0 +1,82 @@
+body {
+  background: image-url("application-bg.jpg") no-repeat center center fixed;
+  background-color: $gray-darker;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+nav {
+  margin-top: 60px;
+
+  .logo-container {
+    padding: 39px 0;
+
+    .logo {
+      display: inline-block;
+      width: 140px;
+      height: 100px;
+      object-fit: contain;
+      background: image-url("logo-filmfans.png");
+      background-size: contain;
+      background-position: center;
+      vertical-align: sub;
+      background-repeat:no-repeat;
+    }
+
+    .logo-text {
+      display: inline-block;
+      font-size: 23.6px;
+      letter-spacing: 2.9px;
+      text-transform: uppercase;
+      padding: 0 10px;
+
+      strong {
+        font-weight: $font-weight-medium;
+      }
+    }
+  }
+}
+
+.content {
+  min-height: 590px;
+  font-weight: $font-weight-book;
+
+  h1, h2 {
+    padding-top: 140px;
+    font-size: 34px;
+    line-height: 1.2;
+  }
+
+  hr {
+    display: inline-block;
+    width: 100px;
+    border: 1px solid #eaeef5;
+    height: 0;
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+
+  .form-control {
+    max-width: 400px;
+  }
+
+  .actions {
+    margin: 40px 0;
+
+    .btn {
+      margin-right: 20px;
+    }
+  }
+}
+
+footer {
+  color: $gray-semidark;
+  height: 26px;
+  font-size: 14px;
+  font-weight: $font-weight-medium;
+  line-height: 1.9;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}

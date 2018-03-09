@@ -1,0 +1,21 @@
+.header
+  - if @channel.present?
+    = render 'panel/channels/header', {active: 'magazines', :@source_owner => @channel}
+  - else
+    .breadcrumbs
+      = link_to _('Home'), "/"
+      span.path-separator
+    h1.pull-left
+      = _('Magazine titles')
+      span.counter
+        | (
+        = @magazines.count
+        | )
+    = link_to order_panel_magazines_path, class: 'btn btn-primary pull-right'  do
+      = _('Order Magazines')
+    .clearfix
+= render 'layouts/alerts'
+- if @magazines.count.zero? && @channel.present?
+  = render 'no_magazines'
+- else
+  = render 'magazines_index'

@@ -1,0 +1,17 @@
+.header
+  = render 'panel/channels/header', {active: 'magazines', :@source_owner => @channel}
+= render 'layouts/alerts'
+= simple_form_for @form, as: :magazine_form, url: panel_channel_magazine_path(@channel, @magazine), method: :put do |f|
+  .fields
+    = f.input :title, label: _('Magazine Title')
+    = f.input :description, label: _('Description'), as: :text
+    = f.simple_fields_for :cover_image, @cover_image do |cover_image_fields|
+     = cover_image_fields.input :file, as: :file, label: _('Magazine image')
+    .form-group
+      = image_tag @magazine.cover_image&.custom_url, data: @magazine&.cropper_data, class: 'cropper', coverCropUrl: @magazine.background_image&.custom_url
+
+  .actions
+    = link_to _('Back'), panel_channel_magazines_path(@channel), class: 'btn btn-default'
+    = f.submit _('Save'), class: 'btn btn-primary'
+
+= render partial: 'shared/double_cropper', locals: {title: 'Edit Magazine Cover', caption: 'new magazine picture'}

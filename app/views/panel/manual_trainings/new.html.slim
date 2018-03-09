@@ -1,0 +1,31 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+    = link_to _('Manually trained products'), panel_manual_trainings_path
+    span.path-separator
+  h1
+    | Create a new training set
+
+.manual_training_detail
+  = render 'layouts/alerts'
+  = simple_form_for @products_form, as: :manual_training_products_form, url: panel_manual_trainings_path, method: :post do |f|
+    .fields.products-search
+      = f.error_notification
+      - if @products_form.errors.any?
+        #error_notification
+          ul
+            - @products_form.errors.full_messages.each do |msg|
+              li= msg
+      .row
+        .col-md-5.container-name-col
+          .linked-products-collection data={template: manual_training_product_template_fields(f).gsub("\n", "")}
+            = f.simple_fields_for :manual_training_products, include_id: false  do |ff|
+              = render 'panel/linked_products/fields', f: ff
+
+      = render partial: 'shared/product_selection_container', locals: {title: 'Trained products. The first selected product is the trained model'}
+
+    .actions
+      = f.button :submit, _('Train'), class: 'btn btn-success'
+
+    = render partial: 'shared/popup_product_detail'

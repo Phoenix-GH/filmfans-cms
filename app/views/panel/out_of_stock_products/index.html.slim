@@ -1,0 +1,36 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+  h1.pull-left
+    = _('Linked products that are out of stock')
+    span.counter
+      | (
+      = @total_count.to_s
+      | )
+  .clearfix
+
+.table-responsive
+  table.table
+    thead
+      tr
+        th
+          = sortable 'type', _('Container')
+        th = _('Action')
+
+    tbody
+      - @out_of_stock_links.each do |link|
+        tr
+          - unless link[:name].blank?
+            td = link[:name]
+          - else
+            - unless link[:picture].blank?
+              td.image = image_tag link[:picture]
+            - else
+              td.video = video_tag link[:video], autoplay: false, controls: true
+
+          td.actions
+            = link_to image_tag("icons/ic-edit.svg"), link[:path_options]
+
+.text-center
+  = paginate @out_of_stock_links if @total_count > 0

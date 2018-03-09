@@ -1,0 +1,18 @@
+.table-responsive
+  table.table
+    thead
+      tr
+        th= sortable 'name', _('Name')
+        th= _('Icon')
+        th= _('Image')
+        th
+        th
+        th
+    tbody
+      - @categories.each do |category|
+        tr
+          td = category.name
+          td = image_tag category.icon.carousel
+          td = image_tag category.image
+          td = link_to _('Show'), [:panel, category], class: 'btn btn-default btn-sm'
+          td = link_to _('Edit'), edit_panel_category_path(category), class: 'btn btn-default btn-sm'

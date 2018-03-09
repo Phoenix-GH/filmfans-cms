@@ -1,0 +1,7 @@
+- if current_admin
+  - if current_admin.role == Role::Viewer
+    = render 'shared/viewer_navbar'
+  - else
+    = render 'shared/admin_navbar'
+- else
+  = render 'shared/guest_navbar'

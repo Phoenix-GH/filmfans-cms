@@ -1,0 +1,64 @@
+hr
+.top-products.product-detail-support
+  h5
+    b.statistics
+      = 'Top products: '
+      - if benchmark.products.size != benchmark.top_products.size
+        = "(#{benchmark.top_products.size} / #{benchmark.products.size})"
+  .row
+    .col-md-12 style='text-align: center'
+      .form-group
+        - if benchmark.pids.blank?
+          | No product returned
+        - else
+          - if benchmark.products.size != benchmark.pids.size
+            b
+              | Notice:
+            = " #{benchmark.pids.size} product IDs returned by PRS but #{benchmark.products.size} found in HS DB"
+          - benchmark.top_products.each_slice(6) do |row|
+            .row
+              - row.each do |product|
+                .col-xs-6.col-sm-4.col-md-3.col-lg-2
+                  .result.product-detail-trigger data-id="#{product.id}"
+                    label.result__content.benchmark-tab
+                      .result__content__image
+                        - unless product.image_display_url.blank?
+                          = image_tag product.image_display_url
+
+.technical-details
+  - unless benchmark.predicted_categories.blank? && benchmark.search_categories.blank? && benchmark.response_keywords.blank? && benchmark.response_message.blank?
+    .technical-details-title
+      | Click to see technical detail
+  .technical-details-details
+    - unless benchmark.predicted_categories.blank?
+      hr
+      .prediction
+        h5
+          = 'Correspond to HS category: '
+        ul.predicted-categories
+          - benchmark.predicted_categories.each do |cat_name|
+            li = "#{cat_name}"
+
+    - unless benchmark.search_categories.blank?
+      hr
+      .search-categories
+        h5
+          = 'Search categories: '
+        b
+          == benchmark.search_categories
+
+    - unless benchmark.response_keywords.blank?
+      hr
+      .response-keywords
+        h5
+          = 'Response Keywords: '
+          b
+            = _("#{benchmark.response_keywords}")
+
+    - unless benchmark.response_message.blank?
+      hr
+      .response-message
+        h5
+          = 'Response Message: '
+          b
+            = _("#{benchmark.response_message}")

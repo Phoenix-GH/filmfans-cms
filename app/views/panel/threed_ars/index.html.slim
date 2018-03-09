@@ -1,0 +1,41 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+  h1.pull-left
+    = _('3D/ARS')
+    span.counter
+      | (
+      = @threed_ars.count
+      | )
+  = link_to new_panel_threed_ar_path, class: 'btn btn-primary pull-right' do
+    = image_tag("icons/ic-add.svg")
+    = _('Add 3D/AR')
+  .clearfix
+= render 'layouts/alerts'
+
+.table-responsive
+  table.table
+    thead
+      tr
+        th
+          = sortable 'name', _('Name')
+          = simple_form_for '', url: panel_threed_ars_path, method: :get, html: {class: 'form-inline'} do |f|
+            == render partial: 'shared/search_panel', locals: {f: f}
+        th= _('Image')
+        th = _('Actions')
+
+    tbody
+      - @threed_ars.each do |row|
+        tr
+          td = row.name
+          td.celebrity-background-image = image_tag row.try(:thumb_url)
+          td.actions
+            - if can?(:update, row)
+              = link_to edit_panel_threed_ar_path(row) do
+                = image_tag("icons/ic-edit.svg")
+                - if can?(:destroy, row)
+                  = link_to panel_threed_ar_path(row), data: {confirm: _('Are you sure?')}, method: :delete do
+                    = image_tag("icons/ic-delete.svg")
+.text-center
+  = paginate @threed_ars if @threed_ars.length > 0

@@ -1,0 +1,26 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+    = link_to _('Home Screens'), panel_homes_path
+    span.path-separator
+  h1 = _('Add New Home Screen')
+  .clearfix
+  .tabs
+    = link_to new_panel_home_path, class: 'active' do
+      .step-number 1
+      = _('Details')
+      span.underline
+    = link_to '#' do
+      .step-number 2
+      = _('Set Containers')
+      span.underline
+= render 'layouts/alerts'
+= simple_form_for @form, as: :home_form, url: panel_homes_path, method: :post do |f|
+  = f.error_notification
+  - if @form.errors.any?
+    #error_notification
+      ul
+        - @form.errors.full_messages.each do |msg|
+          li= msg
+  == render partial: 'fields', locals: { f: f }

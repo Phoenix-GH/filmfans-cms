@@ -1,0 +1,9 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+    = link_to _('Admins'), panel_admins_path
+    span.path-separator
+  h1 = _('Add New Admin')
+= render 'layouts/alerts'
+= render partial: 'form', locals: { form: @form }

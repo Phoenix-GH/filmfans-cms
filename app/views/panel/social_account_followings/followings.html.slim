@@ -1,0 +1,55 @@
+.header
+  = render 'panel/social_categories/header', {:@source_owner => @social_category, :active => 'followings'}
+= render 'layouts/alerts'
+.table-responsive.social-account-followings
+  = simple_form_for '', url: followings_panel_social_category_social_account_followings_path(@social_category), method: :get, html: { class: 'form-inline' } do |f|
+    table.table
+      thead
+        tr
+          th
+            = sortable 'name', _('Name')
+            = render partial: 'shared/search_panel', locals: {f: f}
+          th
+            = _('Belong To Account')
+            = render partial: 'shared/search_panel', locals: {f: f, field: :social_account_name, second_search: true}
+          th = _('Avatar')
+          th = _('Web URL')
+          th = _('Target ID')
+          - unless @social_category.is_top
+            th = _('Trending')
+          th = _('Sort')
+
+      tbody class="#{@has_search ? '' : 'sorted_table'}"
+        - @followings.each do |following|
+          tr id=following.main_id
+            - fname = "#{(following.name.blank? ? following.target_id : following.name)}"
+            td
+              div
+                = fname
+              .followers_posts_num
+                = "#{following.followers_num_pretty} followers"
+                br
+                  = "#{following.posts_num_pretty} posts"
+            td = following.social_account_name
+            td
+              div.picture-circle style='background-image: url(#{following.avatar_url})'
+            td
+              = link_to _('Go To Site'), following.web_url, target: '_blank'
+            td = following.target_id
+            - unless @social_category.is_top
+              td
+                - if can?(:update, following)
+                  div id = "following_trending_#{following.id}"
+                    = render 'following_trending', category: @social_category, following: following
+            td.actions
+              = link_to "#{save_order_top_panel_social_category_social_account_followings_path(@social_category)}?id=#{following.main_id}", method: :post do
+                i class='fa fa-angle-double-up' aria-hidden='true'
+.text-center
+  = paginate @followings if @followings.length > 0
+
+= simple_form_for '', url: save_order_panel_social_category_social_account_followings_path(@social_category), method: :post, html: { class: 'form-inline' } do |f|
+  input type='hidden' name='ordered_ids' value='' id='social_account_followings_sort_input'
+  input type='hidden' name='page' value='#{@page}'
+  .actions
+    = link_to _('Back'), edit_panel_social_category_path(@social_category), class: 'btn btn-default'
+    = f.submit _('Save'), class: 'btn btn-primary'

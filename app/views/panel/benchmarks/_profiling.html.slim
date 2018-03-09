@@ -1,0 +1,94 @@
+hr
+h3
+  b = _('Execution time (millisecond)')
+div
+  table.execution-time
+    - if @benchmark.exec_crop_shop_total_app > 0
+      tr
+        td.col-xs-10.activity
+          b
+            | Total time: from image left apps until receiving products
+        td.col-xs-2.time-spent
+          b
+            = number_to_delimited(@benchmark.exec_crop_shop_total_app)
+      tr
+        td.col-xs-10.activit
+          b
+            | Network roundtrip: APPS -> BACKEND -> APPS
+        td.col-xs-2.time-spent
+          b
+            = number_to_delimited(@benchmark.exec_app_netw)
+    tr
+      td.col-xs-10.activity
+        b
+          | Total server time: HS + PRS
+      td.col-xs-2.time-spent
+        b
+          = number_to_delimited(@benchmark.exec_crop_shop_total)
+    tr
+      td.col-xs-10.activity
+        | From image left HS until receiving PRS response
+        table.execution-time
+          - if @benchmark.exec_prs_product_retrieval_time || @benchmark.exec_prs_single_classification_time || @benchmark.exec_prs_proxy_image_preprocessing
+            tr
+              td.col-xs-10.activity
+                | Image pre-processing at proxy
+              td.col-xs-2.time-spent
+                = number_to_delimited(@benchmark.exec_prs_proxy_image_preprocessing)
+            - unless @benchmark.exec_prs_multi_classification_time.blank?
+              tr
+                td.activity
+                  | Multi object classification
+                td.time-spent
+                  = number_to_delimited(@benchmark.exec_prs_multi_classification_time)
+            tr
+              td.activity
+                | Single object classification
+              td.time-spent
+                = number_to_delimited(@benchmark.exec_prs_single_classification_time)
+            tr
+              td.activity
+                | Product retrieval
+              td.time-spent
+                = number_to_delimited(@benchmark.exec_prs_product_retrieval_time)
+            tr
+              td.activity
+                | Manual Assessment
+              td.time-spent
+                = number_to_delimited(@benchmark.exec_prs_ma_time)
+            tr
+              td.activity
+                | Network round trip
+              td.time-spent
+                = number_to_delimited(@benchmark.exec_netw)
+
+          - else
+            tr
+              td.activity
+                | Recognition time
+              td.time-spent
+                = number_to_delimited(@benchmark.exec_prs_only)
+            tr
+              td.activity
+                | Others
+              td.time-spent
+                = number_to_delimited(@benchmark.exec_prs_netw - @benchmark.exec_prs_only)
+      td.col-xs-2.time-spent
+        = number_to_delimited(@benchmark.exec_prs_netw)
+
+    tr
+      td.col-xs-10.activity
+        | HS processing: before & after PRS
+        table.execution-time
+          tr
+            td.col-xs-10.activity
+              | Database time
+            td.col-xs-2.time-spent
+              = number_to_delimited(@benchmark.exec_hs_db)
+          tr
+            td.activity
+              | Others (image processing)
+            td.time-spent
+              = number_to_delimited(@benchmark.exec_hs_total - @benchmark.exec_hs_db)
+      td.col-xs-2.time-spent
+        = number_to_delimited(@benchmark.exec_hs_total)

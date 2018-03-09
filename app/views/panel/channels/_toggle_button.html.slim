@@ -1,0 +1,4 @@
+- if channel.feed_active?
+  = render 'feed_active', channel: channel
+- else
+  = render 'feed_inactive', channel: channel

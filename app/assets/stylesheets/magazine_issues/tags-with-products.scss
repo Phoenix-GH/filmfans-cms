@@ -1,0 +1,126 @@
+
+.magazine-issue-details {
+  .tags-with-products-container {
+    .tag-product-list-scroller {
+      overflow-x: hidden;
+      overflow-y: auto;
+      height: 100%;
+
+      .tag-product-list {
+        border: solid 1px $gray-light;
+        border-bottom: none;
+
+        .issue-tag-icon-block {
+          float: left;
+        }
+      }
+    }
+  }
+
+  .widget-list-product-tag {
+    position: relative;
+    min-height: 85px;
+    border-bottom: 1px solid #C3CED9;
+
+    .hover-area-droppable {
+      border: 1px dashed #136FFF;
+    }
+
+    .issue-tag-icon-block {
+      border: none;
+      margin-top: 5px;
+    }
+    .container-list-product-tagged {
+      overflow-x: hidden;
+      overflow-y: visible;
+      padding: 5px 10px 0 10px;
+      border-left: 1px solid #C3CED9;
+      min-height: 83px;
+
+      .widget-tag-product {
+        display: inline-block;
+      }
+
+      .help-text {
+        display: none;
+        font-size: 0.9em;
+        color: gray;
+        position: absolute;
+        top: 50%;
+        margin-top: -9px;
+        
+        &:before {
+          border-radius: 8px;
+          border: 1px solid $gray-light;
+          margin-top: -2px;
+          margin-right: 5px;
+        }
+      }
+      .help-text:only-child {
+        display: block;
+      }
+    }
+  }
+
+  .widget-tag-product {
+    width: 75px;
+    height: 73px;
+    white-space: nowrap;
+    margin-right: 5px;
+    position: relative;
+
+    &:hover {
+      .widget-remove-product-tag {
+        display: block;
+      }
+    }
+    .widget-remove-product-tag {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(0, 0, 0, .5);
+      text-align: center;
+      line-height: 72px;
+      top: 0;
+      left: 0;
+      z-index: 99999;
+      display: none;
+      .hs-icon-ic-close-circle {
+        color: #fff;
+        font-size: 20px;
+        cursor: pointer;
+      }
+    }
+
+    input, svg, .result__content__brand, .result__content__price, .result__content__vendor {
+      display: none !important;
+    }
+    img {
+      max-width: 100%;
+      height: 50px;
+    }
+    label {
+      width: 75px !important;
+      height: 73px !important;
+      text-align: center;
+      padding: 2px;
+    }
+    .result__content__name {
+      font-size: 11px;
+      display: block;
+      overflow: hidden;
+      -ms-text-overflow: ellipsis;
+      text-overflow: ellipsis;
+    }
+    .result__content__image {
+      margin: 0 auto 3px auto;
+    }
+
+    // disable border when selecting a product
+    input[type='checkbox']:checked ~ .result__content {
+      border: 1px solid $gray-light;
+    }
+
+  }
+
+}

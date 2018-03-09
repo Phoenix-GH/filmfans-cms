@@ -1,0 +1,42 @@
+.header
+  .row
+    .col-md-6.text-left
+      .breadcrumbs
+        = link_to _('Home'), "/"
+        span.path-separator
+      h1 = "Products keywords (#{(@products.kind_of?(Array) ? @products.count : @products.total_count)})"
+      - if @total_index != @total
+        i
+          = "Total #{@total} / indexed #{@total_index}"
+
+= render 'layouts/alerts'
+.table-responsive.product-keywords-table.product-detail-support
+  = simple_form_for '', url: panel_product_keywords_path, method: :get, html: {class: 'form-inline'} do |f|
+    table.table
+      thead
+        tr
+          th.name
+            | Product
+          th
+            | Brand
+          th.keyword-search
+            | Keywords
+            == render partial: 'shared/search_panel', locals: { f: f, field: :single_keyword}
+      tbody
+        - @products.each do |product|
+          tr.products-table-product-row
+            td.product-image-col.product-detail-trigger data-id="#{product.product_id}"
+              .table--product_image
+                - unless product.product.image_display_url.blank?
+                  = image_tag product.product.image_display_url, class: 'img-responsive'
+
+              .table--product_name
+                .table--product_name--name = product.product.name
+            td
+              = product.brand
+            td
+              - product.displayed_keywords_as_array.each do |k|
+                .keyword
+                  = k
+.text-center
+  = paginate @products if @products.count > 0

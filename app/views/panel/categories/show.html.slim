@@ -1,0 +1,24 @@
+p
+  = link_to _('Edit Category'), edit_panel_category_path(@category), class: 'btn btn-default'
+  = link_to _('Destroy'), [:panel, @category], data: { confirm: _('Are you sure?') }, method: :delete, class: 'btn btn-danger btn-sm'
+p
+  strong= _('Name: ')
+  = @category.name
+p
+  strong= _('Image: ')
+  p
+    = image_tag @category.image
+p
+  strong= _('Icon: ')
+  p
+    = image_tag @category.icon
+p
+  .row
+    .col-md-4
+      = link_to _('New Subcategory'), new_panel_category_path(parent_id: @category.id), class: 'btn btn-success'
+    .col-md-8
+      = simple_form_for '', url: panel_category_path(@category), method: :get, html: {class: 'form-inline'} do |f|
+        == render partial: 'shared/search_panel', locals: {f: f}
+p
+  strong= _('Subcategories: ')
+  == render  'list'

@@ -1,0 +1,11 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+    = link_to _('Product Sets'), panel_products_containers_path
+    span.path-separator
+  h1 = _('Edit Product Set')
+
+= render 'layouts/alerts'
+= simple_form_for @form, as: :products_container_form, url: panel_products_container_path(@products_container), method: :patch do |f|
+  == render partial: 'fields', locals: {f: f}

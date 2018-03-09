@@ -1,0 +1,193 @@
+h4{
+  font-size: 14px;
+  font-weight: 600;
+  color: $gray-dark;
+  margin-bottom:20px;
+}
+.support-call{
+  margin-top:3%;
+  padding-top:3%;
+  padding-bottom:6%;
+  height:100%;
+  border-left: 1px solid $gray-light;
+  position:relative;
+  .number{
+    color: $brand-primary;
+  }
+  &:before{
+    content: 'OR';
+    position: absolute;
+    width:33px;
+    height:33px;
+    left: -16.5px;
+    top: 79px;
+    padding-top: 7px;
+    font-size: 11px;
+    font-weight:600;
+    color: $gray-semilight;
+
+    border-radius:50%;
+    text-align: center;
+    border:1px solid $gray-light;
+    background: $light;
+  }
+}
+.settings-form{
+  max-width:80%;
+  label{
+    font-weight: 400;
+    font-size:16px;
+  }
+}
+.settings{
+  .input-group{
+    .btn{
+      height: 38px;
+      padding: 0px 20px;
+      font-size: 14px;
+      line-height: 38px;
+    }
+
+  }
+  .form-control{
+    padding: 7px 12px;
+  }
+  .tabs {
+    // margin-bottom: -47px;
+    // margin-top: 26px;
+
+    a {
+      text-transform: uppercase;
+      display: inline-block;
+      font-weight: $font-weight-medium;
+      text-decoration: none;
+      margin-right: 40px;
+      color: $gray-semilight;
+
+      .step{
+        display: inline-flex;
+        width:20px;
+        height:20px;
+        border-radius:20px;
+        background-color: $gray-semilight;
+        margin-right:12px;
+        justify-content: center;
+        align-items: center;
+        font-size:12px;
+        color: $light;
+        line-height: 1;
+      }
+
+      .step-number{
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: $gray-semilight;
+        color: #fff;
+        text-align: center;
+        vertical-align: bottom;
+        line-height: 20px;
+        font-size: 12px;
+        margin-right: 12px;
+
+      }
+
+      &.active, &:hover {
+        color: $link-hover-color;
+        .step{
+          background-color: $brand-primary;
+        }
+
+        .step-number {
+          background: $link-hover-color;
+        }
+        .underline {
+          height: 6px;
+          border-radius: 3px;
+          color: $link-hover-color;
+          background-color: $link-color;
+          display: block;
+          margin-top: 12px;
+          margin-right: -4px;
+
+          &:hover {
+            background-color: $link-hover-color;
+          }
+        }
+      }
+    }
+  }
+}
+.channels-tab, .celebrities-tab{
+ padding: 15px 0;
+ display:none;
+ min-height: 300px;
+ overflow-y: auto;
+ &.current{
+   display: block;
+ }
+}
+.tabsetion{
+  border-bottom:1px solid $gray-lighter;
+  .media-owner-tabs{
+    width:68%;
+    position:relative;
+    display: inline-block;
+  }
+  .search-field{
+    width:30%;
+    position:relative;
+    display: inline-block;
+    .form-group{
+      margin-bottom:0px;
+    }
+  }
+}
+.media-owner-container-select{
+  .media-owner{
+    cursor: pointer;
+    margin-left: 15px;
+    input[type="checkbox"]{
+      visibility:hidden;
+    }
+    &.checked{
+      .media-owner__name{
+        color: $brand-primary;
+      }
+      &:before{
+        content: '';
+        position:absolute;
+        width: 24px;
+        height: 24px;
+        background-size: cover;
+        background: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>D1978CB6-C93B-44EA-B70B-F2DC16D42D07</title><path d="M17.707 7.293c-.39-.39-1.023-.39-1.414 0L10 13.586l-2.293-2.293c-.39-.39-1.023-.39-1.414 0-.39.39-.39 1.023 0 1.414l3 3c.195.195.45.293.707.293.256 0 .512-.098.707-.293l7-7c.39-.39.39-1.023 0-1.414" fill="#448aff" fill-rule="evenodd"/></svg>');
+      }
+    }
+  }
+}
+.media-owner{
+  padding:5px 0;
+  &__img{
+    @extend .img-circle;
+    width:36px;
+    height:36px;
+    border: 1px solid $gray-light;
+    border-radius: 50%;
+    margin-left:15px;
+    margin-right: 20px;
+    display: inline-block;
+    overflow: hidden;
+    img{
+      max-height: 100%;
+      max-width: none;
+      width: auto;
+    }
+  }
+  &__name{
+    display: inline-block;
+    position:relative;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+}

@@ -1,0 +1,7 @@
+.breadcrumbs
+  = link_to _('Home'), "/"
+  span.path-separator
+  = link_to _('Social Accounts'), panel_social_accounts_path
+  span.path-separator
+  = link_to _('Followings'), panel_social_account_followings_path(@social_account)
+h1 = _(title)

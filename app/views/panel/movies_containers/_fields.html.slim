@@ -1,0 +1,14 @@
+.fields
+  = f.input :name
+  = hidden_field_tag(:type, 'movie')
+  .association-list data={association: 'Movie', 'fetch-url' => '/json/movies.json'}
+    ul.dropdown-list
+      = f.simple_fields_for :linked_movies do |ff|
+        == render 'linked_movies_fields', f: ff
+    .row
+      .col-md-12
+        = link_to_add_association_fields _('Add next Movie'), f, :linked_movies, 'panel/movies_containers/linked_movies_fields', btn_class: 'btn btn-default btn-add-item', target_container: '.dropdown-list'
+
+.actions
+  = link_to _('Back'), panel_movies_containers_path, class: 'btn btn-default'
+  = f.submit _('Save'), class: 'btn btn-primary'

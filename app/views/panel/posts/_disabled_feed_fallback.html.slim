@@ -1,0 +1,13 @@
+.fields
+  .social-feed
+    = image_tag 'icons/ic-social-feed-empty.svg', class: 'ic-social-feed'
+    div
+      span Channel&nbsp;
+      span.blue => source_owner.name
+      span has no Social Media Feeds linked yet
+    br
+    br
+    .actions
+      = link_to _('Skip'), panel_channels_path, class: 'btn btn-default'
+      .media-social-btn.btn.btn-primary  data-channel = source_owner.id data-dialogfeed = source_owner.dialogfeed_url
+        'Add Social Media Feed

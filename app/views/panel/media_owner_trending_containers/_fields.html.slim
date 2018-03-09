@@ -1,0 +1,14 @@
+.fields
+  = f.input :name
+  = hidden_field_tag(:type, 'manual_post')
+  .association-list data={association: 'Manual Post', 'fetch-url' => '/json/media_owner_trendings.json'}
+    ul.dropdown-list
+      = f.simple_fields_for :linked_manual_posts do |ff|
+        == render 'linked_fields', f: ff
+    .row
+      .col-md-12
+        = link_to_add_association_fields _('Add next Post'), f, :linked_manual_posts, 'linked_fields', btn_class: 'btn btn-default btn-add-item', target_container: '.dropdown-list'
+
+.actions
+  = link_to _('Back'), panel_media_owner_trending_containers_path, class: 'btn btn-default'
+  = f.submit _('Save'), class: 'btn btn-primary'

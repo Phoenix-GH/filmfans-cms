@@ -1,0 +1,17 @@
+.assetment-container
+  .classifier.classifier-in-edit data={current_slide_index: 0}
+    = link_to edit_panel_benchmark_path(benchmark), :class => 'classifier-item selected'
+      .classifier-item-inner
+        = image_tag benchmark.try(:image).try(:cropped_url), alt: 'Recognized image'
+      h6
+        = _("Size: #{benchmark.image_file_size_pretty}")
+      h6
+        = _("#{benchmark.crop_area}")
+      h4
+        b
+          - if benchmark.details['classifier'].blank?
+            = _('-')
+          - else
+            = benchmark.details['classifier'].upcase
+            - unless benchmark.details['classifier_probability'].blank?
+              = " (#{(benchmark.details['classifier_probability'].to_f).round(2)})"

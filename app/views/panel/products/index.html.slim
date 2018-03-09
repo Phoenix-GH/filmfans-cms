@@ -1,0 +1,42 @@
+.header
+  .row
+    .col-md-6.text-left
+      .breadcrumbs
+        = link_to _('Home'), "/"
+        span.path-separator
+      h1 = _('Products (' + (@products.kind_of?(Array) ? @products.count.to_s : @products.total_count.to_s) + ')')
+    .col-md-6.text-right
+      = link_to _('+ Add New Product'), new_panel_product_path, class: 'btn btn-lg btn-primary'
+
+= render 'layouts/alerts'
+.table-responsive.products-table.product-detail-support
+  = simple_form_for '', url: panel_products_path, method: :get, html: {class: 'form-inline'} do |f|
+    table.table
+      thead
+        tr
+          th.name-search
+            = sortable 'name', _('Product name')
+            == render partial: 'shared/search_panel', locals: { f: f }
+          th.brand-search
+            = sortable 'brand', _('Brand')
+            == render partial: 'shared/search_panel', locals: { f: f, field: :brand_search, second_search: true }
+          th
+            = _('Category')
+            .form-group.search
+              input type="hidden" value="#{params[:category_id]}" id="current_filter_category_id"
+              = f.input_field :category_id, collection: @presenter.category_main_options,
+                              as: :grouped_select, group_method: :subcategories,
+                              class: 'form-control', selected: params[:category_id], include_blank: 'All'
+          th
+            = _('Vendor')
+            .form-group.search
+              = f.input_field :vendor, collection: Store.list_stores_having_products, value_method: :name, include_blank: 'All', class: 'form-control', selected: params[:vendor]
+          th = sortable 'created_at', _('Date added')
+          th
+            = _('Containers')
+
+          th.actions = _('Actions')
+
+      = render partial: 'table'
+.text-center
+  = paginate @products if @products.count > 0

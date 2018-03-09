@@ -1,0 +1,31 @@
+.content-container.container-box
+  .col-sm-1.container-handle
+    .handle-bar
+    .handle-bar
+    .handle-bar
+  .col-sm-11
+    .row
+      .col-sm-6
+        = f.input :color, label: _('Color'), input_html: {class: 'container-name-selector'}
+        = f.input :position, as: :hidden
+      .col-sm-6.text-right
+        = link_to_remove_fields "<i class='fa fa-times'></i>".html_safe, f
+    .row
+      .col-sm-6
+        = f.input :description, as: :text, label: _('Description'), input_html: { class: 'container-type-selector' }
+        .sizes
+          .row
+            .col-sm-5
+              = _('Size')
+            .col-sm-5
+              = _('Price for this size')
+          = f.simple_fields_for :sizes do |ff|
+            = render 'panel/products/size_fields', f: ff
+          = link_to_add_association _('Add new size'), f, :sizes, 'panel/products/size_fields'
+      .col-sm-6
+
+        label= _('Images for this color')
+        = f.input :temp_image_ids, as: :hidden,
+                  input_html: { data: {images: TempImage.where(id: f.object.temp_image_ids).map{|img| {temp_image_id: img.id, thumb_url: img.image.small_thumb.url}}}, value: f.object.temp_image_ids&.join(',')}
+
+        #product_variant_form_dropzone.dropzone

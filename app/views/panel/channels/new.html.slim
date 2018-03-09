@@ -1,0 +1,54 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+    = link_to _('Channels'), panel_channels_path
+    span.path-separator
+  h1 = _('Add New Channel')
+  .clearfix
+  .tabs
+    = link_to new_panel_channel_path, class: 'active' do
+      .step-number 1
+      = _('Details')
+      span.underline
+
+    = link_to '' do
+      .step-number 2
+      = _('Feed')
+      span.underline
+
+    = link_to '' do
+      .step-number 3
+      = _('Trending')
+      span.underline
+
+    = link_to '' do
+      .step-number 4
+      = _('TV shows')
+      span.underline
+
+    = link_to '' do
+      .step-number 5
+      = _('Magazines')
+      span.underline
+= render 'layouts/alerts'
+= simple_form_for @form, as: :channel_form, url: panel_channels_path, method: :post do |f|
+  .fields
+    = f.input :name, label: _('Channel Name')
+    = f.input :dialogfeed_url, label: _('Dialogfeed URL')
+    = f.input :media_owner_ids, collection: @presenter.media_owner_options, label: _('Linked Media Owners'), input_html: {multiple: true, class: "chosen-select"}
+    = f.input :countries, collection: @presenter.channel_countries, label: _('Countries'), input_html: {multiple: true, class: "chosen-select"}
+    .field.visibility-checkbox
+      .form-group
+        = f.label :visibility, class: "control-label", label: _('Visibility')
+        .status-checkbox-wrapper
+          = f.input_field :visibility, as: :boolean, boolean_style: :inline, checked: true
+          = f.label :visibility
+          .for-active
+    = f.simple_fields_for :picture, @picture do |picture_fields|
+      = picture_fields.input :file, as: :file, label: _('Channel Picture')
+    .form-group
+      = image_tag @picture.file_url if @channel
+  .actions
+    = link_to _('Back'), panel_channels_path, class: 'btn btn-default'
+    = f.submit _('Save'), class: 'btn btn-primary'

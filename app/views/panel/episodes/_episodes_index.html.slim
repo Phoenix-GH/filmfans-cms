@@ -1,0 +1,33 @@
+.table-actions
+    = link_to 'Add New Episode', new_panel_tv_show_episode_path(@tv_show), class: 'btn btn-default btn-action'
+
+.table-responsive
+  table.table
+    thead
+      tr
+        th{ colspan = "6" }
+          = _('Episodes list')
+      tr
+        th = _('Video')
+        th = _('Title')
+        th = _('Season')
+        th = _('Episode')
+        th = _('Actions')
+
+    tbody
+      - @episodes.each do |episode|
+        tr
+          td.image = image_tag episode&.file&.video_thumb.url
+          td = episode.title
+          td = episode.tv_show_season.number
+          td = episode.number
+          td.actions
+            - if can?(:update, @channel)
+              = link_to edit_panel_tv_show_episode_path(@tv_show, episode) do
+                = image_tag("icons/ic-edit.svg")
+            - if can?(:update, @channel)
+              = link_to [:panel, @tv_show, episode], data: { confirm: _('Are you sure?') }, method: :delete do
+                = image_tag("icons/ic-delete.svg")
+
+.actions
+  = link_to 'Back to TV Shows', panel_channel_tv_shows_path(@channel), class: 'btn btn-default'

@@ -1,0 +1,66 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+  h1.pull-left
+    = _('Crop & shop multi-object recognition test (' + (@benchmarks.kind_of?(Array) ? @benchmarks.count.to_s : @benchmarks.total_count.to_s) + ')')
+
+= render 'layouts/alerts'
+
+.benchmark-multi-objects
+  = simple_form_for @form, as: :multi_object_test_form, url: panel_benchmark_multi_objects_path, method: :post do |f|
+    .fields
+      = f.input :image_url, label: _('Either image URL')
+      = f.input :image_file, as: :file, label: _('Or image file (only .jpg and .jpeg are supported)'), accept: 'jpg jpeg'
+      .actions
+        = f.submit _('Test'), class: 'btn btn-primary'
+
+.table-responsive.benchmark-list
+  = simple_form_for '', url: panel_benchmarks_path, method: :get, html: {class: 'form-inline'} do |f|
+    table.table
+      thead
+        tr
+          th rowspan=2
+            = sortable 'created_at', _('Exec (UTC)')
+          th rowspan=2
+            = _('Photo')
+          th colspan=3
+            = _('Execution time in millisecond')
+        tr
+          th
+            = _('Total')
+          th
+            = _('PRS')
+          th
+            = _('HS')
+      tbody
+        - @benchmarks.each do |benchmark|
+          tr
+            td
+              - if benchmark.image.blank?
+                = benchmark.created_at.utc.strftime('%b %d %Y')
+                br
+                = benchmark.created_at.utc.strftime('%H:%M:%S')
+                br
+                - unless benchmark.details['remote_ip'].blank?
+                  i
+                    = benchmark.details['remote_ip']
+              - else
+                = link_to edit_panel_benchmark_multi_object_path(benchmark, @search_params) do
+                  = benchmark.created_at.utc.strftime('%b %d %Y')
+                  br
+                  = benchmark.created_at.utc.strftime('%H:%M:%S')
+                br
+                - unless benchmark.details['remote_ip'].blank?
+                  i
+                    .ip-country
+                      .ip = benchmark.details['remote_ip']
+                      .country
+            td.benchmark-user-image
+              = image_tag benchmark.try(:image).try(:small_thumb_url)
+              div #{benchmark.image_file_size_pretty}
+            td = number_to_delimited(benchmark.exec_crop_shop_total)
+            td = number_to_delimited(benchmark.exec_prs_netw)
+            td = number_to_delimited(benchmark.exec_hs_total)
+.text-center
+  = paginate @benchmarks if @benchmarks.count > 0

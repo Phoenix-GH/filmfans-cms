@@ -1,0 +1,28 @@
+.header
+  - if @source_owner.is_a?(MediaOwner)
+    = render '/panel/media_owners/header', active: 'videos'
+  - elsif @source_owner.is_a?(Channel)
+    = render '/panel/channels/header', active: 'videos'
+= render 'layouts/alerts'
+.table-responsive
+  table.table
+    thead
+      tr
+        th= _('Video')
+        th= _('Description')
+        th= _('Published')
+        th= _('Visibility')
+        th= _('Linked Products')
+
+    tbody
+      - @posts.each do |post|
+        tr
+          td.video
+            = video_tag post.content_video, autoplay: false, controls: true
+          td= truncate(post.content_body, length: 100)
+          td= post.published_at
+          td
+            - if can?(:update, @source_owner)
+              .toggle
+                = render 'toggle_button', post: post
+          td

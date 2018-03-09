@@ -1,0 +1,47 @@
+.header
+  - if @source_owner.is_a?(MediaOwner)
+    = render '/panel/media_owners/header', active: 'feed'
+  - elsif @source_owner.is_a?(Channel)
+    - if @source_owner.key.blank?
+      = render '/panel/channels/header', active: 'feed'
+    - else
+      = render '/panel/channels/header_special', active: 'feed'
+= render 'layouts/alerts'
+
+- if @source_owner.feed_active?
+  - if @posts.present?
+    - if @source_owner.is_a?(Channel)
+      - if @source_owner.key.blank?
+        .table-actions
+          .media-social-btn.btn-action.btn.btn-default data-channel = @source_owner.id data-dialogfeed = @source_owner.dialogfeed_url
+            = _('Manage Social Media Feed')
+    - else
+      .table-actions
+        .media-social-btn.btn-action.btn.btn-default data-channel = @source_owner.id data-dialogfeed = @source_owner.dialogfeed_url
+          = _('Manage Social Media Feed')
+
+    .table-responsive
+      table.table
+        thead
+          tr
+            th= _('Image/Video')
+            th= _('Description')
+            th= _('Published')
+            th= _('Visibility')
+            th= _('Linked Products')
+
+        tbody
+          = render @posts
+  - else
+    = render 'panel/posts/empty_feed_fallback', source_owner: @source_owner
+- else
+  = render 'panel/posts/disabled_feed_fallback', source_owner: @source_owner
+.text-center
+  = paginate @posts if @posts.count > 0
+
+- if @source_owner.is_a?(Channel) and @source_owner.key.blank?
+  .actions
+    = link_to _('Back'), edit_panel_channel_path(@source_owner), class: 'btn btn-default'
+    = link_to _('Next'), edit_panel_channel_path(@source_owner, step: :trending), class: 'btn btn-primary'
+
+= render partial: 'shared/toggle_feed_popup'

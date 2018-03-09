@@ -1,0 +1,41 @@
+.header
+  = render 'header', {title: "Edit 3D/AR - Models"}
+  = render 'header_edit'
+
+= render 'layouts/alerts'
+
+.table-actions
+  = link_to 'Add New model', new_panel_threed_ar_threed_model_path, class: 'btn btn-default btn-action'
+
+.table-responsive
+  table.table
+    thead
+      tr
+        th{ colspan = "4" }
+          = _("All models (#{(@models.kind_of?(Array) ? @models.count.to_s : @models.total_count.to_s)})")
+      tr
+        th
+          = sortable 'description' , _('Description')
+          = simple_form_for '', url: panel_threed_ar_threed_models_path, method: :get, html: {class: 'form-inline'} do |f|
+            == render partial: 'shared/search_panel', locals: {f: f}
+        th
+          = sortable 'file', _('File')
+        th = _('Number Of Products')
+        th = _('Actions')
+
+    tbody
+      - @models.each do |row|
+        tr
+          td = row.description
+          td = row.file_name
+          td = row.products.count
+          td.actions
+            - if can?(:update, row)
+              = link_to edit_panel_threed_ar_threed_model_path(@threed_ar, row) do
+                = image_tag("icons/ic-edit.svg")
+                - if can?(:destroy, row)
+                  = link_to panel_threed_ar_threed_model_path(@threed_ar, row), data: {confirm: _('Are you sure?')}, method: :delete do
+                    = image_tag("icons/ic-delete.svg")
+
+.text-center
+  = paginate @models if @models.length > 0

@@ -1,0 +1,20 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+    = link_to _('Events'), panel_events_containers_path
+    span.path-separator
+  h1 = _('Edit Event Container')
+  .tabs
+    = link_to edit_panel_event_container_path(@event_container) do
+      = _('Details')
+      span.underline
+    = link_to [:panel, @event_container], class: 'active' do
+      = _('Events order')
+      span.underline
+
+- set_var 'collectionsContainerId', @event_container.id
+ul.events-container-sortable.sortable.grid
+  - @events.each do |event|
+    li{ data= { id: "#{event.id}" } }
+      h3 = event.name

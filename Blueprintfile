@@ -1,0 +1,4 @@
+api:
+  spec: "spec/requests/api/v1"
+  blueprint: "public/api.md"
+  html: "public/api.html"

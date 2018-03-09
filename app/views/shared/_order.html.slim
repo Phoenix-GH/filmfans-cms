@@ -1,0 +1,10 @@
+.fields
+  .widget-reorder
+    .container-list.clearfix
+      - sources.each do |source|
+        .widget-order id='#{source.id}'
+          .box-order
+            / try both the relation's & its own's attribute for image url
+            .picture style="background-image:url(#{source.try(picture).try(:custom_url) || source.try(picture)})"
+            p = source[title]
+    input type='hidden' name='ordered_ids' value=''

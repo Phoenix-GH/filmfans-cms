@@ -1,0 +1,15 @@
+.assetment-container
+  .classifier.classifier-preview
+    - benchmark.ordered_cropped_objects.each_with_index do |crop, index|
+      = link_to '#', class: "classifier-item #{'selected' if index == 0}", data: {benchmark_id: benchmark.id, crop_id: crop.id}
+        .classifier-item-inner
+          = image_tag crop.try(:image).try(:url), alt: 'Recognized area'
+        h4
+          = crop.classifier_data
+          - unless crop.box_classification_info.blank?
+            br
+            = "box: #{crop.box_classification_info}"
+
+- benchmark.ordered_cropped_objects.each_with_index do |crop, index|
+  .bbprs-preview-details data={crop_id: crop.id} style="display: #{'none' if index > 0}"
+    = render 'panel/benchmarks/bbprs_preview_details', {benchmark: crop}

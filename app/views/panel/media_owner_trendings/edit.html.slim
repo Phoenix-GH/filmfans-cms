@@ -1,0 +1,32 @@
+.header
+  = render 'header', { title: 'Edit Manual Post'}
+  = render 'header_edit'
+
+= render 'layouts/alerts'
+.media-owner-trending
+  = simple_form_for @form, as: :manual_post_form, url: panel_media_owner_trending_path(@manual_post), method: :put do |f|
+    .fields
+      = f.input :name, label: _('Description, enter the name of the corresponding movie'), autofocus: true
+      = f.input :owner_id, collection: @presenter.owner_options, label: _('Owner'), input_html: {required: false, multiple: false, class: "chosen-select owner-options"}
+      = f.input :display_option, collection: @presenter.media_owner_trending_display_options, selected: @manual_post.display_option, label: _('Display'), input_html: {required: false, multiple: false, class: "chosen-select display-options"}
+      .field.visibility-checkbox
+        .form-group
+          = f.label :visible, class: "control-label", label: _('Visible - make it visible when you complete the content')
+          .status-checkbox-wrapper
+            = f.input_field :visible, as: :boolean, boolean_style: :inline
+            = f.label :visible
+            .for-active
+      = f.input :image, as: :file, label: _('Either image'), input_html: {accept: '.jpg, .jpeg, .gif, .png'}
+      = f.input :video, as: :file, label: _('Or Video'), input_html: {accept: '.mov, .avi, .mp4, .mkv, .wmv, .mpg, .vob'}
+
+      .form-group
+        - if @manual_post.image?
+          = image_tag @manual_post.custom_url, data: @manual_post.cropper_data, class: 'cropper'
+        - if @manual_post.video?
+          = video_tag @manual_post.try(:video), autoplay: false, controls: true
+
+    .actions
+      = link_to _('Back'), panel_media_owner_trendings_path, class: 'btn btn-default'
+      = f.submit _('Save'), class: 'btn btn-primary'
+
+= render partial: 'shared/cropper', locals: { title: 'Edit Picture' }

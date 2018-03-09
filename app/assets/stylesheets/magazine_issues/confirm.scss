@@ -1,0 +1,29 @@
+.magazine-issue-details.confirm {
+  .confirm-container {
+    .page-separator {
+      border-top: 1px solid $gray-light;
+      height: 1px;
+      margin: 15px 0;
+    }
+
+    .confirmed-page {
+      position: relative;
+
+      .link-edit {
+        text-align: right;
+      }
+
+      .tag-and-products {
+        .title {
+          font-weight: bold;
+        }
+
+        .tags-with-products {
+          .tag-product-list {
+            border-bottom: none;
+          }
+        }
+      }
+    }
+  }
+}

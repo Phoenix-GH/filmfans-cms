@@ -1,0 +1,4 @@
+h1 = _('Editing Product File')
+= render 'layouts/alerts'
+= simple_form_for @form, as: :product_file_form, url: panel_product_product_file_path(@product, @product_file), method: :patch do |f|
+  == render partial: 'fields', locals: { f: f }

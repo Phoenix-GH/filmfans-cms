@@ -1,0 +1,7 @@
+if("<%=@channel.visibility %>" == "true"){
+  $("#channel_visibility_<%=@channel.id%>").find('a').addClass('btn-status-active');
+  $("#channel_visibility_<%=@channel.id%>").find('a > span.status').empty().html('Visible');
+} else {
+  $("#channel_visibility_<%=@channel.id%>").find('a').removeClass('btn-status-active');
+  $("#channel_visibility_<%=@channel.id%>").find('a > span.status').empty().html('Invisible');
+}

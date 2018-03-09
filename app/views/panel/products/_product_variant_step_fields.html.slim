@@ -1,0 +1,10 @@
+= f.error_notification
+- if @form.errors.any?
+  #error_notification
+    ul
+      - @form.errors.full_messages.each do |msg|
+        li= msg
+
+#variants
+  = f.simple_fields_for :variants do |ff|
+    = render 'panel/products/variant_fields', f: ff

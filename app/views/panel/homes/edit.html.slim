@@ -1,0 +1,17 @@
+.header
+  = render 'header', active: 'details'
+= render 'layouts/alerts'
+= simple_form_for @form, as: :home_form, url: panel_home_path(@home), method: :patch do |f|
+  = f.error_notification
+  - if @form.errors.any?
+    #error_notification
+      ul
+        - @form.errors.full_messages.each do |msg|
+          li= msg
+
+  .fields
+    = f.input :name, label: _('Home Name')
+    = f.input :home_type, collection: Home.home_types.keys, include_blank: false, class: "form-control", selected: @home.home_type
+  .actions
+    = link_to _('Back'), panel_homes_path, class: 'btn btn-default'
+    = f.submit _('Save'), class: 'btn btn-primary'

@@ -1,0 +1,21 @@
+.header
+  = render 'header', active: 'details'
+= render 'layouts/alerts'
+= simple_form_for @form, as: :collection_form, url: panel_collection_path(@collection), method: :patch do |f|
+  = f.error_notification
+  - if @form.errors.any?
+    #error_notification
+      ul
+        - @form.errors.full_messages.each do |msg|
+          li= msg
+  .fields
+    = f.input :name, label: _('Collection Name')
+    = f.simple_fields_for :background_image, @background_image do |background_image_fields|
+      = background_image_fields.input :file, as: :file, label: _('Background Image')
+    .form-group
+      = image_tag @background_image&.custom_url, data: @collection.cropper_data, class: 'cropper', coverCropUrl: @collection.cover_image&.custom_url
+  .actions
+    = link_to _('Back'), panel_collections_path, class: 'btn btn-default'
+    = f.submit _('Save'), class: 'btn btn-primary'
+
+= render partial: 'shared/double_cropper', locals: {title: 'Edit Collection Background Image', caption: 'new collection image'}

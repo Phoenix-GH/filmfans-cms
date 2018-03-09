@@ -1,0 +1,36 @@
+var $judgeTitle = $('tr[data-benchmark-id=<%= @benchmark.id %>] .judge-title');
+var $judgeDesc = $('tr[data-benchmark-id=<%= @benchmark.id %>] .judge-desc');
+
+if ('<%= @benchmark.judge_user.blank? %>' == 'true') {
+  $judgeTitle.html('Vote');
+  $judgeDesc.html('Click on the star icon to rate the better result');
+} else {
+  $judgeTitle.html('Voted by');
+  $judgeDesc.html('<%= @benchmark.judge_user %>');
+}
+
+var $sameJudge = $('tr[data-benchmark-id=<%= @benchmark.id %>] .same-judge');
+var $bbJudge = $('tr[data-benchmark-id=<%= @benchmark.id %>] .bb-judge');
+var $ulabJudge = $('tr[data-benchmark-id=<%= @benchmark.id %>] .ulab-judge');
+
+$sameJudge.html('');
+$bbJudge.html('');
+$ulabJudge.html('');
+
+if ('<%= @benchmark.judgement %>' == 'BB') {
+  $sameJudge.html('<%=j = render 'panel/benchmarks/judge', {benchmark: @benchmark, judgement: 'SAME'} %>');
+  $bbJudge.html('<%=j = render 'panel/benchmarks/judge', {benchmark: @benchmark, judgement: nil} %>');
+  $ulabJudge.html('<%=j = render 'panel/benchmarks/judge', {benchmark: @benchmark, judgement: 'ULAB'} %>');
+} else if ('<%= @benchmark.judgement %>' == 'ULAB') {
+  $sameJudge.html('<%=j = render 'panel/benchmarks/judge', {benchmark: @benchmark, judgement: 'SAME'} %>');
+  $bbJudge.html('<%=j = render 'panel/benchmarks/judge', {benchmark: @benchmark, judgement: 'BB'} %>');
+  $ulabJudge.html('<%=j = render 'panel/benchmarks/judge', {benchmark: @benchmark, judgement: nil} %>');
+} else if ('<%= @benchmark.judgement %>' == 'SAME') {
+  $sameJudge.html('<%=j = render 'panel/benchmarks/judge', {benchmark: @benchmark, judgement: nil} %>');
+  $bbJudge.html('<%=j = render 'panel/benchmarks/judge', {benchmark: @benchmark, judgement: 'BB'} %>');
+  $ulabJudge.html('<%=j = render 'panel/benchmarks/judge', {benchmark: @benchmark, judgement: 'ULAB'} %>');
+} else {
+  $sameJudge.html('<%=j = render 'panel/benchmarks/judge', {benchmark: @benchmark, judgement: 'SAME'} %>');
+  $bbJudge.html('<%=j = render 'panel/benchmarks/judge', {benchmark: @benchmark, judgement: 'BB'} %>');
+  $ulabJudge.html('<%=j = render 'panel/benchmarks/judge', {benchmark: @benchmark, judgement: 'ULAB'} %>');
+}

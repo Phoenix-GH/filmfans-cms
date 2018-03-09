@@ -1,0 +1,42 @@
+# Being on the directory containing this file
+# docker-compose up -d
+
+version: '2'
+services:
+#  hsbackend:
+#    image: ulab/hsbackend
+#    #command: rails s -p 3000 -b '0.0.0.0'
+#    environment:
+#      - ELASTICSEARCH_URL=http://elasticsearch:9200
+#      - REDIS_PROVIDER=redis://redis:6379
+#    volumes:
+#      - .:/work
+#      - ~/.ssh:/root/.ssh
+#      - /dev/urandom:/dev/random
+#    # run with: docker-compose run --service-ports hsbackend
+#    ports:
+#      - "3000:3000"
+#    depends_on:
+#      - db
+#      - elasticsearch
+#      - redis
+  db:
+    image: postgres:9.4.8
+    volumes:
+      - ~/hsbackend-volumes/postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_USER=postgres
+    ports:
+      - "5432:5432"
+  elasticsearch:
+    image: elasticsearch:2.3.4
+    volumes:
+      - ~/hsbackend-volumes/elasticsearch-data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+  redis:
+    image: redis:3.2.1
+    ports:
+      - "6379:6379"

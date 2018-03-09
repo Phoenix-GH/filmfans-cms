@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 3.6.1 (26313) - http://www.bohemiancoding.com/sketch -->
+    <title>E0C878FB-793D-4667-9B9E-2D01C33F2F66</title>
+    <desc>Created with sketchtool.</desc>
+    <defs></defs>
+    <g id="Guidelines" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icons" transform="translate(-340.000000, -90.000000)" fill="#000000">
+            <g id="ic_containers" transform="translate(340.000000, 90.000000)">
+                <path d="M19.219,20 L2.282,20 L4.781,10 L21.719,10 L19.219,20 Z M7,4 L7,5 C7,5.553 7.448,6 8,6 L19,6 L19,8 L4,8 C3.541,8 3.142,8.312 3.031,8.758 L2,12.879 L2,4 L7,4 Z M23.788,8.385 C23.599,8.142 23.308,8 23,8 L21,8 L21,5 C21,4.447 20.553,4 20,4 L9,4 L9,3 C9,2.447 8.553,2 8,2 L1,2 C0.448,2 0,2.447 0,3 L0,21 C0,21.041 0.019,21.077 0.024,21.117 C0.031,21.175 0.041,21.228 0.057,21.284 C0.084,21.371 0.122,21.449 0.17,21.525 C0.188,21.553 0.191,21.588 0.212,21.615 C0.223,21.63 0.242,21.635 0.254,21.649 C0.32,21.725 0.4,21.784 0.486,21.838 C0.521,21.859 0.549,21.887 0.585,21.904 C0.712,21.963 0.851,22 1,22 L20,22 C20.459,22 20.859,21.687 20.97,21.242 L23.97,9.242 C24.045,8.943 23.978,8.627 23.788,8.385 L23.788,8.385 Z" id="ic_container"></path>
+            </g>
+        </g>
+    </g>
+</svg>

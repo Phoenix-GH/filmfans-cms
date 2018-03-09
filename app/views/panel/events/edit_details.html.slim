@@ -1,0 +1,30 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+    = link_to _('Events'), panel_events_path
+    span.path-separator
+  h1 = _('Edit Event')
+  .tabs
+    = link_to edit_panel_event_path(@event, step: :details), class: 'active' do
+      span.step 1
+      = _('Details')
+      span.underline
+    = link_to edit_panel_event_path(@event, step: :containers) do
+      span.step 2
+      = _('Set Containers')
+      span.underline
+
+= render 'layouts/alerts'
+= simple_form_for @form, as: :event_form, url: panel_event_path(@event), method: :patch do |f|
+  .fields
+    = f.input :name, label: _('Event Name')
+    = f.simple_fields_for :background_image, @event.background_image do |background_image_fields|
+      = background_image_fields.input :file, as: :file, label: _('Event Image')
+    .form-group
+      = image_tag @event.background_image.custom_url, data: @event.cropper_data, class: 'cropper', coverCropUrl: @event.cover_image.custom_url
+  .actions
+    = link_to _('Back'), panel_events_path, class: 'btn btn-default'
+    = f.submit _('Save'), class: 'btn btn-primary'
+
+= render partial: 'shared/double_cropper', locals: {title: 'Edit Picture', caption: 'new channel picture'}

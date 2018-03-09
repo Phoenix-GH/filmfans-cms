@@ -1,0 +1,38 @@
+hr
+.prediction
+  h5
+    = 'Correspond to HS category: '
+  - if predicted_categories.blank?
+    b
+      = _('Not found')
+  - else
+    ul.predicted-categories
+      - predicted_categories.each do |cat_name|
+        li = "#{cat_name}"
+hr
+.search-categories
+  h5
+    = 'Search categories: '
+  div
+    - if search_categories.blank?
+      = _('-')
+    - else
+      == search_categories
+hr
+.response-keywords
+  h5
+    = 'Response Keywords: '
+    b
+      - if response_keywords.blank?
+        = _('-')
+      - else
+        = _("#{response_keywords}")
+hr
+.response-message
+  h5
+    = 'Response Message: '
+    b
+      - if response_message.blank?
+        = _('-')
+      - else
+        = _("#{response_message}")

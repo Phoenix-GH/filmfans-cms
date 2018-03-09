@@ -1,0 +1,45 @@
+.table-actions
+  - if @channel.present?
+    - if can?(:update, @channel)
+      = link_to 'Add New Title', new_panel_channel_magazine_path(@channel), class: 'btn btn-default btn-action'
+    - else
+      = link_to 'Add New Title', new_panel_magazine_path, class: 'btn btn-default btn-action'
+
+.table-responsive
+  = simple_form_for '', url: @channel.present? ? panel_channel_magazines_path(@channel) : panel_magazines_path, method: :get, html: {class: 'form-inline'} do |f|
+    table.table
+      thead
+        tr
+          th{ colspan = "4" }
+            = _('Magazine title list')
+        tr
+          th
+            = sortable 'title', _('Title')
+            == render partial: 'shared/search_panel', locals: {f: f}
+          th = _('Image')
+          th = _('No of issues')
+          th = _('Actions')
+
+      tbody
+        - @magazines.each do |magazine|
+          tr
+            td = magazine.title
+            td.image = image_tag magazine.try(:cover_image).try(:custom_url)
+            td
+              = "#{magazine.issues.count} "
+              - if can?(:update, magazine.channel)
+                = link_to 'Manage Issues', panel_magazine_issues_path(magazine), class: 'btn btn-default'
+            td.actions
+              - if can?(:update, magazine.channel)
+                = link_to edit_panel_channel_magazine_path(magazine.channel, magazine) do
+                  = image_tag("icons/ic-edit.svg")
+              - if can?(:update, magazine.channel)
+                = link_to [:panel, magazine.channel, magazine], data: { confirm: _('Are you sure?') }, method: :delete do
+                  = image_tag("icons/ic-delete.svg")
+.text-center
+  = paginate @magazines if @magazines.count > 0
+
+- if @channel
+  .actions
+    = link_to 'Back', panel_channel_tv_shows_path(@channel), class: 'btn btn-default'
+    = link_to 'Complete', panel_channels_path, class: 'btn btn-primary'

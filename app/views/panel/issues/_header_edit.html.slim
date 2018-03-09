@@ -1,0 +1,29 @@
+.tabs
+  = link_to edit_panel_magazine_issue_path(@magazine, @issue), class: ('active' if request.path_info.include?('/edit') or request.path_info =~ /issues\/\d+$/) do
+    .step-number 1
+    = _('DETAILS')
+    span.underline
+
+  = link_to upload_panel_magazine_issue_path(@magazine, @issue), class: ('active' if request.path_info.include?('/upload')) do
+    .step-number 2
+    = _('UPLOAD')
+    span.underline
+
+  = link_to tags_panel_magazine_issue_path(@magazine, @issue), class: ('active' if request.path_info.include?('/tags')) do
+    .step-number 3
+    = _('TAGS')
+    span.underline
+
+  = link_to tag_products_panel_magazine_issue_path(@magazine, @issue), class: ('active' if request.path_info.include?('/tag_products')) do
+    .step-number 4
+    = _('TAG PRODUCTS')
+    span.underline
+
+  = link_to confirm_panel_magazine_issue_path(@magazine, @issue), class: ('active' if request.path_info.include?('/confirm')) do
+    .step-number 5
+    = _('CONFIRMATION')
+    span.underline
+
+= simple_form_for '', as: :hidden, url: '#', method: :post do |f|
+  .fields
+    = f.input :issue___id, as: :hidden, input_html: {value: @issue.id}

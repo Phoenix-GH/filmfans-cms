@@ -1,0 +1,58 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+  h1.pull-left
+    = _('Home Screens')
+    span.counter
+      | (
+      = @homes.length
+      | )
+  = link_to new_panel_home_path, class: 'btn btn-primary pull-right' do
+    = image_tag("icons/ic-add.svg")
+    = _('Add Home Screen')
+  .clearfix
+= render 'layouts/alerts'
+.table-responsive
+  = simple_form_for '', url: panel_homes_path, method: :get, html: {class: 'form-inline'} do |f|
+    table.table
+      thead
+        tr
+          th
+            = sortable 'name', _('Home Title')
+            == render partial: 'shared/search_panel', locals: {f: f}
+          th
+            = _('Type')
+            .search
+              = f.input :home_type, collection: Home.home_types.keys, include_blank: 'All', selected: params[:home_type], label: false
+          th = sortable 'home_contents', _('Containers')
+          th = sortable 'products', _('Products')
+          th = sortable 'created_at', _('Created')
+          th = sortable 'published', _('Status')
+          th = _('Actions')
+
+      tbody
+        - @homes.each do |home|
+          tr
+            td = home.name
+            td = home.home_type
+            td = home.home_contents.count
+            td = home.products_count
+            td = l home.created_at
+            td
+              - if can?(:update, home)
+                - if home.published?
+                  = link_to unpublish_panel_home_path(home), method: :put, class: 'btn btn-status btn-status-active' do
+                    = _('Active')
+                    span.circle
+                - else
+                  = link_to publish_panel_home_path(home), method: :put, class: 'btn btn-status' do
+                    span.circle
+                    = _('Inactive')
+            td.actions
+              - if can?(:update, home)
+                = link_to edit_panel_home_path(home) do
+                  = image_tag("icons/ic-edit.svg")
+              - if can?(:destroy, home)
+                = link_to [:panel, home], data: {confirm: _('Are you sure?')}, method: :delete do
+                  = image_tag("icons/ic-delete.svg")

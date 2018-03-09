@@ -1,0 +1,358 @@
+.magazine-issue-details {
+  $issue-tag-icon-block-width: 70px;
+  $icon-tag-bubble-size: 50px;
+  $side-padding: ($issue-tag-icon-block-width - $icon-tag-bubble-size) / 2;
+  .pagination-image{
+    clear: both;
+    text-align: center;
+    padding-top:10px;
+    a{
+      display: inline-block;
+      padding:0 12px;
+      height:35px;
+      text-align: center;
+      line-height:35px;
+      background-color: #fff;
+      color:#666;
+      border:1px solid #ddd;
+      margin:0 3px;
+      -webkit-border-radius:4px;
+      -moz-border-radius:4px;
+      border-radius:4px;
+    }
+    .active_page{
+      background-color: #ddd;
+    }
+  }
+  .issue-tag-icon-block {
+    height: 77px;
+    width: $issue-tag-icon-block-width;
+    border: solid 1px $gray-light;
+
+    .icon-tag-alignment {
+      margin: 2px $side-padding 0 $side-padding;
+    }
+
+    .icon-text {
+      font-size: 0.6em;
+      font-weight: bold;
+      overflow: hidden;
+      padding: 2px;
+      text-align: center;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  // put it here instead of inside the issue-tag-icon-block so that it keeps the shape while moving
+  .icon-tag-bubble {
+    text-align: center;
+    background-color: #E0E0E0;
+    width: $icon-tag-bubble-size;
+    height: $icon-tag-bubble-size;
+    border-radius: 50% 8px 50% 50%;
+    position: relative;
+
+    $icon-tag-icon-size: 30px;
+    img {
+      max-height: $icon-tag-icon-size;
+      max-width: $icon-tag-icon-size;
+      top: 50%;
+      position: absolute;
+      margin-top: -1 * ($icon-tag-icon-size / 2);
+      left: 50%;
+      margin-left: -1 * ($icon-tag-icon-size / 2);
+    }
+
+    .icon-tag-del,
+    .icon-tag-anchor {
+      display: none;
+      width: 10px;
+      height: 10px;
+      font-size: 8px;
+      cursor: pointer;
+      position: absolute;
+    }
+    .icon-tag-anchor {
+      color: red;
+      cursor: auto;
+    }
+  }
+
+  .icon-tag-bubble-top-left {
+    border-radius: 8px 50% 50% 50%;
+
+    .icon-tag-del,
+    .icon-tag-anchor {
+      top: 0;
+      left: 0
+    }
+  }
+  .icon-tag-bubble-top-right {
+    border-radius: 50% 8px 50% 50%;
+
+    .icon-tag-del,
+    .icon-tag-anchor {
+      top: 0;
+      right: 0
+    }
+  }
+  .icon-tag-bubble-bottom-left {
+    border-radius: 50% 50% 50% 8px;
+
+    .icon-tag-del,
+    .icon-tag-anchor {
+      bottom: 0;
+      left: 0
+    }
+  }
+  .icon-tag-bubble-bottom-right {
+    border-radius: 50% 50% 8px 50%;
+
+    .icon-tag-del,
+    .icon-tag-anchor {
+      bottom: 0;
+      right: 0
+    }
+  }
+
+  .issue-page-image-droppable {
+    .ui-draggable-dropped {
+      .icon-tag-del {
+        display: block;
+      }
+    }
+    .ui-draggable-dragging {
+      .icon-tag-anchor {
+        display: block;
+      }
+    }
+    .icon-tag-bubble-top-left {
+      box-shadow: 0 1px 4px #000;
+    }
+    .icon-tag-bubble-top-right {
+      box-shadow: 0 1px 4px #000;
+    }
+    .icon-tag-bubble-bottom-left {
+      box-shadow: 1px 0 4px #000;
+    }
+    .icon-tag-bubble-bottom-right {
+      box-shadow: 1px 0 4px #000;
+    }
+  }
+
+  .image-pane {
+    .col-sm-4,
+    .col-sd-4 {
+      padding: 15px 15px 0 15px;
+      .image-page {
+        display: table-cell;
+        position: relative;
+
+        img {
+          border: 1px solid #ddd;
+          max-width: 100%;
+          width: auto;
+          height: auto;
+        }
+
+        .image-page-overlay,
+        .image-page-hidden,
+        .image-page-do-hide {
+          background: rgba(0, 0, 0, 0.3);
+          transition: opacity 0.15s linear;
+          cursor: pointer;
+          height: 100%;
+          left: 0;
+          position: absolute;
+          top: 0;
+          width: 100%;
+          z-index: 1;
+
+          .overlay-text {
+            background-repeat: no-repeat;
+            color: white;
+            font-size: 0.8em;
+            height: 50px;
+            margin-top: -25px; /* 1/2 height of this block */
+            position: relative;
+            top: 50%;
+
+            .icon {
+              font-size: 22px;
+              height: 28px;
+              left: 50%;
+              line-height: 1px;
+              margin-left: -14px;
+              position: absolute;
+              text-align: center;
+              top: 0;
+              width: 28px;
+            }
+            div.icon:before {
+              border-radius: 14px;
+              border: 2px solid white;
+              display: block;
+              line-height: 25px;
+            }
+            .text {
+              bottom: 0;
+              position: absolute;
+              text-align: center;
+              width: 100%;
+            }
+          }
+        }
+
+        .image-page-hidden,
+        .image-page-do-hide {
+          .overlay-text {
+            div.icon:before {
+              border-radius: 15px;
+              color: red;
+            }
+          }
+        }
+
+        .image-page-hidden {
+          background: rgba(0, 0, 0, 0.5);
+          border: 2px solid $brand-primary;
+          .overlay-text {
+            height: 65px;
+          }
+        }
+
+        .image-page-do-hide {
+          background: transparent;
+          .overlay-text {
+            display: none
+          }
+
+          &:hover {
+            background: rgba(0, 0, 0, 0.5);
+            transition: opacity 0.15s linear;
+            .overlay-text {
+              display: block;
+            }
+          }
+        }
+      }
+
+      .image-page-label,
+      .image-page-bub-stat {
+        color: #8d99a7;
+        font-size: 0.8em;
+      }
+      .image-page-bub-stat {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        .figure {
+          font-weight: bold;
+          color: blue;
+        }
+      }
+    }
+
+    .actions {
+      margin: 50px 0 0 0;
+    }
+  }
+
+  .image-detail {
+    position: relative;
+
+    .back {
+      margin-bottom: 30px;
+
+      .back-handle {
+        cursor: pointer;
+        font-size: 0.9em;
+        font-weight: bold;
+      }
+      .icon {
+        cursor: pointer;
+        font-size: 18px;
+        padding-right: 15px;
+      }
+    }
+
+    .title {
+      font-weight: bold;
+    }
+
+    .back,
+    .left .title {
+      padding-left: 25px;
+    }
+
+    .content-row {
+      position: relative;
+
+      $tag-list-width: 295px;
+
+      .left {
+        padding-right: $tag-list-width;
+        width: 100%;
+
+        .previous,
+        .next {
+          display: table-cell;
+          font-size: 30px;
+          width: 25px;
+          padding: 10px;
+        }
+
+        .previous-handle,
+        .next-handle {
+          color: gray;
+          cursor: pointer;
+        }
+
+        .previous {
+          text-align: right;
+        }
+
+        .image {
+          display: table-cell;
+
+          .issue-page-image-droppable {
+            border: solid 1px $gray-light;
+            box-sizing: content-box;
+            overflow: hidden;
+            position: relative;
+
+            img {
+              max-width: 100%;
+            }
+          }
+        }
+      }
+
+      .right {
+        height: 430px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: $tag-list-width;
+
+        .tag-list-scroller {
+          overflow-x: hidden;
+          overflow-y: auto;
+          height: 100%;
+
+          .tag-list {
+            width: 281px;
+            border: solid 1px $gray-light;
+            border-left: none;
+
+            .issue-tag-icon-block {
+              float: left;
+            }
+          }
+        }
+      }
+    }
+  }
+
+}

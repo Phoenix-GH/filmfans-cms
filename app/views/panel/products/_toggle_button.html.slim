@@ -1,0 +1,3 @@
+= link_to toggle_container_active_panel_product_path(product, format: 'js'), method: :put, remote: true, class: (product.containers_placement? ? 'btn btn-status btn-status-active' : 'btn btn-status') do
+  span.status = product.containers_placement? ? _('Active') : _('Inactive')
+  span.circle

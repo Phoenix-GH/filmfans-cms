@@ -1,0 +1,37 @@
+.header
+  = render 'header', {title: "Followings (#{@followings.kind_of?(Array) ? @followings.count.to_s : @followings.total_count.to_s})"}
+  = render 'panel/social_account_followings/tabs', {active: 'followings'}
+
+= render 'layouts/alerts'
+.table-responsive.social-account-followings
+  = simple_form_for '', url: panel_social_account_followings_path(@social_account), method: :get do |f|
+    table.table
+      thead
+        tr
+          th
+            = sortable 'name', _('Name')
+            = render partial: 'shared/search_panel', locals: { f: f }
+          th
+            = _('Social Categories')
+            = render partial: 'shared/filter_panel', locals: {f: f, field: :social_category, collection: @social_categories, selected: @selected_category}
+          th = _('Avatar')
+          th = _('Web URL')
+          th = sortable 'target_id', _('Target ID')
+
+      tbody
+        - @followings.each do |following|
+          tr
+            td = link_to following.name, edit_categories_panel_social_account_following_path(@social_account, following, format: 'js'),  {:remote => true, :'data-toggle' => 'modal', :'data-target' => '#update-social-categories-modal', :'data-keyboard' => true}
+            td
+              - following.social_categories.each do |category|
+                h5 = category.name
+            td
+              div.picture-circle style='background-image: url(#{following.avatar_url})'
+            td
+              = link_to _('Go To Site'), following.web_url, target: '_blank'
+            td = following.target_id
+
+  .modal.fade role="dialog" id="update-social-categories-modal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true"
+
+.text-center
+  = paginate @followings if @followings.length > 0

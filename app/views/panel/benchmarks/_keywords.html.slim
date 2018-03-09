@@ -1,0 +1,9 @@
+- image_url = image_url || ''
+hr
+h5
+  b = _('Recognized Keywords')
+
+table.benchmark-keywords data={image_url: image_url}
+  tr
+    td
+      = image_tag 'icons/ic-spinner48.gif', class: 'spinner'

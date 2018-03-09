@@ -1,0 +1,40 @@
+.header
+  .row
+    .col-md-6.text-left
+      .breadcrumbs
+        = link_to _('Home'), "/"
+        span.path-separator
+      h1 = link_to _('Crop & shop multi-object recognition '), panel_benchmark_multi_objects_path(@search_params)
+
+= render 'layouts/alerts'
+
+.benchmark-detail.product-detail-support.benchmark-multi-objects
+  .fields
+    .table-responsive
+      table.table
+        thead
+          tr
+            th
+            th
+        tbody
+          tr.user_photo
+            td
+              div
+                = "Original: #{@detail.image_file_size_pretty} #{@detail.origin_image_dimension}"
+                div
+                  = image_tag @detail.try(:image).try(:full_url)
+
+            td
+              - @detail.benchmark_multi_object_crops.each do |obj|
+                .obj_box_inf
+                  b Box:
+                  div
+                    = "- [x1: #{obj.area[0].round}, y1: #{obj.area[1].round}, x2: #{obj.area[2].round}, y2: #{obj.area[3].round}]"
+                  - unless obj.box_category.blank?
+                    div
+                      = "- Cat: #{obj.box_category}"
+                  div
+                    = "- Prob: #{obj.box_probability}"
+                div
+                  = image_tag obj.image_url
+                hr

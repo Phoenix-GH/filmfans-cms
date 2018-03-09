@@ -1,0 +1,48 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+  h1.pull-left
+    = _('Product Sets')
+    span.counter
+      | (
+      = @products_containers.length
+      | )
+  = link_to new_panel_products_container_path, class: 'btn btn-primary pull-right' do
+    = image_tag("icons/ic-add.svg")
+    = _('Add New Product Set')
+  .clearfix
+= render 'layouts/alerts'
+.table-responsive
+  = simple_form_for '', url: panel_products_containers_path, method: :get, html: {class: 'form-inline'} do |f|
+    table.table
+      thead
+        tr
+          th
+            = sortable 'name', _('Product Container')
+            == render partial: 'shared/search_panel', locals: {f: f}
+          th
+            = _('Category')
+            .form-group.search
+              = f.input_field :category_id, collection: @presenter.category_main_options,
+                      as: :grouped_select, group_method: :subcategories,
+                      class: 'form-control', selected: params[:category_id], include_blank: 'All'
+          th = sortable 'products',  _('Number Of Products')
+          th = sortable 'created_at', _('Created')
+          th = _('Actions')
+      tbody
+        - @products_containers.each do |products_container|
+          tr
+            td = products_container.name
+            td = products_container.category&.full_name
+            td = products_container.products.count
+            td = l products_container.created_at
+            td.actions
+              - if can?(:update, products_container)
+                = link_to edit_panel_products_container_path(products_container) do
+                  = image_tag("icons/ic-edit.svg")
+              - if can?(:destroy, products_container)
+                = link_to [:panel, products_container], data: {confirm: _('Are you sure?')}, method: :delete do
+                  = image_tag("icons/ic-delete.svg")
+.text-center
+  = paginate @products_containers if @products_containers.length > 0

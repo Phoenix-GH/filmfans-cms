@@ -1,0 +1,7 @@
+p style="color: #2a3034; font-weight: 400; line-height: 1.2; font-size: 30px;text-align:center;"
+  | Welcome to Hotspotting&nbsp;Admin&nbsp;Panel
+p style="padding: 35px;text-align:center;"
+  | This is invitation to Hotspotting Admin Panel as <span style="text-transform: capitalize;">#{@resource.role}</span> role. To activate account use button below.
+p style="text-align:center;"
+  = link_to _('Join Hotspotting Admin Panel'), accept_invitation_url(@resource, invitation_token: @token),
+    style: "border-radius: 4px; background-color: #448aff; padding: 15px 18px; color: #fff; text-decoration: none;"

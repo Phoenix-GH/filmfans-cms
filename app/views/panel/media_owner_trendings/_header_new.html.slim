@@ -1,0 +1,10 @@
+.tabs
+  = link_to new_panel_media_owner_trending_path(@manual_post), class: 'active' do
+    .step-number 1
+    = _('DETAILS')
+    span.underline
+
+    = link_to _('#') do
+      .step-number 2
+      = _('PRODUCTS')
+      span.underline

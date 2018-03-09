@@ -1,0 +1,20 @@
+.header
+  = render 'header', {title: "#{@magazine.title.capitalize} : #{@issue.title}"}
+  = render 'header_edit'
+
+div.magazine-issue-details.upload
+  = render 'layouts/alerts'
+  .fields.inline-waiting-pane
+  = simple_form_for '', \
+          html: {enctype: 'multipart/form-data', class: 'dropzone form-content', style: 'display:none', id: 'magazine_issue_pdf_form'}, \
+          url: "#{ENV['ULAB_PDF2IMG_CONVERTER_URL']}", \
+          method: :post do |f|
+    = f.input :file, as: :hidden
+
+  .image-pane.fields style = 'display:none'
+    .images
+    .actions
+      = link_to _('Re-upload'), 'javascript:void(0);', class: 'btn btn-default btn-reupload'
+  .actions
+    = link_to _('Back'), edit_panel_magazine_issue_path(@magazine, @issue), class: 'btn btn-default'
+    = link_to _('Next'), tags_panel_magazine_issue_path(@magazine, @issue), class: 'btn btn-primary'

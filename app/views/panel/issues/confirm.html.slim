@@ -1,0 +1,17 @@
+.header
+  = render 'header', {title: "#{@magazine.title.capitalize} : #{@issue.title}"}
+  = render 'header_edit'
+
+div.magazine-issue-details.confirm
+  = render 'layouts/alerts'
+  .fields.inline-waiting-pane
+  = simple_form_for '', as: :hidden, url: '#', method: :post do |f|
+    .fields
+      = f.input :issue_page_edit_url_base, as: :hidden, input_html: {value: tag_products_panel_magazine_issue_path(@magazine, @issue)}
+
+  .fields
+    .confirm-container
+
+  .actions
+    = link_to _('Back'), tag_products_panel_magazine_issue_path(@magazine, @issue), class: 'btn btn-default'
+    = link_to _('Done'), panel_magazine_issues_path(@magazine), class: 'btn btn-primary'

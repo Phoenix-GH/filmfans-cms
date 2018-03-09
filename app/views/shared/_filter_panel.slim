@@ -1,0 +1,5 @@
+- selected ||= nil
+- collection ||= []
+
+.form-group.search
+  = f.input_field field, collection: collection, include_blank: 'All', class: 'form-control', selected: selected, onchange: 'this.form.submit()'

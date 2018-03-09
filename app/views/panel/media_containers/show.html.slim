@@ -1,0 +1,22 @@
+p
+  strong= _('Name: ')
+  = @media_container.name
+p
+  = link_to _('Edit Media Container'), edit_panel_media_container_path(@media_container), class: 'btn btn-default'
+p
+  strong= _('Image: ')
+  p
+    = image_tag @media_container.cover_image.thumb
+p
+  strong= _('Description: ')
+  = @media_container.description
+p
+  strong= _('Additional Description: ')
+  = @media_container.additional_description
+p
+  strong= _('Media owner: ')
+  = @media_container.media_owner.name
+p
+  strong= _('Content: ')
+  p
+    = render partial: 'media_content_file_show', locals: { media_content: @media_container.media_content }

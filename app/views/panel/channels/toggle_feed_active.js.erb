@@ -1,0 +1,7 @@
+if("<%=@channel.feed_active %>" == "true"){
+  $("#toggle_<%=@channel.id%>").html("<%=j render(partial: 'feed_active', locals: { channel: @channel }) %>");
+} else {
+  $("#toggle_<%=@channel.id%>").find('a').addClass('popup-feed').removeClass('btn-status-active').find('.status').text('Inactive');
+  $("#toggle_<%=@channel.id%>").find('a').removeAttr('data-remote data-method href rel');
+  $("#toggle_<%=@channel.id%>").find('a').attr('data-channel', <%=@channel.id%>);
+}

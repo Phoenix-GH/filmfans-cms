@@ -1,0 +1,21 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+    = link_to _('Containers'), panel_collections_containers_path
+    span.path-separator
+  h1 = _('Edit Collection Container')
+  .tabs
+    = link_to edit_panel_collections_container_path(@collections_container) do
+      = _('Details')
+      span.underline
+    = link_to [:panel, @collections_container], class: 'active' do
+      = _('Collections order')
+      span.underline
+
+- set_var 'collectionsContainerId', @collections_container.id
+ul.collections-container-sortable.sortable.grid
+  - @collections.each do |collection|
+    li{ data= { id: "#{collection.id}" } }
+      h3 = collection.name
+

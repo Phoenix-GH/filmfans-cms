@@ -1,0 +1,14 @@
+.fields.text-center
+  br
+  | Channel&nbsp;
+  = link_to @channel.name, edit_panel_channel_path(@channel)
+  |  has no Magazines set yet
+  br
+  br
+  .actions
+    = link_to 'Skip', panel_channels_path(@channel), class: 'btn btn-default'
+    = link_to 'Add Magazine', new_panel_channel_magazine_path(@channel), class: 'btn btn-primary'
+
+.actions
+  = link_to 'Back', panel_channel_tv_shows_path(@channel), class: 'btn btn-default'
+  = link_to 'Complete', panel_channels_path, class: 'btn btn-primary'

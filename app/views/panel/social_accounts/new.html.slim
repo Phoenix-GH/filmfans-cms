@@ -1,0 +1,15 @@
+.header
+  = render 'header', { title: 'New Social Account'}
+  = render 'panel/social_accounts/tabs_new'
+= render 'layouts/alerts'
+.social-accounts
+  = simple_form_for @form, as: :social_account_form, url: panel_social_accounts_path, method: :post do |f|
+    .fields
+      = f.input :name, label: _('Name'), autofocus: true
+      = f.input :username, label: _('Username')
+      = f.input :password,  label: _('Password')
+      = f.input :password_confirmation,  label: _('Password Confirmation')
+      = f.input :provider, collection: Provider.select_options, label: _('Provider'), selected: 'instagram', input_html: {required: true, multiple: false, class: "chosen-select"}
+    .actions
+      = link_to _('Back'), panel_social_accounts_path, class: 'btn btn-default'
+      = f.submit _('Save'), class: 'btn btn-primary'

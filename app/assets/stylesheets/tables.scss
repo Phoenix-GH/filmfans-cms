@@ -1,0 +1,27 @@
+th .current {
+  padding-right: 12px;
+  background-repeat: no-repeat;
+  background-position: right center;
+  &.asc {
+    background-image: image-url("sort_asc.png");
+  }
+
+  &.desc {
+    background-image: image-url("sort_desc.png");
+  }
+}
+th.actions{
+  min-width:110px;
+  padding:10px 0px;
+  text-align: center;
+  a:last-child{
+    margin-right:0px;
+  }
+}
+th.date{
+  min-width:101px;
+}
+
+th.media-container, td.media-container {
+  width: 470px;
+}

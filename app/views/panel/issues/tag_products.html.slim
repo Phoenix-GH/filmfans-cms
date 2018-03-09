@@ -1,0 +1,42 @@
+.header
+  = render 'header', {title: "#{@magazine.title.capitalize} : #{@issue.title}"}
+  = render 'header_edit'
+
+div.magazine-issue-details.tag_products
+  = render 'layouts/alerts'
+  .image-pane.fields style = 'display:none'
+    .images
+
+  .image-detail.fields style = 'display:none'
+    .back
+      span.back-handle
+        span class = 'fa fa-angle-left icon'
+        |Back to issue overview
+
+    .row.products-search style = 'display:none'
+      .col-md-7.col-sm-7
+        div
+          .row
+            .col-md-12.products-search__selected-products-col
+              .row.search__filters
+                .col-md-4
+                  = select_tag :vendor, options_from_collection_for_select(Store.all, 'name', 'name'), class: 'products-vendor-filter__query-field', include_blank: 'All Merchants'
+                .col-md-4
+                  = select_tag :category_id, option_groups_from_collection_for_select(@product_presenter.category_main_options, :subcategories, :name, :id, :name), class: 'products-category-filter__query-field', prompt: 'All Categories'
+                .col-md-4.search__field
+                  = text_field_tag :search, '', class: 'string search form-control products-search__query-field', placeholder: 'Search product'
+          .row
+            .col-md-12.products-search__search-products-col
+              .products-search__results.no_checkbox_selection
+
+      .col-md-5.col-sm-5.tags-with-products
+
+    .actions
+      = link_to _('Reset'), 'javascript:void(0);', class: 'btn btn-default btn-reset-img-detail'
+      = link_to _('Save'), 'javascript:void(0);', class: 'btn btn-primary btn-save-img-detail'
+
+    .image-detail-container
+
+  .actions
+    = link_to _('Back'), tags_panel_magazine_issue_path(@magazine, @issue), class: 'btn btn-default'
+    = link_to _('Next'), confirm_panel_magazine_issue_path(@magazine, @issue), class: 'btn btn-primary'

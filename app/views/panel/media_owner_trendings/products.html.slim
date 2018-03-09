@@ -1,0 +1,32 @@
+.header
+  = render 'header', {title: 'Edit Manual Post'}
+  = render 'header_edit'
+
+.media_owner_trendings
+  = render 'layouts/alerts'
+  = simple_form_for @form, as: :manual_post_products_form, url: products_panel_media_owner_trending_path(@manual_post), method: :patch do |f|
+    .trending_image
+      - if @manual_post.image?
+        = image_tag @manual_post.try(:custom_url)
+      - if @manual_post.video?
+        = video_tag @manual_post.try(:video), autoplay: false, controls: true
+    .fields.products-search
+      = f.error_notification
+      - if @form.errors.any?
+        #error_notification
+          ul
+            - @form.errors.full_messages.each do |msg|
+              li= msg
+      .row
+        .col-md-5.container-name-col
+          .linked-products-collection data={template: manual_post_product_template_fields(f).gsub("\n", "")}
+            = f.simple_fields_for :manual_post_products, include_id: false  do |ff|
+              = render 'panel/linked_products/fields', f: ff
+
+      = render partial: 'shared/product_selection_container', locals: {title: 'Linked Products'}
+
+    .actions
+      = link_to _('Back'), edit_panel_media_owner_trending_path(@manual_post), class: 'btn btn-default'
+      = f.button :submit, _('Save'), class: 'btn btn-success'
+
+  = render partial: 'shared/popup_product_detail'

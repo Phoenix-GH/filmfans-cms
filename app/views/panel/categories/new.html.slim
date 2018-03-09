@@ -1,0 +1,4 @@
+h1= _('New Category')
+= render 'layouts/alerts'
+= simple_form_for @form, as: :category_form, url: panel_categories_path, method: :post do |f|
+  == render partial: 'fields', locals: { f: f }

@@ -1,0 +1,20 @@
+.header
+  h1.pull-left
+    = _('Untrained categories')
+    span.counter
+      | (
+      = "#{@untrained_categories.length} / #{@total_product} products"
+      | )
+
+.table-responsive
+  table.table
+    thead
+      tr
+        th = sortable 'name', _('Categories')
+        th = sortable 'products', _('Product count')
+
+    tbody
+      - @untrained_categories.each do |category|
+        tr
+          td = category[:name]
+          td = category[:product_count]

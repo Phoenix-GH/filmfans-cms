@@ -1,0 +1,48 @@
+= image_tag benchmark.try(:image).try(:cropped)
+
+.like
+  - if benchmark.like == true
+    = image_tag("icons/ic-like.svg")
+  - elsif benchmark.like == false
+    = image_tag("icons/ic-dislike.svg")
+
+hr
+.time.value
+  = link_to edit_panel_benchmark_path(benchmark, @search_params) do
+    = benchmark.created_at.utc.strftime('%b %d %Y, %H:%M:%S')
+.size
+  = 'Size: '
+  span.value
+    - if benchmark.image_file_size_pretty.blank?
+      = 'N/A'
+    - else
+      = benchmark.image_file_size_pretty
+- unless benchmark.details['remote_ip'].blank?
+  .ip-country
+    = 'IP: '
+    span.ip.value
+      = benchmark.details['remote_ip']
+    .country
+      = 'Country: '
+hr
+- unless benchmark.app_name_version.blank?
+  = 'From: '
+  span.value
+    = "#{benchmark.app_name_version}"
+  br
+
+hr
+- unless benchmark.review.blank?
+  .benchmarks-icons
+    = 'Status: '
+    - if benchmark.review == 'PRS_W_CATE' || benchmark.review == 'PRS_W_PROD'
+      span.hs-icon-ic-close.value
+    - else
+      span.hs-icon-ic-tick.value
+
+= 'MA: '
+span.value
+  - if benchmark.sent_to_ma
+    = 'Sent'
+  - else
+    = 'Not Sent'

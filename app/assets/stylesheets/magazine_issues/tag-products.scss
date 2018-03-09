@@ -1,0 +1,61 @@
+.magazine-issue-details.tag_products {
+  position: relative;
+
+  .image-detail {
+    .actions {
+      margin: 30px 0 60px 0;
+      padding-top: 15px;
+      text-align: center;
+    }
+    .left {
+      padding: 0 15%;
+    }
+  }
+
+  .products-search {
+    margin-top: 15px;
+    padding-top: 15px;
+    .select2-selection,.search{
+      padding-left:6px !important;
+    }
+    .row {
+      .products-search__search-products-col {
+        padding: 10px 30px 10px 5px;
+        border: 1px solid $gray-light;
+      }
+    }
+
+    $search-filters-margin-bottom: 5px;
+    .search__filters {
+      margin-bottom: $search-filters-margin-bottom;
+
+      :first-child {
+        padding-left: 0;
+      }
+    }
+
+    .products-search__results {
+      .result {
+        float: left;
+        width: 25%;
+        height: 135px;
+        margin-bottom: 5px;
+        padding: 0 0 0 5px;
+
+        label {
+          width: 135px;
+          height: 135px;
+          margin-right: 5px;
+        }
+      }
+    }
+
+    .tags-with-products {
+      padding-top: 14px + $search-filters-margin-bottom;
+
+      .icon-tag-bubble {
+        cursor: pointer;
+      }
+    }
+  }
+}

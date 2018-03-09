@@ -1,0 +1,15 @@
+.assetment-container
+  .classifier.classifier-in-edit data={current_slide_index: selected_area[:index], total_slide: areas.count}
+    - areas.each do |area|
+      = link_to edit_panel_benchmark_path(benchmark, :crop_id => area.id, :anchor => 'recognized-items'), :class => "classifier-item #{area.id.to_s == selected_area[:id].to_s ? 'selected' : ''}"
+        .classifier-item-inner
+          = image_tag area.try(:image).try(:url), alt: 'Recognized area'
+        h6
+          = _("Size: #{area.area_file_size}")
+        h6
+          = _("[x: #{area.area_as_xywh[:x]}, y: #{area.area_as_xywh[:y]}, w: #{area.area_as_xywh[:width]}, h: #{area.area_as_xywh[:height]}]")
+        h4
+          = area.classifier_data
+          - unless area.box_classification_info.blank?
+            br
+            = "box: #{area.box_classification_info}"

@@ -1,0 +1,13 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+  h1.pull-left
+    = _('Order Celebrities')
+  .clearfix
+= render 'layouts/alerts'
+= simple_form_for '', url: save_order_panel_media_owners_path, method: :post do |f|
+  = render 'shared/order', {sources: @media_owners, picture: :picture, title: :name}
+  .actions
+    = link_to _('Back'), panel_media_owners_path, class: 'btn btn-default'
+    = f.submit _('Save'), class: 'btn btn-primary'

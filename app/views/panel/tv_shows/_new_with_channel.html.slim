@@ -1,0 +1,17 @@
+.header
+  = render 'panel/channels/header', {active: 'tv_shows', :@source_owner => @channel}
+= render 'layouts/alerts'
+= simple_form_for @form, as: :tv_show_form, url: panel_channel_tv_shows_path(@channel), method: :post do |f|
+  .fields
+    = f.input :title, label: _('TV Show Title')
+    = f.input :description, label: _('Description'), as: :text
+    = f.simple_fields_for :background_image, @background_image do |background_image_fields|
+      = background_image_fields.input :file, as: :file, label: _('TV Show image')
+    .form-group
+      = image_tag @background_image.custom_url if @tv_show
+
+  .actions
+    = link_to _('Back'), panel_channel_tv_shows_path(@channel), class: 'btn btn-default'
+    = f.submit _('Save'), class: 'btn btn-primary'
+
+= render partial: 'shared/cropper', locals: {title: 'Edit TV Show Cover', caption: 'new background image'}

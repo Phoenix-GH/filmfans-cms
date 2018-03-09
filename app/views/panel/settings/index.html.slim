@@ -1,0 +1,70 @@
+.header
+  .row
+    .col-md-6.text-left
+      .breadcrumbs
+        = link_to _('Home')
+        span.path-separator
+      h1 = _('Settings')
+= render 'layouts/alerts'
+.fields.settings
+  .row
+    .col-md-6
+      h4 Profile details
+      = simple_form_for @form, as: :account_form, url: update_account_panel_settings_path, method: :patch do |f|
+        = f.input :full_name, label: _('Full Name'), placeholder: 'Your Full Name'
+        = f.input :email, label: _('Email')
+        .form-group
+          label.control-label = _('Password')
+          .input-group
+            input.form-control#password placeholder='*****' type='password' disabled='true'
+            span.input-group-btn
+              button.btn.btn-default type='button' = link_to _('Reset password'), reset_password_panel_settings_path, method: :put
+        .form-group
+          label.control-label = _('Role')
+          - if current_admin.role < Role::Admin
+            .input-group
+              input.form-control#role placeholder= current_admin.role.text type="text" disabled="true"
+              span.input-group-btn
+                button.btn.btn-default type="button" = link_to _('Delete account'), delete_account_panel_settings_path, data: { confirm: "Are you sure?" }, method: :delete
+          - else
+            input.form-control#role placeholder= current_admin.role.text type="text" disabled="true"
+        .form-group
+          button.btn.btn-primary Save
+
+    - if current_admin.role < Role::Admin
+      .col-md-6.tabs-container
+        h4
+          = _('Linked media owners')
+          span= " (#{current_admin.owners_count})"
+        - unless current_admin.role < Role::Moderator
+          .row
+            .col-md-12
+              .tabs.media-owner-tabs
+                = link_to '#', class: 'active', data: {owner: '.channels-tab'} do
+                  = _('Channels')
+                  span= " (#{current_admin.channels.count})"
+                  span.underline
+                = link_to '#', data: {owner: '.celebrities-tab'} do
+                  = _('Celebrities')
+                  span= " (#{current_admin.media_owners.count})"
+                  span.underline
+        .row.media-owner-container
+          - unless current_admin.role < Role::Moderator
+            .col-md-12.channels-tab.current
+              - current_admin.channels.each do |channel|
+                .media-owner
+                  img.media-owner__img src=channel.try(:picture).try(:custom_url)
+                  .media-owner__name
+                    = channel.name
+          .col-md-12.celebrities-tab class=('current' if current_admin.role < Role::Moderator)
+            - current_admin.media_owners.each do |media_owner|
+              .media-owner
+                img.media-owner__img src=media_owner.try(:picture).try(:custom_url)
+                .media-owner__name
+                  = media_owner.name
+    /    .row
+    /      .col-md-12
+    /        .btn.btn-default data-target="#requestOwners" data-toggle="modal"
+    /          | Request new media owners
+    /
+    /= render partial: 'modal_request_owners'

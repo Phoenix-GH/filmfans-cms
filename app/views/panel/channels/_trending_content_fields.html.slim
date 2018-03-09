@@ -1,0 +1,26 @@
+li.content-container.js-mp-element
+  .container-box
+    .col-lg-1.container-handle.js-sort-handle
+      .handle-bar
+      .handle-bar
+      .handle-bar
+    = f.input :position, as: :hidden, input_html: { class: 'js-sort-position' }
+    .col-lg-3.container-type
+      = f.input :content_type, label: _('Container Type'), collection: [[_('Product'), 'Product'], [_('Product Set'), 'ProductsContainer'], [_('Media'), 'MediaContainer'], [_('Celebrity'), 'MediaOwner'], ['Magazine', _('Magazine')], [('TV Show'), 'TvShow'], [_("Event"), 'EventsContainer']], input_html: { class: 'js-container-type', style: 'width: 100%' }, include_blank: false, selected: f.object.content_type == 'Link' ? f.object.content&.target_type : f.object.content_type
+    .col-lg-5.container-name
+      - title = f.object&.content&.respond_to?(:name) ? f.object.content&.name : f.object.content&.title
+      - content_id = f.object.content_type == 'Link' ? f.object.content&.target_id : f.object.content_id
+      - product_available = f.object.content_type == 'Product' ? f.object.content&.available : nil
+      = f.input :content_id, label: _('Collection Name'), collection: [[title, content_id]], input_html: { data: { picture: f.object.content&.cover_image_url, title: title, product_available: product_available }, class: 'js-container-name', style: 'width: 100%'}, include_blank: false, selected: content_id
+    .col-lg-2.container-width
+      label Width
+      .width-checkbox
+        .width-checkbox-wrapper
+          = f.input_field :width, as: :boolean, boolean_style: :inline, class: 'js-container-width', checked: f.object.width == 'full' ? true : false
+          = f.label :width
+          .for-active
+          .for-inactive
+    = link_to_remove_fields "<i class='fa fa-times'></i>".html_safe, f, target_container: '.content-containers ol' do
+      = image_tag 'icons/ic-close.svg', class: 'remove-container-icon'
+
+

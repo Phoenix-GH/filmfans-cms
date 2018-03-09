@@ -1,0 +1,20 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+    = link_to _('Movies'), panel_movies_containers_path
+    span.path-separator
+  h1 = _('Edit Movie Container')
+  .tabs
+    = link_to edit_panel_movie_container_path(@movie_container) do
+      = _('Details')
+      span.underline
+    = link_to [:panel, @movie_container], class: 'active' do
+      = _('Movies order')
+      span.underline
+
+- set_var 'collectionsContainerId', @movie_container.id
+ul.movies-container-sortable.sortable.grid
+  - @movies.each do |movie|
+    li{ data= { id: "#{movie.id}" } }
+      h3 = movie.name

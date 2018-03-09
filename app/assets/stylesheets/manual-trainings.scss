@@ -1,0 +1,30 @@
+.manual_training_detail {
+  .user-image-preview {
+    height: 200px;
+    width: 100%;
+    text-align: center;
+    vertical-align: middle;
+    display: none;
+    img {
+      max-height: 100%;
+      max-width: 100%;
+      margin: auto;
+    }
+  }
+  .trained-user-images {
+    li {
+      list-style: none;
+    }
+    .products-search__label {
+      height: 15px;
+    }
+    .image-uuid {
+      font-size: 30%;
+    }
+    .product {
+      img {
+        height: 90%;
+      }
+    }
+  }
+}

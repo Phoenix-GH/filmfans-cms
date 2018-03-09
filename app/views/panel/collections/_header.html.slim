@@ -1,0 +1,15 @@
+.breadcrumbs
+  = link_to _('Home'), "/"
+  span.path-separator
+  = link_to _('Collection'), panel_collections_path
+  span.path-separator
+h1 = _('Edit Collection')
+.tabs
+  = link_to edit_panel_collection_path(@collection), class: ('active' if active == 'details') do
+    .step-number 1
+    = _('Details')
+    span.underline
+    = link_to edit_panel_collection_path(@collection, step: :collection_contents), class: ('active' if active == 'collection_contents') do
+      .step-number 2
+      = _('Set Containers')
+      span.underline

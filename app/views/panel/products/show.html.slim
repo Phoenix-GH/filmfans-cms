@@ -1,0 +1,23 @@
+p
+  = link_to _('Edit Product'), edit_panel_product_path(@product), class: 'btn btn-default'
+p
+  strong = _('Brand: ')
+  = @product.brand
+p
+  strong = _('Image: ')
+  p
+    = image_tag @product.primary_image_object&.large_cover_image_url
+p
+  strong = _('Name: ')
+  = @product.name
+p
+  strong = _('Description: ')
+  = @product.description
+p
+  strong = _('Product code: ')
+  = @product.product_code
+br
+p
+  = render partial: 'product_variants', locals: { product: @product }
+p
+  = render partial: 'product_files', locals: { product: @product }

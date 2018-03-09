@@ -1,0 +1,28 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+    = link_to _('Collections'), panel_homes_path
+    span.path-separator
+  h1 = _('Edit Home Collection')
+  .tabs
+    = link_to edit_panel_home_path(@home) do
+      = _('Details')
+      span.underline
+    = link_to [:panel, @home], class: 'active' do
+      = _('Containers order')
+      span.underline
+
+- set_var 'homeId', @home.id
+ul.sortable.home-sortable.grid
+  - @home.home_contents.order(:position).each do |content|
+    li{ data= { id: "#{content.id}" } }
+      - if content.content_type == 'CollectionsContainer'
+        h3 = content.content.name
+      - elsif content.content_type == 'ProductsContainer'
+        h3 = content.content.name
+        - content.content.products.limit(4).each do |product|
+          = image_tag product.primary_image_object&.small_cover_image_url
+      - elsif content.content_type == 'MediaContainer'
+        h3 = content.content.name
+        = image_tag content.content.cover_image&.small_thumb

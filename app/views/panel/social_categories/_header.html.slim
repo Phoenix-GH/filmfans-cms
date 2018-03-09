@@ -1,0 +1,15 @@
+.breadcrumbs
+  = link_to _('Home'), "/"
+  span.path-separator
+  = link_to _('Social Categories'), panel_social_categories_path
+  span.path-separator
+h1 = _('Edit Category')
+.tabs
+  = link_to edit_panel_social_category_path(@source_owner), class: ('active' if active == 'details') do
+    .step-number 1
+    = _('Details')
+    span.underline
+    = link_to followings_panel_social_category_social_account_followings_path(@source_owner), class: ('active' if active == 'followings') do
+      .step-number 2
+      = _('Followings')
+      span.underline

@@ -1,0 +1,40 @@
+.table-responsive
+  table.table
+    tbody
+      tr
+        td
+          = 'APP'
+        td
+          = 'NETW APP'
+        td
+          = 'BE'
+        td
+          = 'NETW BE'
+        td
+          = 'PRS'
+        td
+          = 'HS'
+      tr
+        td
+          span.value
+            = number_to_delimited(benchmark.exec_crop_shop_total_app)
+        td
+          span.value
+            = number_to_delimited(benchmark.exec_app_netw)
+        td
+          span.value
+            = number_to_delimited(benchmark.exec_crop_shop_total)
+        td
+          span.value
+            = number_to_delimited(benchmark.exec_netw)
+        td
+          span.value
+            = number_to_delimited(benchmark.exec_prs_only)
+        td
+          span.value
+            = number_to_delimited(benchmark.exec_hs_total)
+hr
+- if benchmark.is_multi_crops
+  = render 'panel/benchmarks/bbprs_multi', {benchmark: benchmark}
+- else
+  = render 'panel/benchmarks/bbprs_single', {benchmark: benchmark}

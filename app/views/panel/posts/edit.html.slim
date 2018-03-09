@@ -1,0 +1,44 @@
+.header
+= render 'layouts/alerts'
+= simple_form_for @form, as: :post_products_form, url: panel_post_path(@post), method: :patch do |f|
+  .fields.products-search
+    = f.error_notification
+    - if @form.errors.any?
+      #error_notification
+        ul
+          - @form.errors.full_messages.each do |msg|
+            li= msg
+    .row
+      .col-md-5.container-name-col
+        /- f.object.linked_products.each do | linked_product |
+        .linked-products-collection data={template: post_product_template_fields(f).gsub("\n", "")}
+          = f.simple_fields_for :post_products, include_id: false  do |ff|
+            = render 'panel/linked_products/fields', f: ff
+
+    .row
+      .col-md-12.products-search__selected-products-col
+        h2.products-search__label
+          = _('Linked products')
+          span.products-search__label-counter.js-selected-products-counter<= ''
+        .col-md-8.pull-right
+          .row.search__filters
+            .col-md-4
+              = select_tag :vendor, options_from_collection_for_select(Store.all, 'name', 'name'), class: 'products-vendor-filter__query-field form-control', include_blank: 'All Merchants'
+            .col-md-4
+              = select_tag :category_id, option_groups_from_collection_for_select(@presenter.category_main_options, :subcategories, :name, :id, :name), class: 'products-category-filter__query-field form-control', prompt: 'All Categories'
+            .col-md-4.search__field
+              = text_field_tag :search, '', class: 'string search form-control products-search__query-field', placeholder: 'Search product'
+        .products-search__selection
+          ul.js-product-selection
+        p.products-search__help-text
+    .row
+      .col-md-12.products-search__search-products-co
+        .products-search__results
+  .actions
+    - if @post.source.source_owner.class.to_s == 'MediaOwner'
+      = link_to _('Back'), feed_panel_media_owner_posts_path(@post.source.source_owner), class: 'btn btn-default'
+    - else
+      = link_to _('Back'), feed_panel_channel_posts_path(@post.source.source_owner), class: 'btn btn-default'
+    = f.button :submit, _('Save'), class: 'btn btn-success'
+    
+= render partial: 'shared/popup_product_detail'

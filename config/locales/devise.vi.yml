@@ -1,0 +1,48 @@
+vi:
+  devise_token_auth:
+    sessions:
+      not_confirmed: "Email xác nhận đã được gửi đến: '%{email}'. Bạn phải hoàn thành các chỉ dẫn trong email để kích hoạt tài "
+      bad_credentials: "Tài khoản hoặc mật khẩu không đúng. Vui lòng thử lại"
+      not_supported: "Yêu cầu không được hỗ trợ"
+      user_not_found: "Tài khoản không tồn tại hoặc chưa đăng nhập"
+    token_validations:
+      invalid: "Tài khoản hoặc mật khẩu không đúng"
+    registrations:
+      missing_confirm_success_url: "Tham số 'confirm_success_url' bị thiếu"
+      redirect_url_not_allowed: "Không cho phép huyển hướng đến '%{redirect_url}'"
+      email_already_exists: "Email '%{email}' đã tồn tại"
+      account_with_uid_destroyed: "Tài khoản với UID '%{uid}' đã bị xoá"
+      account_to_destroy_not_found: "Không tìm thấy tài khoản để xoá"
+      user_not_found: "Không tìm thấy tài khoản"
+      unavailable: "Đăng ký không thành công. Vui lòng thử lại"
+      update_error: "Đổi mật khẩu không thành công. Vui lòng thử lại"
+    passwords:
+      missing_email: "Bạn cần cung cấp địa chỉ email"
+      missing_redirect_url: "Không tìm thấy redirect_"
+      not_allowed_redirect_url: "Không được phép chuyển hướng  '%{redirect_url}'"
+      sended: "Một email cung cấp các chỉ dẫn để đặt lại mật khẩu cho đã được gửi đến địa chỉ  '%{email}'"
+      user_not_found: "Không tìm thấy tài khoản với  '%{email}'"
+      password_not_required: "Tài khoản này không yêu cầu mật khẩu. Vui lòng đăng nhập sử dụng tài khoản '%{provider}'"
+      missing_passwords: "Bạn cần nhập các thông tin gồm 'Password' và 'Password confirmation'."
+      successfully_updated: "Cập nhật tài khoản thành công"
+  errors:
+    messages:
+      validate_sign_up_params: "Thông tin đăng ký không chính ."
+      validate_account_update_params: "Thông tin cập nhật không chính ."
+      not_email: "không phải là một tài khoản email chính xác"
+  devise:
+    mailer:
+      confirmation_instructions:
+        confirm_link_msg: "Bạn có thể xác nhận tài khoản thông qua địa chỉ bên dưới:"
+        confirm_account_link: "Xác nhận tài khoản của "
+      reset_password_instructions:
+        request_reset_link_msg: "Bạn đã yêu cầu thay đổi mật khẩu. Vui lòng nhấn vào địa chỉ bên dưới."
+        password_change_link: "Thay đổi mật khẩu của tôi"
+        ignore_mail_msg: "Nếu bạn không thực hiện yêu cầu này. Vui lòng bỏ qua"
+        no_changes_msg: "Mật khẩu của bạn sẽ không thay đến cho đến khi bạn truy cập vào đường dẫn bên trên và cập nhật mật khẩu"
+      unlock_instructions:
+        account_lock_msg: "Tài khoản của bạn đã bị khoá vì vượt quá số lần đăng nhập không thành công"
+        unlock_link_msg: "Nhấn vào đường dẫn bên dưới để mở khoá tài khoản:"
+        unlock_link: "Mở khoá tài khoản của tôi"
+  hello: "Xin chào"
+  welcome: "Chào mừng"

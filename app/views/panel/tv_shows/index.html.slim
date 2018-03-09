@@ -1,0 +1,21 @@
+.header
+  - if @channel.present?
+    = render 'panel/channels/header', {active: 'tv_shows', :@source_owner => @channel}
+  - else
+    .breadcrumbs
+      = link_to _('Home'), "/"
+      span.path-separator
+    h1.pull-left
+      = _('TV Shows titles')
+      span.counter
+        | (
+        = @tv_shows.count
+        | )
+    = link_to order_panel_tv_shows_path, class: 'btn btn-primary pull-right'  do
+      = _('Order TV Shows')
+    .clearfix
+= render 'layouts/alerts'
+- if @tv_shows.count.zero? && @channel.present?
+  = render 'no_tv_shows'
+- else
+  = render 'tv_shows_index'

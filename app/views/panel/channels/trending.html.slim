@@ -1,0 +1,36 @@
+.header
+  = render 'header', active: 'trending', :@source_owner => @channel
+= render 'layouts/alerts'
+= simple_form_for @form, as: :trending_form, url: panel_channel_path(@channel, step: :trending), html: { method: :patch } do |f|
+  .channels
+    .row
+      .col-md-8
+        .content-panel.content-panel--container
+          .content-panel-body
+            .content-panel-heading
+              .row
+                .col-sm-6.text-left
+                  h2.content-heading= _('Containers list')
+                .col-sm-6.text-right
+                  = link_to_add_association_fields _('Add new container'), f, :trending_contents, 'panel/channels/trending_content_fields', btn_class: 'btn btn-default', target_container: '.content-containers ol'
+
+            .content-containers
+              ol.js-mp-elements-container { data= { emulator: '#mobile_preview' } }
+                = f.simple_fields_for :trending_contents do |ff|
+                  == render 'trending_content_fields', f: ff
+
+      .col-md-4
+        h2.content-heading= _('Preview')
+        = link_to '#', data: { placement: :top, toggle: :tooltip, title: 'For best layout look try to keep two  following half-width containers in the same type'},
+          class: 'preview-tooltip-link' do
+          = image_tag 'icons/ic-help-circle.svg'
+        #mobile_preview.content-panel.content-panel--preview.js-mp-emulator
+          .channel-logo.text-center
+            span.logo-preview-img style='background-image: url(#{@channel.cover_image_url})'
+            span.channel-name= @channel.name
+          .media-container
+            .row.js-mp-emulator__screen
+
+  .actions
+    = link_to _('Back'), feed_panel_channel_posts_path(@channel), class: 'btn btn-default'
+    = f.submit _('Next'), class: 'btn btn-primary'

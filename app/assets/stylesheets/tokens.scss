@@ -1,0 +1,83 @@
+ul.token-input-list-facebook {
+  border: none;
+  width: 100%;
+  background: none;
+
+  > p, > li.token-input-token-facebook, > li.token-input-selected-token-facebook {
+    padding: 6px 12px;
+    background: none;
+    border: none;
+    float: none;
+    font-size: 14px;
+    color: $gray-dark;
+
+    img {
+      max-width: 40px;
+      margin-right: 10px;
+    }
+
+    br {
+      display: none;
+    }
+
+    > .token-input-delete-token-facebook {
+      margin-left: 5px;
+      cursor: pointer;
+      color: $link-color;
+      font-weight: $font-weight-medium;
+
+      &:hover {
+        color: $link-hover-color
+      }
+    }
+  }
+
+  > li.token-input-input-token-facebook {
+    float: none;
+
+    > input {
+      height: auto;
+      box-shadow: none;
+      border-radius: 4px;
+      border: solid 1px $gray-semilighter;
+      color: $gray-dark;
+      font-weight: $font-weight-book;
+      line-height: 1.42857;
+      padding: 6px 12px;
+      width: 100% !important;
+      background-color: $light;
+      appearance: none;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+
+      &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+        color:    $gray-semilight;
+      }
+
+      &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        color:    $gray-semilight;
+        opacity:  1;
+      }
+
+      &::-moz-placeholder { /* Mozilla Firefox 19+ */
+        color:    $gray-semilight;
+        opacity:  1;
+      }
+
+      &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color:    $gray-semilight;
+      }
+    }
+  }
+}
+
+.token-input-dropdown-facebook {
+  z-index: 1500 !important;
+  border: solid 1px $gray-semilighter;
+  border-radius: 4px;
+
+  img {
+    max-width: 40px;
+    margin-right: 10px;
+  }
+}

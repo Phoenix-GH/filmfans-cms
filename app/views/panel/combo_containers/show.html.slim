@@ -1,0 +1,22 @@
+- set_var 'productsContainerId', @products_container.id
+
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+    = link_to _('Containers'), panel_combo_containers_path
+    span.path-separator
+  h1 = _('Edit Combo Container')
+  .tabs
+    = link_to edit_panel_combo_container_path(@products_container) do
+      = _('Details')
+      span.underline
+    = link_to panel_combo_container_path(@products_container), class: 'active' do
+      = _('Products order')
+      span.underline
+
+ul.products-sortable.sortable.grid
+  - @products.each do |product|
+    li{ data= { id: "#{product.id}" } }
+      h3 = product.name
+      = image_tag product.primary_image_object&.thumb_cover_image_url

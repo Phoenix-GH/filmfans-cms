@@ -1,0 +1,12 @@
+.fields
+  .social-feed
+    = image_tag 'icons/ic-social-feed-empty.svg', class: 'ic-social-feed'
+    div
+      span Channel&nbsp;
+      span.blue => source_owner.name
+      span has empty feed.
+    br
+    br
+    .actions
+      .media-social-btn.btn.btn-primary  data-channel = source_owner.id data-dialogfeed = source_owner.dialogfeed_url
+        'Manage Social Media Feed

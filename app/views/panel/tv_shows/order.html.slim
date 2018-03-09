@@ -1,0 +1,16 @@
+.header
+  - if @channel.present?
+    = render 'panel/channels/header', {active: 'tv_shows', :@source_owner => @channel}
+  - else
+    .breadcrumbs
+      = link_to _('Home'), "/"
+      span.path-separator
+    h1.pull-left
+      = _('Order TV Shows')
+    .clearfix
+= render 'layouts/alerts'
+= simple_form_for '', url: save_order_panel_tv_shows_path, method: :post do |f|
+  = render 'shared/order', {sources: @tv_shows, picture: :cover_image, title: :title}
+  .actions
+    = link_to _('Back'), panel_tv_shows_path, class: 'btn btn-default'
+    = f.submit _('Save'), class: 'btn btn-primary'

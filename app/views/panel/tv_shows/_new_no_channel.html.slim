@@ -1,0 +1,24 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+    = link_to _('TV Shows'), panel_tv_shows_path
+    span.path-separator
+  h1 = _('New TV Show')
+= render 'layouts/alerts'
+= simple_form_for @form, as: :tv_show_form, url: panel_tv_shows_path, method: :post do |f|
+  .fields
+    = f.input :form_type, as: :hidden, input_html: {value: 'no_channel' }
+    = f.input :title, label: _('TV Show Title')
+    = f.input :description, label: _('Description'), as: :text
+    = f.input :channel_id, label: _('Channel'), collection: Channel.where(id: current_admin.channel_ids).map{ |c| [c.name, c.id] }, include_blank: false
+    = f.simple_fields_for :background_image, @background_image do |background_image_fields|
+      = background_image_fields.input :file, as: :file, label: _('TV Show image')
+    .form-group
+      = image_tag @background_image.custom_url if @tv_show
+
+  .actions
+    = link_to _('Back'), panel_tv_shows_path, class: 'btn btn-default'
+    = f.submit _('Save'), class: 'btn btn-primary'
+
+= render partial: 'shared/cropper', locals: {title: 'Edit TV Show Cover', caption: 'new background image'}

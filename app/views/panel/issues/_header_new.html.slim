@@ -1,0 +1,25 @@
+.tabs
+  = link_to new_panel_magazine_issue_path(@magazine), class: 'active' do
+    .step-number 1
+    = _('DETAILS')
+    span.underline
+
+  = link_to _('#') do
+    .step-number 2
+    = _('UPLOAD')
+    span.underline
+
+  = link_to _('#') do
+    .step-number 3
+    = _('TAGS')
+    span.underline
+
+  = link_to _('#') do
+    .step-number 4
+    = _('TAG PRODUCTS')
+    span.underline
+
+  = link_to _('#') do
+    .step-number 5
+    = _('CONFIRMATION')
+    span.underline

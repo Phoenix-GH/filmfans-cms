@@ -1,0 +1,43 @@
+.table-actions
+    = link_to 'Add New Issue', new_panel_magazine_issue_path(@magazine), class: 'btn btn-default btn-action'
+
+.table-responsive
+  table.table
+    thead
+      tr
+        th{ colspan = "7" }
+          = _('Issues list ')
+          span.counter
+            | (
+            = @issues.count
+            | )
+      tr
+        th = _('Title')
+        th = _('Image')
+        th = _('Pages')
+        th = _('Publication')
+        th = _('Link to issue')
+        th = _('Actions')
+
+    tbody
+      - @issues.each do |issue|
+        tr
+          td = issue.title
+          td.image = image_tag issue.try(:cover_image).try(:custom_url)
+          td = issue.number_of_pages
+          td = I18n.l issue.publication_date, format: :month_year
+          td 
+            = link_to issue.url, issue.url, target: '_blank'
+          td.actions
+            - if can?(:update, @channel)
+              = link_to edit_panel_magazine_issue_path(@magazine, issue) do
+                = image_tag("icons/ic-edit.svg")
+            - if can?(:update, @channel)
+              = link_to [:panel, @magazine, issue], data: { confirm: _('Are you sure?') }, method: :delete do
+                = image_tag("icons/ic-delete.svg")
+
+.text-center
+  = paginate @issues if @issues.count > 0
+
+.actions
+  = link_to 'Back to Magazines', panel_channel_magazines_path(@channel), class: 'btn btn-default'

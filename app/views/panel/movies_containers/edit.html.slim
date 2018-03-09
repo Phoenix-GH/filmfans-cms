@@ -1,0 +1,10 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+    = link_to _('Movie Sets'), panel_movies_containers_path
+    span.path-separator
+  h1 = _('Edit Movie Set')
+= render 'layouts/alerts'
+= simple_form_for @form, as: :movies_container_form, url: panel_movies_container_path(@movies_container), method: :patch do |f|
+  == render partial: 'fields', locals: {f: f}

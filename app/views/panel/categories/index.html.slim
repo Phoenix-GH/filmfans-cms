@@ -1,0 +1,11 @@
+.header.categories-header
+  h1
+    = _('Categories ')
+    span.counter
+      | (
+      = "#{@leaf_categories.size} / #{@total_product} products"
+      | )
+  div
+  = render 'layouts/alerts'
+  = render 'all_category_list'
+  /= render 'list'

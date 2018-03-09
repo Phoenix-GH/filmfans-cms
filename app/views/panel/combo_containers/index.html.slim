@@ -1,0 +1,59 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+  h1.pull-left
+    = _('Containers')
+    span.counter
+      | (
+      = @products_containers.count
+      | )
+  = link_to new_panel_combo_container_path, class: 'btn btn-primary pull-right' do
+    = image_tag("icons/ic-add.svg")
+    = _('Add New Combo Container')
+  .clearfix
+  .tabs
+    = link_to panel_products_containers_path do
+      = _('Products')
+      span.underline
+    = link_to panel_media_containers_path do
+      = _('Media')
+      span.underline
+    = link_to panel_combo_containers_path, class: 'active' do
+      = _('Combo')
+      span.underline
+    = link_to panel_collections_containers_path do
+      = _('Collection')
+      span.underline
+= render 'layouts/alerts'
+.table-responsive
+  table.table
+    thead
+      tr
+        th
+          = sortable 'name', _('Combo Containers')
+          = simple_form_for '', url: panel_combo_containers_path, method: :get, html: { class: 'form-inline' } do |f|
+            == render partial: 'shared/search_panel', locals: { f: f }
+        th = _('Image / Video')
+        th = sortable 'media_owners.name', _('Media owner')
+        th = sortable 'created_at', _('Created')
+        th = _('Actions')
+    tbody
+      - @products_containers.each do |products_container|
+        tr
+          td = products_container.name
+          td.image = image_tag products_container.media_content.cover_image.thumb
+          td
+            = products_container.media_owner.name
+            - if products_container.channel
+              |(
+              = products_container.channel.name
+              |)
+          td = l products_container.created_at
+          td.actions
+            - if can?(:update, products_container)
+              = link_to edit_panel_combo_container_path(products_container) do
+                = image_tag("icons/ic-edit.svg")
+            - if can?(:create, products_container)
+              = link_to panel_combo_container_path(products_container), data: {confirm: _('Are you sure?') }, method: :delete do
+                = image_tag("icons/ic-delete.svg")

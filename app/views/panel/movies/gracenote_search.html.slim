@@ -1,0 +1,54 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+    = link_to _('Movies'), panel_movies_path
+    span.path-separator
+  h1 = _('Movies from Gracenote')
+
+= render 'layouts/alerts'
+.movie-gracenote-search
+  = simple_form_for '', as: :gracenote_search_form, url: gracenote_search_panel_movies_path, method: :get do |f|
+    .fields
+      = f.input :search, label: _('Search'), autofocus: true, input_html: {value: @gracenote_keyword}
+    .actions
+      = link_to _('Back'), panel_movies_path, class: 'btn btn-default'
+      = f.submit _('Search'), class: 'btn btn-primary'
+
+-unless @gracenote_search_total.blank?
+  .table-responsive
+    h1
+      = _(' Search result ')
+      span.counter
+        | (
+        = @gracenote_search_total
+        | )
+
+    table.table
+      thead
+        tr
+          th = _('Movie Title')
+          th = _('Poster')
+          th
+            = _('Genre')
+          th = _('Actions')
+
+      tbody
+        - @gracenote_movies.each do |movie|
+          tr
+            td
+              = movie[:title]
+            td.image = image_tag movie[:image_url]
+            td = movie[:genres].join(', ')
+            td.actions
+              -if @imported_ids.include?(movie[:id])
+                = _('Imported')
+              -else
+                = link_to _('Import'),
+                        import_gracenote_movie_panel_movies_path(search: @gracenote_keyword,
+                                gracenote_id: movie[:id],
+                                page: @gracenote_page,
+                                per: @gracenote_per), method: :post
+
+    .text-center
+      = paginate @gracenote_movies

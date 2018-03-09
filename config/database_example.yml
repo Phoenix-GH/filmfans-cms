@@ -1,0 +1,29 @@
+development:
+  adapter:  postgresql
+  host:     localhost
+  encoding: unicode
+  database: hotspotting_dev
+  pool:     5
+  username: username
+  password: password
+  template: template0
+
+test:
+  adapter:  postgresql
+  host:     localhost
+  encoding: unicode
+  database: hotspotting_test
+  pool:     5
+  username: username
+  password: password
+  template: template0
+
+production:
+  adapter:  postgresql
+  host:     localhost
+  encoding: unicode
+  database: hotspotting_production
+  pool:     5
+  username: username
+  password: password
+  template: template0

@@ -1,0 +1,14 @@
+.header
+  = render 'header', {:@source_owner => @social_category, :active => 'details'}
+= render 'layouts/alerts'
+.social-categories
+  = simple_form_for @form, as: :social_category_form, url: panel_social_category_path(@social_category), method: :put do |f|
+    .fields
+      = f.input :name, label: _('Name'), autofocus: true
+      - unless @social_category&.is_top
+        = f.input :image, as: :file, label: _('Background Image')
+        .form-group
+          = image_tag @social_category.try(:image).try(:url)
+    .actions
+      = link_to _('Back'), panel_social_categories_path, class: 'btn btn-default'
+      = f.submit _('Next'), class: 'btn btn-primary'

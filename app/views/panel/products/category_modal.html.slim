@@ -1,0 +1,38 @@
+.modal.fade role="dialog" id="update-product-category-model"
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close type="button" data-dismiss="modal"
+          |&times;
+        h4.modal-title
+          |Change product categories
+      .modal-body
+
+        .alerts-container.alerts-container--margin style="display:none"
+          .alert.alert-danger.alert-dismissible role="alert"
+            button type="button" class="close" data-dismiss="alert" aria-label="Close"
+              span aria-hidden="true" &times;
+
+        .row
+          .col-sm-4.col-md-4
+            - unless @product.image_display_url.blank?
+              = image_tag @product.image_display_url, class: 'img-responsive'
+
+            div.product-name
+              = @product.name_with_brand
+
+          .col-sm-8.col-md-8
+            select multiple="multiple" name="dual_listbox_product_categories[]"
+              - @available_categories.each do |category|
+                - if @selected_category_ids.include?(category[:id])
+                  option value="#{category[:id]}" selected="selected"
+                    = category[:name]
+                - else
+                  option value="#{category[:id]}"
+                    = category[:name]
+
+      .modal-footer
+        button.btn.btn-primary.btn-save type="button"
+          |Save
+        button.btn.btn-default.btn-cancel type="button" data-dismiss="modal"
+          |Close

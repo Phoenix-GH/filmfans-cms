@@ -1,0 +1,58 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+  h1.pull-left
+    = _('Admins')
+    span.counter
+      | (
+      = @admins.count
+      | )
+  = link_to new_panel_admin_path, class: 'btn btn-primary pull-right' do
+    = image_tag("icons/ic-add.svg")
+    = _('Add New Admin')
+  .clearfix
+= render 'layouts/alerts'
+.table-responsive
+  = simple_form_for '', url: panel_admins_path, method: :get, html: { class: 'form-inline' } do |f|
+    table.table
+      thead
+        tr
+          th
+            = sortable 'email', _('Admins Emails')
+            == render partial: 'shared/search_panel', locals: { f: f }
+          th
+            = sortable 'role', _('Role')
+            .form-group.search
+              = f.input_field :role, collection: Role.all, label_method: :text, include_blank: 'All', class: 'form-control', selected: params[:role]
+          th = _('Linked Media Owners')
+          th = sortable 'active', _('Status')
+          th = _('Actions')
+
+      tbody
+        - @admins.each do |admin|
+          tr
+            td
+              big = admin.email
+            td
+              = admin.role&.text
+            td
+              - if admin.role == Role::Moderator
+                = admin.channel_ids.count + admin.media_owner_ids.count
+              - elsif admin.role == Role::Curator
+                = admin.media_owner_ids.count
+              - else
+                = _("All")
+            td
+              - if can?(:update, admin)
+                div id = "toggle_#{admin.id}"
+                  = link_to toggle_active_panel_admin_path(admin, format: 'js'), method: :put, remote: true, class: (admin.active? ? 'btn btn-status btn-status-active' : 'btn btn-status') do
+                    span.status = admin.active? ? _('Active') : _('Inactive')
+                    span.circle
+            td.actions
+              - if can?(:update, admin)
+                = link_to edit_panel_admin_path(admin) do
+                  = image_tag("icons/ic-edit.svg")
+              - if can?(:destroy, admin)
+                = link_to panel_admin_path(admin), method: :delete, data: { confirm: _('Are you sure?') } do
+                  = image_tag("icons/ic-delete.svg")

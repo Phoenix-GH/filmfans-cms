@@ -1,0 +1,20 @@
+.header
+  = render 'header', {:@source_owner => @channel}
+
+.actions
+  h3
+    | Add new episode
+= render 'layouts/alerts'
+= simple_form_for @form, as: :episode_form, url: panel_tv_show_episodes_path(@tv_show), method: :post do |f|
+  .fields
+    = f.input :title, label: _('Episode Title')
+    = f.input :tv_show_season_number, label: _('Season')
+    = f.input :number, label: _('Epiosde')
+    = f.input :file, label: _('Video'), as: :file
+    = f.input :file_cache, as: :hidden
+
+  .actions
+    = link_to _('Cancel'), panel_tv_show_episodes_path(@tv_show), class: 'btn btn-default'
+    = f.submit _('Save Episode'), class: 'btn btn-primary'
+
+

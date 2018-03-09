@@ -1,0 +1,21 @@
+h3 = _('Product Files')
+.row
+  .col-md-4
+    = link_to _('New Product Product File'), new_panel_product_product_file_path(product_id: @product.id), class: 'btn btn-success'
+
+.table-responsive
+  table.table
+    thead
+      tr
+        th = _('Cover Image')
+        th = _('File Type')
+        th
+        th
+
+    tbody
+      - @product.product_files.each do |product_file|
+        tr
+          td = image_tag (product_file.cover_image.present? ? product_file.cover_image.thumb : product_file.normal_version_url.to_s)
+          td = product_file.file_type
+          td = link_to _('Edit Product File'), edit_panel_product_product_file_path(@product, product_file), class: 'btn btn-default btn-sm'
+          td = link_to _('Destroy'), panel_product_product_file_path(@product, product_file), data: { confirm: _('Are you sure?') }, method: :delete, class: 'btn btn-danger btn-sm'

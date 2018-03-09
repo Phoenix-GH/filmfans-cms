@@ -1,0 +1,14 @@
+.tabs
+  = link_to edit_panel_media_owner_trending_path(@manual_post), class: ('active' if request.path_info.include?('/edit') or request.path_info =~ /media_owner_trendings\/\d+$/) do
+    .step-number 1
+    = _('DETAILS')
+    span.underline
+
+  = link_to products_panel_media_owner_trending_path(@manual_post), class: ('active' if request.path_info.include?('/products')) do
+    .step-number 2
+    = _('PRODUCTS')
+    span.underline
+
+= simple_form_for '', as: :hidden, url: '#', method: :post do |f|
+  .fields
+    = f.input :issue___id, as: :hidden, input_html: {value: @manual_post.id}

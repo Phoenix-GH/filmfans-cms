@@ -1,0 +1,10 @@
+= f.error_notification
+.form-inputs
+  = image_tag @product_file.large_cover_image_url if @product_file
+  = f.input :cover_image, as: :file
+  = image_tag @product_file.file_url if @product_file && @product_file.image?
+  = video_tag @product_file.mp4_version_file, autoplay: true, controls: true if @product_file && @product_file.video?
+  = f.input :file, as: :file, label: _('Content File')
+.form-actions
+  = f.button :submit, _('Save Product File'), class: 'btn btn-success'
+  = link_to _('Back'), panel_product_path(params[:product_id]), class: 'btn btn-default'

@@ -1,0 +1,15 @@
+.breadcrumbs
+  = link_to _('Home'), "/"
+  span.path-separator
+  = link_to _('Home Screens'), panel_homes_path
+  span.path-separator
+h1 = _('Edit Home Screen')
+.tabs
+  = link_to edit_panel_home_path(@home), class: ('active' if active == 'details') do
+    .step-number 1
+    = _('Details')
+    span.underline
+  = link_to edit_panel_home_path(@home, step: :home_contents), class: ('active' if active == 'home_contents') do
+    .step-number 2
+    = _('Set Containers')
+    span.underline

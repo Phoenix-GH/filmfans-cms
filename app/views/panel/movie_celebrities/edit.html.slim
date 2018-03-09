@@ -1,0 +1,17 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+    = link_to _('Movie Celebrities'), panel_movie_celebrities_path
+    span.path-separator
+  h1 = _('Edit Movie Celebrities')
+= render 'layouts/alerts'
+= simple_form_for @form, as: :movie_celebrities_form, url: panel_movie_celebrity_path(@movie_celebrity), method: :patch do |f|
+  .fields
+    = f.input :name, readonly: true, label: _('Name')
+    = f.input :instagram_url, label: _('Instagram URL - ex: https://www.instagram.com/taylorswift')
+    = f.input :instagram_status, collection: @instagram_status, label: _('Choose a status below if cannot save an Instagram URL')
+
+  .actions
+    = link_to _('Back'), panel_movie_celebrities_path, class: 'btn btn-default'
+    = f.submit _('Save'), class: 'btn btn-primary'

@@ -1,0 +1,4 @@
+- if @channel.present?
+  = render partial: 'new_with_channel'
+- else
+  = render partial: 'new_no_channel'

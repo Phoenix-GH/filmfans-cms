@@ -1,0 +1,20 @@
+{
+  "code": "200",
+  "message": "message",
+  "result": {
+    "man": [{
+      "pid": "1",
+      "image_url": "http://i.dailymail.co.uk/i/pix/2016/02/04/11/30DF694000000578-0-image-m-17_1454585285886.jpg"
+    }, {
+      "pid": "2",
+      "image_url": "https://s-media-cache-ak0.pinimg.com/236x/f3/d8/c6/f3d8c61a432f115346b8fe7b0ca01ec5.jpg"
+    }],
+    "woman": [{
+      "pid": "3",
+      "image_url": "http://cdn.images.express.co.uk/img/dynamic/128/590x/secondary/redpanda-339440.jpg"
+    }, {
+      "pid": "4",
+      "image_url": "http://chicagotonight.wttw.com/sites/default/files/styles/full/public/article/image-non-gallery/red%20panda%20closeup.jpg"
+    }]
+  }
+}

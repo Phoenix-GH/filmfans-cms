@@ -1,0 +1,272 @@
+// every product purpose in this json is described in title
+{
+  "root": {
+    "page": [{
+      "pageurl": "http://www.amazon.com/ABOUT-THINGS-Nordic-Skiing-Hoodie/dp/B00PVBWLZU",
+      "record": {
+        "uniq_id": "f5b532663251669a1f53482b1f728a77",
+        "detail_pageurl": "http://www.amazon.com/ABOUT-THINGS-Nordic-Skiing-Hoodie/dp/B00PVBWLZU",
+        "title": "A PRODUCT WITH VARIANTS AND ONLY DEFAULT IMAGES",
+        "innermost_category": "Hoodies",
+        "department": "Hoodies",
+        "product_name": "I ONLY CARE ABOUT 2 THINGS SEX AND Nordic Skiing Women Hoodie",
+        "asin": "B00PVBWLZU",
+        "item_base_price": "$19.99 - $39.99",
+        "category_hierarchy": ["Clothing, Shoes & Jewelry", "Novelty & More", "Clothing", "Novelty", "Women", "Hoodies"],
+        "available_sizes": {
+          "size_0": "X-Small",
+          "size_1": "Small",
+          "size_2": "Medium",
+          "size_3": "Large",
+          "size_4": "X-Large",
+          "size_5": "XX-Large",
+          "size_6": "XXX-Large"
+        },
+        "available_features": {
+          "feature_0": "This is an authentic idakoos Nordic Skiing Hoodie",
+          "feature_1": "High quality durable print. 100% Satisfaction Guarantee",
+          "feature_2": "Hoddie 100% cotton for comfort and softness",
+          "feature_3": "Great idea for gift on birthday present, holidays, or some special day",
+          "feature_4": "Roomy front pocket pouch"
+        },
+        "images": {
+          "default_image_links": {
+            "largeImage": "http://ecx.images-amazon.com/images/I/71gfvFxQLlL._UL1500_.jpg",
+            "mediumImage": "http://ecx.images-amazon.com/images/I/5183Cv3zyoL.jpg",
+            "smallImage": "http://ecx.images-amazon.com/images/I/5183Cv3zyoL._SR38,50_.jpg"
+          }
+        },
+        "similar_products": [{
+          "title": "I sleep with a Beagle Women Sweatshirt",
+          "asin": "B017TGCK7I"
+        }, {
+          "title": "All I do is win squash Women Sweatshirt",
+          "asin": "B017TGCCCQ"
+        }, {
+          "title": "Wrestling I will break you Women Sweatshirt",
+          "asin": "B017TGC0EG"
+        }, {
+          "title": "I'm drunk and you're still ugly Women Sweatshirt",
+          "asin": "B017TGC01O"
+        }, {
+          "title": "Drunk and sexy Women Sweatshirt",
+          "asin": "B017TGB8EY"
+        }, {
+          "title": "I play squash therefore I am awesome Women Sweatshirt",
+          "asin": "B017TGB57E"
+        }, {
+          "title": "Hug me Pug Women Sweatshirt",
+          "asin": "B017TGDA2M"
+        }, {
+          "title": "Labrador Retriever sorry Women Sweatshirt",
+          "asin": "B017TGCEOC"
+        }, {
+          "title": "Best friend Pug Women Sweatshirt",
+          "asin": "B017TGD2KW"
+        }, {
+          "title": "Leave me alone I'm only talking to my Great Dane Women Sweatshirt",
+          "asin": "B017TGDLTY"
+        }, {
+          "title": "The secret to excellence in Akita agility Women Sweatshirt",
+          "asin": "B017TGCRZ8"
+        }, {
+          "title": "Stop do not open this door! Women Sweatshirt",
+          "asin": "B017TGDEO6"
+        }]
+      }
+    }, {
+      "pageurl": "http://www.amazon.com/Port-Authority-Jacket-Pacific-Blue/dp/B0012GLDCU",
+      "record": {
+        "uniq_id": "0286f462b521a773e1ab03c6898f0140",
+        "detail_pageurl": "http://www.amazon.com/Port-Authority-Jacket-Pacific-Blue/dp/B0012GLDCU",
+        "title": "A PRODUCT THAT SHOULD NOT BE IMPORTED",
+        "innermost_category": "Shells",
+        "department": "Shells",
+        "product_name": "Port Authority - MRX Jacket, Pacific Blue/Grey, XS",
+        "asin": "B0012GLDCU",
+        "item_base_price": "$49.98",
+        "category_hierarchy": ["Clothing, Shoes & Jewelry", "Novelty & More", "Clothing", "Novelty", "Women", "Hoodies"],
+        "available_features": {
+          "feature_0": "nylon",
+          "feature_1": "78/22 nylon/cotton oxford shell",
+          "feature_2": "100% polyester mesh upper body lining",
+          "feature_3": "100% nylon taffeta lining on lower body and sleeves",
+          "feature_4": "Locker loop",
+          "feature_5": "Interior chest pocket with Velcro closure"
+        },
+        "images": {
+          "default_image_links": {
+            "mediumImage": "http://ecx.images-amazon.com/images/I/413uP-xCm6L.jpg",
+            "smallImage": "http://ecx.images-amazon.com/images/I/413uP-xCm6L._SR38,50_.jpg"
+          }
+        }
+      }
+    }, {
+      "pageurl": "http://www.amazon.com/Port-Authority-Jacket-Pacific-Blue/dp/B0012GLDCU",
+      "record": {
+        "uniq_id": "0286f462b521a773e1ab03c6898f0140",
+        "detail_pageurl": "http://www.amazon.com/Port-Authority-Jacket-Pacific-Blue/dp/B0012GLDCU",
+        "title": "A PRODUCT THAT SHOULD BE ASSIGNED TO TWO CATEGORIES",
+        "innermost_category": "Shells",
+        "department": "Shells",
+        "product_name": "Port Authority - MRX Jacket, Pacific Blue/Grey, XS",
+        "asin": "B0012GLDCU",
+        "item_base_price": "$49.98",
+        "category_hierarchy": ["Clothing, Shoes & Jewelry", "Novelty & More", "Jewelry", "Rings"],
+        "available_features": {
+          "feature_0": "nylon",
+          "feature_1": "78/22 nylon/cotton oxford shell",
+          "feature_2": "100% polyester mesh upper body lining",
+          "feature_3": "100% nylon taffeta lining on lower body and sleeves",
+          "feature_4": "Locker loop",
+          "feature_5": "Interior chest pocket with Velcro closure"
+        },
+        "images": {
+          "default_image_links": {
+            "mediumImage": "http://ecx.images-amazon.com/images/I/413uP-xCm6L.jpg",
+            "smallImage": "http://ecx.images-amazon.com/images/I/413uP-xCm6L._SR38,50_.jpg"
+          }
+        }
+      }
+    }, {
+      "pageurl": "http://www.amazon.com/Rudy-Oops-Missy-Bottom-Sweatpant/dp/B019KZDRJ6",
+      "record": {
+        "uniq_id": "9eb90e105ba8d51f4451c61495bc6222",
+        "detail_pageurl": "http://www.amazon.com/Rudy-Oops-Missy-Bottom-Sweatpant/dp/B019KZDRJ6",
+        "title": "A PRODUCT WITH VARIANT IMAGES",
+        "innermost_category": "Pants & Capris",
+        "department": "Pants & Capris",
+        "product_name": "Rudy Oops By Jay Missy Fit Open Bottom Sweatpant",
+        "asin": "B019KZDRJ6",
+        "item_base_price": "$22.99 - $35.99",
+        "category_hierarchy": ["Clothing, Shoes & Jewelry", "Novelty & More", "Clothing", "Novelty", "Women", "Pants & Capris"],
+        "available_sizes": {
+          "size_0": "Small",
+          "size_1": "Medium",
+          "size_2": "Large",
+          "size_3": "X-Large",
+          "size_4": "XX-Large"
+        },
+        "available_colors": {
+          "color_0": "SportsGrey",
+          "color_1": "Charcoal",
+          "color_2": "Black",
+          "color_3": "Navy"
+        },
+        "available_features": {
+          "feature_0": "8.0 oz., pre-shrunk 50/50 cotton/polyester, Covered elastic waistband with flat drawcord, Differential rise",
+          "feature_1": "Outstanding Fabric Quality!",
+          "feature_2": "Super Fast Shipping! & 100% Money Back Guarantee. Actual Colors Or Images May Vary Slightly From Picture",
+          "feature_3": "Our designs are available on a wide range of apparel; t-shirts, hoodies, sweatshirts, workout tank tops, maternity shirts, baby onesies and more. Visit our store for more great items.",
+          "feature_4": "This is not an unauthorized replica/counterfeit item. This is an original inspired design and does not infringe on any rights holders rights. Words used in the title/search terms are not intended to imply they are licensed by any rights holders."
+        },
+        "images": {
+          "default_image_links": [{
+            "largeImage": "http://ecx.images-amazon.com/images/I/51Kl2VufhtL._UL1500_.jpg",
+            "mediumImage": "http://ecx.images-amazon.com/images/I/31ON35cK1xL.jpg",
+            "smallImage": "http://ecx.images-amazon.com/images/I/31ON35cK1xL._SR38,50_.jpg"
+          }, {
+            "largeImage": "http://ecx.images-amazon.com/images/I/61SDR3uhpDL._UL1500_.jpg",
+            "mediumImage": "http://ecx.images-amazon.com/images/I/41%2Bt4pY-QiL.jpg",
+            "smallImage": "http://ecx.images-amazon.com/images/I/41%2Bt4pY-QiL._SR38,50_.jpg"
+          }, {
+            "largeImage": "http://ecx.images-amazon.com/images/I/71OJFR4B7rL._UL1500_.jpg",
+            "mediumImage": "http://ecx.images-amazon.com/images/I/51w1vvAK3WL.jpg",
+            "smallImage": "http://ecx.images-amazon.com/images/I/51w1vvAK3WL._SR38,50_.jpg"
+          }],
+          "color_image_variants": {
+            "color_0": [{
+              "largeImage": "http://ecx.images-amazon.com/images/I/61IDOHDJIVL._UL1200_.jpg",
+              "mediumImage": "http://ecx.images-amazon.com/images/I/41DRetXoNyL.jpg",
+              "smallImage": "http://ecx.images-amazon.com/images/I/41DRetXoNyL._SR38,50_.jpg"
+            }, {
+              "largeImage": "http://ecx.images-amazon.com/images/I/61SDR3uhpDL._UL1200_.jpg",
+              "mediumImage": "http://ecx.images-amazon.com/images/I/41%2Bt4pY-QiL.jpg",
+              "smallImage": "http://ecx.images-amazon.com/images/I/41%2Bt4pY-QiL._SR38,50_.jpg"
+            }, {
+              "largeImage": "http://ecx.images-amazon.com/images/I/71OJFR4B7rL._UL1300_.jpg",
+              "mediumImage": "http://ecx.images-amazon.com/images/I/51w1vvAK3WL.jpg",
+              "smallImage": "http://ecx.images-amazon.com/images/I/51w1vvAK3WL._SR38,50_.jpg"
+            }],
+            "color_1": [{
+              "largeImage": "http://ecx.images-amazon.com/images/I/514aaCg%2BrqL._UL1200_.jpg",
+              "mediumImage": "http://ecx.images-amazon.com/images/I/313Fze9giML.jpg",
+              "smallImage": "http://ecx.images-amazon.com/images/I/313Fze9giML._SR38,50_.jpg"
+            }, {
+              "largeImage": "http://ecx.images-amazon.com/images/I/61SDR3uhpDL._UL1200_.jpg",
+              "mediumImage": "http://ecx.images-amazon.com/images/I/41%2Bt4pY-QiL.jpg",
+              "smallImage": "http://ecx.images-amazon.com/images/I/41%2Bt4pY-QiL._SR38,50_.jpg"
+            }, {
+              "largeImage": "http://ecx.images-amazon.com/images/I/71OJFR4B7rL._UL1300_.jpg",
+              "mediumImage": "http://ecx.images-amazon.com/images/I/51w1vvAK3WL.jpg",
+              "smallImage": "http://ecx.images-amazon.com/images/I/51w1vvAK3WL._SR38,50_.jpg"
+            }],
+            "color_2": [{
+              "largeImage": "http://ecx.images-amazon.com/images/I/51Kl2VufhtL._UL1200_.jpg",
+              "mediumImage": "http://ecx.images-amazon.com/images/I/31ON35cK1xL.jpg",
+              "smallImage": "http://ecx.images-amazon.com/images/I/31ON35cK1xL._SR38,50_.jpg"
+            }, {
+              "largeImage": "http://ecx.images-amazon.com/images/I/61SDR3uhpDL._UL1200_.jpg",
+              "mediumImage": "http://ecx.images-amazon.com/images/I/41%2Bt4pY-QiL.jpg",
+              "smallImage": "http://ecx.images-amazon.com/images/I/41%2Bt4pY-QiL._SR38,50_.jpg"
+            }, {
+              "largeImage": "http://ecx.images-amazon.com/images/I/71OJFR4B7rL._UL1300_.jpg",
+              "mediumImage": "http://ecx.images-amazon.com/images/I/51w1vvAK3WL.jpg",
+              "smallImage": "http://ecx.images-amazon.com/images/I/51w1vvAK3WL._SR38,50_.jpg"
+            }],
+            "color_3": [{
+              "largeImage": "http://ecx.images-amazon.com/images/I/515NF1diXbL._UL1200_.jpg",
+              "mediumImage": "http://ecx.images-amazon.com/images/I/31vRTUKjwgL.jpg",
+              "smallImage": "http://ecx.images-amazon.com/images/I/31vRTUKjwgL._SR38,50_.jpg"
+            }, {
+              "largeImage": "http://ecx.images-amazon.com/images/I/61SDR3uhpDL._UL1200_.jpg",
+              "mediumImage": "http://ecx.images-amazon.com/images/I/41%2Bt4pY-QiL.jpg",
+              "smallImage": "http://ecx.images-amazon.com/images/I/41%2Bt4pY-QiL._SR38,50_.jpg"
+            }, {
+              "largeImage": "http://ecx.images-amazon.com/images/I/71OJFR4B7rL._UL1300_.jpg",
+              "mediumImage": "http://ecx.images-amazon.com/images/I/51w1vvAK3WL.jpg",
+              "smallImage": "http://ecx.images-amazon.com/images/I/51w1vvAK3WL._SR38,50_.jpg"
+            }]
+          }
+        },
+        "similar_products": [{
+          "title": "New Years Missy Fit Open Bottom Sweatpant",
+          "asin": "B019LFDH9K"
+        }, {
+          "title": "Fireworks Missy Fit Open Bottom Sweatpant",
+          "asin": "B019LEKD1G"
+        }, {
+          "title": "Red Fireworks Missy Fit Open Bottom Sweatpant",
+          "asin": "B019LEIDL8"
+        }, {
+          "title": "Santa Claus15 Missy Fit Open Bottom Sweatpant",
+          "asin": "B019LDD7P6"
+        }, {
+          "title": "Ho Ho Ho 15 Missy Fit Open Bottom Sweatpant",
+          "asin": "B019LD7TVE"
+        }, {
+          "title": "Lumberjack Xmas Missy Fit Open Bottom Sweatpant",
+          "asin": "B019LDGZVY"
+        }, {
+          "title": "Happy New Year 22 Missy Fit Open Bottom Sweatpant",
+          "asin": "B019LEANQ6"
+        }, {
+          "title": "Happy New Year 20 Missy Fit Open Bottom Sweatpant",
+          "asin": "B019LEC0ZI"
+        }, {
+          "title": "Happy New Year 17 Missy Fit Open Bottom Sweatpant",
+          "asin": "B019LE71FC"
+        }, {
+          "title": "Happy New Year 27 Missy Fit Open Bottom Sweatpant",
+          "asin": "B019LE99EI"
+        }, {
+          "title": "Happy New Year 14 Missy Fit Open Bottom Sweatpant",
+          "asin": "B019LE8KDE"
+        }, {
+          "title": "Happy New Year 15 Missy Fit Open Bottom Sweatpant",
+          "asin": "B019LE5LBS"
+        }]
+      }
+    }]
+  }
+}

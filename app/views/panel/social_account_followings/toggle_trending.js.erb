@@ -1,0 +1,7 @@
+if("<%=@social_following_category.trending %>" == "true"){
+  $("#following_trending_<%=@social_following_category.social_account_following.id%>").find('a').addClass('btn-status-active');
+  $("#following_trending_<%=@social_following_category.social_account_following.id%>").find('a > span.status').empty().html('YES');
+} else {
+  $("#following_trending_<%=@social_following_category.social_account_following.id%>").find('a').removeClass('btn-status-active');
+  $("#following_trending_<%=@social_following_category.social_account_following.id%>").find('a > span.status').empty().html('NO');
+}

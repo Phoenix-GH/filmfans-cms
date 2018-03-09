@@ -1,0 +1,4 @@
+h1 = _('New Product File')
+= render 'layouts/alerts'
+= simple_form_for @form, as: :product_file_form, url: panel_product_product_files_path, method: :post do |f|
+  == render partial: 'fields', locals: { f: f }

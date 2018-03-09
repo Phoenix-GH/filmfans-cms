@@ -1,0 +1,48 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+    = link_to _('Manually trained products'), panel_manual_trainings_path
+    span.path-separator
+  h1 = @item.product.name
+
+.manual_training_detail
+  = render 'layouts/alerts'
+  .user-image
+    = simple_form_for '', as: :train_user_image_form, url: :train_user_image_panel_manual_training, method: :post do |f|
+      .fields
+        b = _('Train an user\' cropped image')
+        = f.input :image_url, label: _('Image URL'), input_html: {value: params[:image_url]}
+        .user-image-preview
+      .actions
+        = f.submit _('Train an user image'), class: 'btn btn-primary'
+  .row
+    .col-md-4.trained-user-images.products-search
+      .products-search__label
+        | Trained user images
+      .products-search__selection
+        - @item.manual_training_user_images.each do |user_image|
+          li.product.no-product-detail
+            i.fa.fa-close data-id="#{user_image.id}" training-id="#{@item.id}"
+            = image_tag user_image.trained_image_url
+            .image-uuid
+              = user_image.uuid
+    .col-md-8.trained-products
+      = simple_form_for @products_form, as: :manual_training_products_form, url: panel_manual_training_path(@item), method: :put do |f|
+        .products-search
+          = f.error_notification
+          - if @products_form.errors.any?
+            #error_notification
+              ul
+                - @products_form.errors.full_messages.each do |msg|
+                  li= msg
+          .row
+            .col-md-5.container-name-col
+              .linked-products-collection data={template: manual_training_product_template_fields(f).gsub("\n", "")}
+                = f.simple_fields_for :manual_training_products, include_id: false  do |ff|
+                  = render 'panel/linked_products/fields', f: ff
+          = render partial: 'shared/product_selection_container', locals: {title: 'Trained products'}
+        .actions
+          = f.button :submit, _('Update trained products'), class: 'btn btn-success'
+
+      = render partial: 'shared/popup_product_detail'

@@ -1,0 +1,12 @@
+h3 = _('Product Variants')
+
+.table-responsive
+  table.table
+    thead
+      tr
+        th = _('Variants')
+
+    tbody
+      - @product.variants.each do |variant|
+        tr
+          td = variant.option_values.pluck(:name)

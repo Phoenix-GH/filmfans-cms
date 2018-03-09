@@ -1,0 +1,5 @@
+if("<%=@admin.active %>" == "true"){
+  $("#toggle_<%=@admin.id%>").find('a').addClass('btn-status-active').find('.status').text('Active');
+} else {
+  $("#toggle_<%=@admin.id%>").find('a').removeClass('btn-status-active').find('.status').text('Inactive');
+}

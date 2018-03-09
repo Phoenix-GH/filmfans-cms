@@ -1,0 +1,13 @@
+.breadcrumbs
+  = link_to _('Home'), "/"
+  span.path-separator
+  = link_to _('Celebrities'), panel_media_owners_path
+  span.path-separator
+h1 = _('Edit Celebrity')
+.tabs
+  = link_to edit_panel_media_owner_path(@source_owner), class: ('active' if active == 'details') do
+    = _('Details')
+    span.underline
+    = link_to feed_panel_media_owner_posts_path(@source_owner), class: ('active' if active == 'feed') do
+      = _('Feed')
+      span.underline

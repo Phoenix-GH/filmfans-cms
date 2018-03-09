@@ -1,0 +1,7 @@
+.breadcrumbs
+  = link_to _('Home'), "/"
+  span.path-separator
+  = link_to _('Channels'), panel_channels_path
+  span.path-separator
+h1 = _("#{@tv_show.title.capitalize} Episodes")
+

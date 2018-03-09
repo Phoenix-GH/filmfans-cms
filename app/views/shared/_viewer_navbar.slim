@@ -1,0 +1,32 @@
+nav
+  .logo-container
+    .logo
+    .logo-text <strong>Hot</strong>spotting
+  ul.nav.nav-sidebar
+    li.sub-menu
+      a
+        = image_tag("icons/ic-open-circle.svg")
+        = _('Platform')
+      ul
+        li class = active_class('dashboard')
+          = link_to panel_dashboard_index_path do
+            = image_tag("icons/ic-dashboard.svg")
+            = _('Dashboard')
+
+    li.sub-menu
+      a
+        = image_tag("icons/ic-open-circle.svg")
+        = _('Profile')
+      ul
+        li class = active_class('settings')
+          = link_to panel_settings_path do
+            = image_tag("icons/ic-settings.svg")
+            = _('Settings')
+        li class = active_class('support')
+          = link_to panel_support_index_path do
+            = image_tag("icons/ic-help-circle.svg")
+            = _('Help and Support')
+        li class = active_class('')
+          = link_to destroy_admin_session_path, method: :delete do
+            = image_tag("icons/ic-sign-out.svg")
+            = _('Sign out')

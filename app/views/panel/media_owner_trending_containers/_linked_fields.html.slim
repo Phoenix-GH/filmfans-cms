@@ -1,0 +1,9 @@
+li.dropdown-list__elem
+  .dropdown-list__elem--num
+    | 1
+  .dropdown-list__elem--select
+    i.fa.fa-bars.drag
+    .form-group
+      = f.input :position, :as => :hidden, :input_html => { class: 'item-position' }
+      = f.input :manual_post_id, label: _('Manual Post Name'), collection: [[f.object.manual_post&.name, f.object.manual_post&.id ]], value: 'position', input_html: { class: 'available-items' }, include_blank: false
+    i.hs-icon-ic-close-circle.close

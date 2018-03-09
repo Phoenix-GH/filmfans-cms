@@ -1,0 +1,14 @@
+.fields
+  = f.input :name
+  = hidden_field_tag(:type, 'event')
+  .association-list data={association: 'Event', 'fetch-url' => '/json/events.json'}
+    ul.dropdown-list
+      = f.simple_fields_for :linked_events do |ff|
+        == render 'linked_events_fields', f: ff
+    .row
+      .col-md-12
+        = link_to_add_association_fields _('Add next Event'), f, :linked_events, 'panel/events_containers/linked_events_fields', btn_class: 'btn btn-default btn-add-item', target_container: '.dropdown-list'
+
+.actions
+  = link_to _('Back'), panel_events_containers_path, class: 'btn btn-default'
+  = f.submit _('Save'), class: 'btn btn-primary'

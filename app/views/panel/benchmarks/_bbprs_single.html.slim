@@ -1,0 +1,15 @@
+.assetment-container
+  .classifier.classifier-preview
+    = link_to '#', :class => 'classifier-item selected', data: {}
+      .classifier-item-inner
+        = image_tag benchmark.try(:image).try(:cropped_url), alt: 'Recognized image'
+      h4
+        b
+          - if benchmark.details['classifier'].blank?
+            = _('-')
+          - else
+            = benchmark.details['classifier'].upcase
+            - unless benchmark.details['classifier_probability'].blank?
+              = " (#{(benchmark.details['classifier_probability'].to_f).round(2)})"
+
+= render 'panel/benchmarks/bbprs_preview_details', {benchmark: benchmark}

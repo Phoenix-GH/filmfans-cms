@@ -1,0 +1,258 @@
+.benchmark-list {
+  a, div, span {
+    font-size: 12px !important;
+  }
+  table {
+    tbody {
+      tr {
+        td {
+          max-width: 0px;
+          vertical-align: top !important;
+          img {
+            max-width: 100%;
+          }
+          hr {
+            margin: 5px 0px;
+          }
+          .value {
+            font-weight: bold;
+            color: #00a653;
+          }
+          .country {
+            img {
+              margin-bottom: 1px;
+              margin-right: 5px;
+            }
+          }
+          .top-products {
+            img {
+              max-width: 100%;
+              max-height: 100%;
+            }
+          }
+          .product-detail-trigger {
+            img {
+              cursor: pointer;
+            }
+          }
+          .assetment-container .classifier .classifier-item h4 {
+            font-size: 10px;
+          }
+          .like {
+            margin: 10px auto;
+            text-align: center;
+            svg {
+              width: 32px;
+            }
+          }
+        }
+        td.bbprs, td.ulabprs {
+          .table-responsive {
+            margin-top: 5px;
+            table tr td {
+              padding: 5px 0px;
+              height: auto;
+            }
+          }
+        }
+        td.crop_shop_row {
+          border-top: 1px solid #666;
+        }
+        td.left-col {
+          border-right: 1px solid #666;
+        }
+      }
+      tr.judgement {
+        text-align: center;
+        td.bb-judge, td.ulab-judge {
+          text-align: center;
+          height: auto;
+        }
+        .fa.fa-star {
+          font-size: 32px;
+        }
+        .fa.blue {
+          color: #00a653;
+        }
+        .fa.grey {
+          color: #4c5459;
+        }
+        h3 {
+          text-decoration: underline;
+          margin: 5px;
+        }
+      }
+    }
+  }
+
+  .technical-details-title {
+    color: blue;
+    cursor: pointer;
+  }
+  .technical-details-details {
+    display: none;
+  }
+}
+
+.benchmark-detail {
+  .technical-details-title {
+    display: none;
+  }
+  *, a {
+    outline: none;
+  }
+  hr {
+    margin: 10px auto auto;
+  }
+  h3 {
+    margin: 20px 0px;
+  }
+  h5 {
+    font-size: 18px;
+  }
+  h6 {
+    color: #000000;
+    text-align: center;
+  }
+  .user_photo {
+    text-align: center;
+    img {
+      max-width: 100%;
+      max-height: 480px;
+    }
+    .origin-photo {
+      position: relative;
+      .box, .anchor {
+        position: absolute;
+      }
+      img {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      .box {
+        border: 1px solid #e52253;
+      }
+      .box.selected {
+        opacity: 0.6;
+        background-color: #e52253;
+      }
+      .anchor {
+        z-index: 9999;
+        display: block;
+        cursor: pointer;
+        background-color: #00a653;
+      }
+    }
+  }
+  .actions {
+    margin: 30px 0px;
+  }
+  .products-search .result__content__image {
+    height: 100%;
+    img {
+      max-height: 100%;
+    }
+  }
+  table.execution-time, table.benchmark-keywords {
+    width: 100%;
+    border: 1px solid lightgrey;
+    border-collapse: collapse;
+    margin: 15px 0px;
+    td {
+      border: 1px solid lightgrey;
+      padding: 5px;
+    }
+
+    .activity {
+      padding-right: 10px
+    }
+    .time-spent {
+      text-align: right;
+      vertical-align: top;
+    }
+  }
+  .benchmark-tab {
+    width: inherit;
+  }
+  table.benchmark-keywords {
+    word-wrap: break-word;
+    word-break: break-all;
+    table-layout: fixed;
+    .spinner {
+      display: block;
+      margin: auto;
+    }
+  }
+}
+.assetment-container {
+  margin: auto 15px;
+  .slick-slider {
+    margin-bottom: 0px;
+  }
+  .classifier {
+    .slick-arrow:before {
+      color: #000;
+    }
+    .classifier-item {
+      margin: auto 2px;
+      cursor: pointer;
+      text-decoration: none;
+      border: 1px solid #e3e3e3;
+      padding: 5px;
+      outline: none;
+      h4 {
+        text-align: center;
+        margin-bottom: 5px;
+        font-size: 14px;
+      }
+      .classifier-item-inner {
+        width: 100%;
+        height: 100%;
+        background-color: #ffffff;
+        img {
+          max-height: 120px;
+          max-width: 100%;
+          margin: auto;
+          text-align: center;
+        }
+      }
+      &.selected {
+        border: 1px solid #ff0000;
+        background-color: #ff0000;
+        h4 {
+          color: #ffffff;
+        }
+        h6 {
+          color: #ffffff;
+        }
+      }
+    }
+    .classifier-item:focus {
+      outline: none;
+    }
+  }
+  .prediction {
+    margin-bottom: 15px;
+    .predicted-categories {
+      li {
+        margin: 10px auto;
+      }
+    }
+  }
+  .response-message {
+    margin-bottom: 15px;
+  }
+}
+.benchmark-thresholds {
+  .table-responsive {
+    background-color: #ffffff;
+    border-radius: 4px;
+    border: solid 1px #dfe4ed;
+    font-size: 14px;
+    margin: 30px 50px;
+    .table {
+      margin-bottom: 0px;
+    }
+  }
+}

@@ -1,0 +1,44 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,600);
+
+$font-family: Open Sans;
+$font-weight-light: 300;
+$font-weight-book: 400;
+$font-weight-medium: 600;
+$font-weight-bold: 700;
+
+body {
+  font-family: $font-family;
+  background-color: $gray-lightest;
+  font-size: 16px;
+}
+
+h1 {
+  font-size: 30px;
+  font-weight: $font-weight-medium;
+}
+
+.tooltip-inner {
+  text-align: left;
+  color: $light;
+  background-color: $gray-darker;
+  font-size: 14px;
+  font-weight: $font-weight-light;
+}
+
+.bootstrap-duallistbox-container {
+  .info-container {
+    button {
+      height: 22px;
+      line-height: 20px;
+    }
+  }
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  display: block;
+  margin: auto;
+  background-image: asset_url('icons/ic-spinner48.gif');
+  background-size: 48px;
+}

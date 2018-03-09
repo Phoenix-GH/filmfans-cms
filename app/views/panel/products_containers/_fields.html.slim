@@ -1,0 +1,31 @@
+.fields.products-search
+  = f.error_notification
+  - if @form.errors.any?
+    #error_notification
+      ul
+        - @form.errors.full_messages.each do |msg|
+          li= msg
+  .row
+    .col-md-5.container-name-col
+      .products-containers-locale
+        = f.input :name_all_langs, label: _('Product Container Name'), placeholder: "Don't fill this if you plan to select a category", input_html: {"class": "locale-text", data: {"i18n": supported_languages.join(","), "translation": @products_container ? @products_container.name_all_langs : {}}}
+
+      /- f.object.linked_products.each do | linked_product |
+      .linked-products-collection data={template: linked_product_template_fields(f).gsub("\n", "")}
+        = f.simple_fields_for :linked_products, include_id: false  do |ff|
+          = render 'panel/linked_products/fields', f: ff
+
+  .row
+    .col-md-5.container-name-col.form-group
+      label.control-label
+        = _('Category')
+      = f.input_field :product_category_id, collection: @presenter.category_main_options,
+              as: :grouped_select, group_method: :subcategories,
+              class: 'form-control products-category-filter__create-field', selected: @form.category_id, include_blank: 'Independent from product category'
+
+  = render partial: 'shared/product_selection_container', locals: {title: 'Linked Products'}
+.actions
+  = link_to _('Back'), panel_products_containers_path, class: 'btn btn-default'
+  = f.submit _('Save'), class: 'btn btn-primary'
+
+= render partial: 'shared/popup_product_detail'

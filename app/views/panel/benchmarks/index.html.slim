@@ -1,0 +1,96 @@
+.header
+  .row
+    .col-md-6.text-left
+      .breadcrumbs
+        = link_to _('Home'), "/"
+        span.path-separator
+      h1 = _('Crop & shop benchmarks (' + (@benchmarks.kind_of?(Array) ? @benchmarks.count.to_s : @benchmarks.total_count.to_s) + ')')
+    .col-md-6
+      = link_to edit_thresholds_panel_benchmarks_path, class: 'btn btn-primary pull-right' do
+        = image_tag("icons/ic-edit.svg")
+        = _('Edit Thresholds')
+
+= render 'layouts/alerts'
+
+.actions
+  = link_to _("Liked (#{@likes})"), panel_benchmarks_path({like: true}), class: 'btn btn-primary'
+  = link_to _("Disliked (#{@dislikes})"), panel_benchmarks_path({like: false}), class: 'btn btn-default'
+
+.table-responsive.benchmark-list
+  = simple_form_for '', url: panel_benchmarks_path, method: :get, html: {class: 'form-inline'} do |f|
+    table.table
+      thead
+        tr
+          th style='border:none'
+            = _('Details')
+            .form-group.search
+              = f.input_field :review, collection: @review_results, value_method: :key, include_blank: 'All', class: 'form-control', selected: params[:review]
+            .form-group.search
+              = f.input_field :sent_to_ma, collection: [['Sent to MA', true], ['Not Sent to MA', false]], include_blank: 'All', class: 'form-control', selected: params[:sent_to_ma]
+          th style='border:none; text-align: center'
+            = _('BB PRS')
+          th style='border:none; text-align: center'
+            = _('ULAB PRS')
+      tbody
+        - @benchmarks.each do |benchmark|
+          tr
+            td.col-sm-2.details.crop_shop_row
+              = render 'details', {benchmark: benchmark}
+            td.crop_shop_row colspan=2
+              .table-responsive
+                table.table
+                  tbody
+                    tr
+                    - if benchmark.using_ulab_prs?
+                      - if benchmark.sub_benchmark.blank?
+                        td.col-sm-6.left-col
+                      - else
+                        td.col-sm-6.left-col.bbprs data={benchmark_id: benchmark.sub_benchmark.id}
+                          = render 'bbprs', {benchmark: benchmark.sub_benchmark}
+                      td.col-sm-6.ulabprs data={benchmark_id: benchmark.id}
+                        = render 'bbprs', {benchmark: benchmark}
+                    - else
+                      td.col-sm-6.left-col.bbprs data={benchmark_id: benchmark.id}
+                        = render 'bbprs', {benchmark: benchmark}
+                      - if benchmark.sub_benchmark.blank?
+                        td.col-sm-6
+                      - else
+                        td.col-sm-6.ulabprs data={benchmark_id: benchmark.sub_benchmark.id}
+                          = render 'bbprs', {benchmark: benchmark.sub_benchmark}
+                    tr.judgement data={benchmark_id: benchmark.id}
+                      td colspan=2
+                        .table-responsive
+                          table.table
+                            tbody
+                              tr
+                                - if benchmark.judge_user.blank?
+                                  h3.judge-title = 'Vote'
+                                  p.judge-desc = 'Click on the star icon to rate the better result'
+                                - else
+                                  h3.judge-title = 'Voted by'
+                                  p.judge-desc = "#{benchmark.judge_user}"
+                              tr
+                                td.col-sm-5
+                                  .bb-judge
+                                    - if benchmark.judgement == 'BB'
+                                      = render 'panel/benchmarks/judge', {benchmark: benchmark, judgement: nil}
+                                    - else
+                                      = render 'panel/benchmarks/judge', {benchmark: benchmark, judgement: 'BB'}
+                                  p = '(This is better)'
+                                td.col-sm-2
+                                  .same-judge
+                                    - if benchmark.judgement == 'SAME'
+                                      = render 'panel/benchmarks/judge', {benchmark: benchmark, judgement: nil}
+                                    - else
+                                      = render 'panel/benchmarks/judge', {benchmark: benchmark, judgement: 'SAME'}
+                                  p = '(The same)'
+                                td.col-sm-5
+                                  .ulab-judge
+                                    - if benchmark.judgement == 'ULAB'
+                                      = render 'panel/benchmarks/judge', {benchmark: benchmark, judgement: nil}
+                                    - else
+                                      = render 'panel/benchmarks/judge', {benchmark: benchmark, judgement: 'ULAB'}
+                                  p = '(This is better)'
+
+.text-center
+  = paginate @benchmarks if @benchmarks.count > 0

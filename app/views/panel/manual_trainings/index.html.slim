@@ -1,0 +1,39 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+  h1.pull-left
+    = _('Manually trained products')
+    span.counter
+      | (
+      = (@list.kind_of?(Array) ? @list.count.to_s : @list.total_count.to_s)
+      | )
+  = link_to new_panel_manual_training_path, class: 'btn btn-primary pull-right' do
+    = image_tag("icons/ic-add.svg")
+    = _('Add new training set')
+  = link_to csv_panel_manual_trainings_path, class: 'btn pull-right' do
+    = _('CSV')
+  .clearfix
+= render 'layouts/alerts'
+.table-responsive
+  table.table
+    thead
+      tr
+        th
+          = sortable 'name', _('Name')
+        th = _('Image')
+        th = _('Result set')
+        th = _('Actions')
+
+    tbody
+      - @list.each do |item|
+        tr
+          td.image = image_tag item.product.image_display_url, class: 'img-responsive', style: 'margin:auto'
+          td = item.product.name
+          td = item.products.count
+          td.actions
+            - if can?(:update, item)
+              = link_to edit_panel_manual_training_path(item.id) do
+                = image_tag("icons/ic-edit.svg")
+.text-center
+  = paginate @list if @list.length > 0

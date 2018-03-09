@@ -1,0 +1,111 @@
+.modal.fade role="dialog" id="view-product-details-modal"
+  .modal-dialog.product-details-modal
+    .modal-content
+      .modal-header
+        button.close type="button" data-dismiss="modal"
+          |&times;
+        h4.modal-title
+          |Product detail
+      .modal-body
+
+        .alerts-container.alerts-container--margin style="display:none"
+          .alert.alert-danger.alert-dismissible role="alert"
+            button type="button" class="close" data-dismiss="alert" aria-label="Close"
+              span aria-hidden="true" &times;
+        label.control-label Details (ID: #{@product.id} | #{link_to 'Product link', @product.vendor_url, :target => '_blank'})
+
+        .row
+          .col-sm-4.col-md-4
+            - unless @product.image_display_url.blank?
+              = image_tag @product.image_display_url, class: 'img-responsive'
+
+          .col-sm-8.col-md-8
+            table.table
+              tr
+                td.col-md-2
+                  |Product Name:
+                td.col-md-4 colspan=3
+                  b
+                    = @product.name
+              tr
+                td.col-md-2
+                  |Brand:
+                td.col-md-4
+                  b
+                    = @product.brand
+                td.col-md-2
+                  |Category:
+                td.col-md-4
+                  b
+                    = @product.categories_array.join(', ')
+              - if not @product.shipping_info&.blank?
+                tr
+                  td.col-md-2
+                    |Shipping information:
+                  td.col-md-4 colspan=3
+                    b
+                      = @product.shipping_info
+
+        label.control-label Parameters list
+        .parameters-list
+          table.table
+            - @product.variants.each do |variant|
+              tr
+                td.col-md-2
+                  |Description:
+                td.col-md-4 colspan=5
+                  b
+                    = variant.get_normalized_description
+              tr
+                td.col-md-2
+                  |Color:
+                td.col-md-2
+                  b
+                    = variant.color
+                td.col-md-2
+                  |Size:
+                td.col-md-2
+                  b
+                    = variant.size
+                td.col-md-2
+                  |Price:
+                td.col-md-2.text-right
+                  b
+                    = "#{number_with_precision(variant.price, precision: 2)} #{variant.currency}"
+              - if not variant.get_variant_image_url&.blank?
+                tr
+                  td.col-md-2
+                    |Images for this color
+                  td.variant-image colspan=5
+                    - variant.get_variant_image_url.each do |image|
+                      - if !image.thumb_cover_image_url.blank?
+                        img src=image.thumb_cover_image_url
+                      - elsif !image.small_cover_image_url.blank?
+                        img src=image.small_cover_image_url
+                      - elsif !image.large_cover_image_url.blank?
+                        img src=image.large_cover_image_url
+                  td
+                  td
+          br
+
+        - if @similarProduct.length > 0
+          br
+          .form-group
+            label.control-label Similar products
+          .similar-product
+            - @similarProduct.each do |linked_product|
+              .col-sm-3.similar-product-item
+                .col-sm-3
+                  img src=linked_product[:thumb]
+                .col-sm-9
+                  h6
+                    = linked_product[:name]
+                  h6
+                    = linked_product[:brand]
+                  h6
+                    = linked_product[:price]
+                  h6
+                    = linked_product[:vendor]
+      .modal-footer
+        button.btn.btn-default.btn-cancel type="button" data-dismiss="modal"
+          |Close

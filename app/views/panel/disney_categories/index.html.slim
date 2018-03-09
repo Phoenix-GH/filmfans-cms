@@ -1,0 +1,85 @@
+.disney-product-category-mapping
+  h1
+    = "Disney product categories (#{@total_product} products). Go to "
+    a href="http://www.disneystore.co.uk/" target="_blank"
+      | http://www.disneystore.co.uk/
+    | &nbsp; to see category structure
+  .row
+    .col-md-3
+      - if @hierarchies.size > 0
+        .panel.panel-info.disney-cat-list
+          .panel-heading
+            | Unmapped Disney original categories | CLICK to map &nbsp;
+            span.badge
+              = @hierarchies.size
+          .panel-body
+            ul.list-group
+              - @hierarchies.each do |hierarchy, count|
+                a href="#{panel_disney_categories_path(disney_cat: hierarchy)}" class="list-group-item #{@disney_cat == hierarchy ? 'active' : ''}"
+                  = hierarchy
+                  span.badge
+                    = count
+
+      - if @ff_names.size > 0
+        .panel.panel-info.ff-cat-list
+          .panel-heading
+            | FilmFans categories &nbsp;
+            span.badge
+              = @ff_names.size
+          .panel-body
+            ul.list-group
+              - @ff_names.each do |new_name, count|
+                a href="#{panel_disney_categories_path(ff_cat: new_name)}" class="list-group-item #{@ff_cat == new_name ? 'active' : ''}"
+                  = new_name
+                  span.badge
+                    = count
+
+      - if @mapped_hierarchies.size > 0
+        .panel.panel-info.disney-cat-list
+          .panel-heading
+            | Mapped Disney original categories
+            span.badge
+              = @mapped_hierarchies.size
+          .panel-body
+            ul.list-group
+              - @mapped_hierarchies.each do |hierarchy, count|
+                a href="#{panel_disney_categories_path(disney_cat: hierarchy)}" class="list-group-item #{@disney_cat == hierarchy ? 'active' : ''}"
+                  = hierarchy
+                  span.badge
+                    = count
+
+    .col-md-9
+      - unless @form.disney_cat.blank?
+        = render 'layouts/alerts'
+        = simple_form_for @form, as: :remap_category_form, url: panel_disney_categories_path, method: :patch do |f|
+          .fields
+            = f.input :disney_cat, label: _('Disney category name'), readonly: true
+            = f.input :new_name, label: _('FilmFans category name')
+          .actions
+            = f.button :submit, _('Save mapping'), class: 'btn btn-primary'
+
+      .panel.panel-info
+        - if @image_urls
+          .panel-heading
+            = @current_cat
+            | &nbsp;
+            span.badge
+              = @image_urls.size
+            - unless @mapped_hierarchies_for_ff_name.blank?
+              div
+                | The following Disney categories were mapped
+              ul
+                - @mapped_hierarchies_for_ff_name.each do |hier, count|
+                  li
+                    = hier
+                    | &nbsp;
+                    span.badge
+                      = count
+          .panel-body
+            .rows
+              - @image_urls.each do |row|
+                .col-md-2
+                  .product-image
+                    img src="#{row[0]}"
+                    .product-name
+                      = row[1]

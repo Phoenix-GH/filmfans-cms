@@ -1,0 +1,16 @@
+tr
+  - if post.video?
+    td.video
+      = video_tag post.content_video, autoplay: false, controls: true
+  - elsif post.image?
+    td.image
+      = image_tag post.content_picture
+  td= truncate(post.content_body, length: 100)
+  td= post.published_at
+  td
+    - if can?(:update, @source_owner)
+      div id = "toggle_#{post.id}"
+        = render 'toggle_button', post: post
+  td
+    = link_to edit_panel_post_path(post) do
+      = image_tag("icons/ic-edit.svg")

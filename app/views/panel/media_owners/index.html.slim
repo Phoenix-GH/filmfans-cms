@@ -1,0 +1,52 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+  h1.pull-left
+    = _('Celebrities')
+    span.counter
+      | (
+      = @media_owners.count
+      | )
+  = link_to new_panel_media_owner_path, class: 'btn btn-primary pull-right' do
+    = image_tag("icons/ic-add.svg")
+    = _('Add Celebrity')
+  = link_to order_panel_media_owners_path, class: 'btn btn-primary pull-right btn-reorder'  do
+    = _('Order Celebrities')
+  .clearfix
+= render 'layouts/alerts'
+.table-responsive
+  table.table
+    thead
+      tr
+        th= _('Picture')
+        th
+          = sortable 'name', _('Celebrity Name')
+          = simple_form_for '', url: panel_media_owners_path, method: :get, html: { class: 'form-inline' } do |f|
+            == render partial: 'shared/search_panel', locals: { f: f }
+        th= _('Background Image')
+        th= sortable 'feed_active', _('Social Media Feed')
+        th = _('Actions')
+
+    tbody
+      - @media_owners.each do |media_owner|
+        tr
+          td
+            div.picture-circle style='background-image: url(#{media_owner.try(:picture).try(:custom_url)})'
+          td = media_owner.name
+          td.celebrity-background-image = image_tag media_owner.try(:background_image).try(:custom_url)
+          td
+            - if can?(:update, media_owner)
+              div id = "toggle_#{media_owner.id}"
+                = link_to toggle_feed_active_panel_media_owner_path(media_owner, format: 'js'), method: :put, remote: true, class: (media_owner.feed_active? ? 'btn btn-status btn-status-active' : 'btn btn-status') do
+                  span.status = media_owner.feed_active? ? _('Active') : _('Inactive')
+                  span.circle
+          td.actions
+            - if can?(:update, media_owner)
+              = link_to edit_panel_media_owner_path(media_owner) do
+                = image_tag("icons/ic-edit.svg")
+            - if can?(:destroy, media_owner)
+              = link_to [:panel, media_owner], data: { confirm: _('Are you sure?') }, method: :delete do
+                = image_tag("icons/ic-delete.svg")
+.text-center
+  = paginate @media_owners if @media_owners.length > 0

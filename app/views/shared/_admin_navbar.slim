@@ -1,0 +1,173 @@
+nav
+  .logo-container
+    .logo
+  ul.nav.nav-sidebar
+    li.sub-menu
+      a
+        = image_tag("icons/ic-open-circle.svg")
+        = _('Platform')
+      ul
+        li class = active_class('dashboard')
+          = link_to panel_dashboard_index_path do
+            = image_tag("icons/ic-dashboard.svg")
+            = _('Dashboard')
+        li class = active_class('campaigns')
+          = link_to panel_campaigns_path do
+            = image_tag("icons/ic-campaigns.svg")
+            = _('Campaigns')
+        - unless current_admin.role < Role::Admin
+          li class = active_class('admins')
+            = link_to panel_admins_path do
+              = image_tag("icons/ic-user.svg")
+              = _('Admins')
+        /li class = active_class('reports')
+        /  = link_to panel_reports_path do
+        /    = image_tag("icons/ic-reports.svg")
+        /    = _('Reports')
+
+    li.sub-menu
+
+      a
+        = image_tag("icons/ic-open-circle.svg")
+        = _('Mobile App')
+      ul
+
+        - unless current_admin.role < Role::Admin
+          li class = active_class('homes')
+            = link_to panel_homes_path do
+              = image_tag("icons/ic-home.svg")
+              = _('Home Screens')
+        - unless current_admin.role < Role::Moderator
+          li class = active_class('channels')
+            = link_to panel_channels_path do
+              = image_tag("icons/ic-channel.svg")
+              = _('Channels')
+          /li.sub-menu
+          /  a
+          /    = image_tag("icons/ic-channel.svg")
+          /    = _('Channels')
+          /  ul
+          /    li class = active_class('channels')
+          /      = link_to panel_channels_path do
+          /        = _('Channel list')
+          /    - unless current_admin.role < Role::Admin && TvShow.where(channel_id: current_admin.channel_ids).count.zero?
+          /      li class = active_class('tv_shows')
+          /        = link_to panel_tv_shows_path do
+          /          = _('TV Shows')
+          /    - unless current_admin.role < Role::Admin && Magazine.where(channel_id: current_admin.channel_ids).count.zero?
+          /      li class = active_class('magazines')
+          /        = link_to panel_magazines_path do
+          /          = _('Magazines')
+        - unless current_admin.role == Role::Moderator && current_admin.media_owners.count.zero?
+          li class = active_class('media_owners')
+            = link_to panel_media_owners_path
+              = image_tag("icons/ic-celebrity.svg")
+              = _('Celebrities')
+          li.sub-menu
+            a
+              = image_tag("icons/ic-social-feed-empty.svg")
+              = _('Manual Posts')
+            ul
+              li class = active_class('media_owner_trendings')
+                = link_to panel_media_owner_trendings_path do
+                  = _('Posts')
+              li class = active_class('media_owner_trending_containers')
+                = link_to panel_media_owner_trending_containers_path do
+                  = _('Post Sets')
+        - unless current_admin.role < Role::Moderator
+          li.sub-menu
+            a
+              = image_tag("icons/ic-collections.svg")
+              = _('Collections')
+            ul
+              li class = active_class('collections')
+                = link_to panel_collections_path do
+                  = _('Collection List')
+              li class = active_class('collections_containers')
+                = link_to panel_collections_containers_path do
+                  = _('Collection Sets')
+
+          /li.sub-menu
+          /  a
+          /    = image_tag("icons/ic-events.svg")
+          /    = _('Events')
+          /  ul
+          /    li class = active_class('events')
+          /      = link_to panel_events_path do
+          /        = _('Events List')
+          /    li class = active_class('events_containers')
+          /      = link_to panel_events_containers_path do
+          /        = _('Events Sets')
+
+        /li class = active_class('media_containers')
+        /  = link_to panel_media_containers_path do
+        /    = image_tag("icons/ic-video.svg")
+        /    = _('Videos')
+
+        li.sub-menu
+          a
+            = image_tag("icons/ic-video.svg")
+            = _('Movies')
+          ul
+            li class = active_class('movies')
+              = link_to panel_movies_path do
+                = _('Movies List')
+
+            li class = active_class('movies_containers')
+              = link_to panel_movies_containers_path do
+                = _('Movies Sets')
+
+            li class = active_class('movie_celebrities')
+              = link_to panel_movie_celebrities_path do
+                = _('Actors/Actresses')
+
+
+        /
+        /li class = active_class('threed_ars')
+        /  = link_to panel_threed_ars_path do
+        /    = image_tag("icons/ic-product-set.svg")
+        /    = _('3D/AR')
+
+    - unless current_admin.role < Role::Moderator
+      li.sub-menu
+        a
+          = image_tag("icons/ic-open-circle.svg")
+          = _('Products')
+
+
+        ul
+          li class = active_class('products')
+            = link_to panel_products_path do
+              = image_tag('icons/ic-product.svg')
+              = _('Product List')
+          li class = active_class('products_containers')
+            = link_to panel_products_containers_path do
+              = image_tag('icons/ic-product-set.svg')
+              = _('Product Sets')
+          /- unless current_admin.role < Role::Admin
+            /li class = active_class('searched_phrases')
+            /  = link_to panel_searched_phrases_path do
+            /    = image_tag('icons/ic-search-term.svg')
+            /    = _('Search Phrases')
+            /li class = active_class('orders_history')
+            /  = link_to panel_orders_history_index_path do
+            /    = image_tag('icons/ic-history.svg')
+            /    = _('Orders History')
+
+    li.sub-menu
+      a
+        = image_tag("icons/ic-open-circle.svg")
+        = _('Profile')
+      ul
+        li class = active_class('settings')
+          = link_to panel_settings_path do
+            = image_tag("icons/ic-settings.svg")
+            = _('Settings')
+        li class = active_class('support')
+          = link_to panel_support_index_path do
+            = image_tag("icons/ic-help-circle.svg")
+            = _('Help and Support')
+        li class = active_class('')
+          = link_to destroy_admin_session_path, method: :delete do
+            = image_tag("icons/ic-sign-out.svg")
+            = _('Sign out')

@@ -1,0 +1,6 @@
+$('#update-social-categories-modal').html("<%= escape_javascript(render 'categories_modal') %>");
+$('#social-following-categories-selector').bootstrapDualListbox({
+  nonSelectedListLabel: 'Available categories',
+  selectedListLabel: 'Linked categories',
+  selectorMinimalHeight: 200
+});

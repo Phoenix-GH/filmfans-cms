@@ -1,0 +1,36 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+  h1.pull-left
+    = _('Searched Phrases')
+    span.counter
+      | (
+      = @searched_phrases.count
+      | )
+  .clearfix
+
+= render 'layouts/alerts'
+.table-responsive
+  table.table
+    thead
+      tr
+        th
+          = sortable 'phrase', _('Searched Phrase')
+          = simple_form_for '', url: panel_searched_phrases_path, method: :get, html: { class: 'form-inline' } do |f|
+            == render partial: 'shared/search_panel', locals: { f: f }
+        th = sortable 'counter', _('Counter')
+        th = _('Actions')
+
+    tbody
+      - @searched_phrases.each do |phrase|
+        tr
+          td
+            big = phrase.phrase
+          td
+            = phrase.counter
+          td.actions
+            = link_to panel_searched_phrase_path(phrase), method: :delete, data: { confirm: _('Are you sure?') } do
+              = image_tag("icons/ic-delete.svg")
+.text-center
+  = paginate @searched_phrases if @searched_phrases.count > 0

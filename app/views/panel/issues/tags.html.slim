@@ -1,0 +1,24 @@
+.header
+  = render 'header', {title: "#{@magazine.title.capitalize} : #{@issue.title}"}
+  = render 'header_edit'
+
+div.magazine-issue-details.tags
+  = render 'layouts/alerts'
+  .image-pane.fields style = 'display:none'
+    .images
+
+  .image-detail.fields style = 'display:none'
+    .back
+      span.back-handle
+        span class = 'fa fa-angle-left icon'
+        |Back to issue overview
+
+    .image-detail-container
+
+    .actions
+      = link_to _('Reset'), 'javascript:void(0);', class: 'btn btn-default btn-reset-img-detail'
+      = link_to _('Save'), 'javascript:void(0);', class: 'btn btn-primary btn-save-img-detail'
+
+  .actions
+    = link_to _('Back'), upload_panel_magazine_issue_path(@magazine, @issue), class: 'btn btn-default'
+    = link_to _('Next'), tag_products_panel_magazine_issue_path(@magazine, @issue), class: 'btn btn-primary'

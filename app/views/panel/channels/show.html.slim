@@ -1,0 +1,9 @@
+p
+  = link_to _('Edit Channel'), edit_panel_channel_path(@channel), class: 'btn btn-default'
+p
+  strong= _('Name: ')
+  = @channel.name
+p
+  strong= _('Picture: ')
+  p
+    = image_tag @channel.image

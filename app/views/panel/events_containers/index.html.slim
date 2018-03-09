@@ -1,0 +1,39 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+  h1.pull-left
+    = _('Event Sets')
+    span.counter
+      | (
+      = @events_containers.length
+      | )
+  = link_to new_panel_events_container_path, class: 'btn btn-primary pull-right' do
+    = image_tag("icons/ic-add.svg")
+    = _('Add New Event Set')
+  .clearfix
+= render 'layouts/alerts'
+.table-responsive
+  table.table
+    thead
+      tr
+        th
+          = sortable 'name', _('Swipe Set Name')
+          = simple_form_for '', url: panel_events_containers_path, method: :get, html: {class: 'form-inline'} do |f|
+            == render partial: 'shared/search_panel', locals: {f: f}
+        th = sortable 'events', _('Elements')
+        th = sortable 'created_at', _('Created')
+        th = _('Actions')
+    tbody
+      - @events_containers.each do |event_container|
+        tr
+          td = event_container.name
+          td = event_container.events.count
+          td = l event_container.created_at
+          td.actions
+            - if can?(:update, event_container)
+              = link_to edit_panel_events_container_path(event_container) do
+                = image_tag("icons/ic-edit.svg")
+            - if can?(:destroy, event_container)
+              = link_to [:panel, event_container], data: {confirm: _('Are you sure?')}, method: :delete do
+                = image_tag("icons/ic-delete.svg")

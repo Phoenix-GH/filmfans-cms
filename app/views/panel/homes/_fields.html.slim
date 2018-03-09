@@ -1,0 +1,6 @@
+.fields
+  = f.input :name, label: _('Home Name')
+  = f.input :home_type, collection: Home.home_types.keys, include_blank: false, class: "form-control"
+.actions
+  = link_to _('Back'), panel_homes_path, class: 'btn btn-default'
+  = f.submit _('Save'), class: 'btn btn-primary'

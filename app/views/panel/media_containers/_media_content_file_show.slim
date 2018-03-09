@@ -1,0 +1,9 @@
+- if media_content.image?
+  = link_to _('Add Tags'), new_panel_media_container_tag_path(@media_container), class: 'btn btn-default btn-sm'
+
+  h3 = _('File: ') + media_content.file.file.filename
+  p = image_tag media_content.file
+
+- if media_content.video?
+  h3 = _('File: ') + media_content.mp4_version_file.file.filename
+  p = video_tag media_content.mp4_version_file, autoplay: true, controls: true

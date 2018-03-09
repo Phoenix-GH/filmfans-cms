@@ -1,0 +1,30 @@
+tbody
+  - @products.each do |product|
+    tr.products-table-product-row
+      td.product-image-col.product-detail-trigger data-id="#{product.id}"
+
+        .table--product_image
+          - unless product.image_display_url.blank?
+            = image_tag product.image_display_url, class: 'img-responsive'
+
+        .table--product_name
+          .table--product_name--name = product.name
+          .table--product_name--price = product.price
+
+      td.product-brand-col = product.brand
+      td.product-category-cell data-id="#{product.id}" title="Click to change categories"
+        - product.categories.each do |category|
+          div
+            = category.full_name
+      td = product.vendor
+      td = product.created_at.to_date
+      td
+        - if can?(:update, product)
+          div id = "toggle_#{product.id}"
+            = render 'toggle_button', product: product
+      td
+        = link_to edit_panel_product_path(product) do
+          = image_tag("icons/ic-edit.svg")
+
+        = link_to [:panel, product], data: { confirm: _('Are you sure?') }, method: :delete do
+          = image_tag("icons/ic-delete.svg")

@@ -1,0 +1,35 @@
+.header
+  = render 'header', active: 'home_contents'
+= render 'layouts/alerts'
+= simple_form_for @form, as: :home_form, url: panel_home_path(@home, step: :home_contents), html: { method: :patch } do |f|
+  .homes
+    .row
+      .col-md-8
+        .content-panel.content-panel--container
+          .content-panel-body
+            .content-panel-heading
+              .row
+                .col-sm-6.text-left
+                  h2.content-heading= _('Containers list')
+                .col-sm-6.text-right
+                  = link_to_add_association_fields _('Add new container'), f, :home_contents, 'home_content_fields', btn_class: 'btn btn-default', target_container: '.content-containers ol'
+
+            .content-containers
+              ol.js-mp-elements-container { data= { emulator: '#mobile_preview' } }
+                = f.simple_fields_for :home_contents do |ff|
+                  == render 'home_content_fields', f: ff
+
+
+      .col-md-4
+        h2.content-heading= _('Preview')
+        = link_to '#', data: { placement: :top, toggle: :tooltip, title: 'For best layout look try to keep two  following half-width containers in the same type'},
+          class: 'preview-tooltip-link' do
+          = image_tag 'icons/ic-help-circle.svg'
+        #mobile_preview.content-panel.content-panel--preview.js-mp-emulator
+          .media-container class=(@home.home_type === 'trending' ? 'same-type': '')
+            .row.js-mp-emulator__screen
+
+
+  .actions
+    = link_to _('Back'), edit_panel_home_path(@home), class: 'btn btn-default'
+    = f.submit _('Save'), class: 'btn btn-primary'

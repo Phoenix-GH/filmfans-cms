@@ -1,0 +1,120 @@
+.header
+  = render 'header'
+  = render 'layouts/alerts'
+
+.benchmark-detail.product-detail-support
+  .fields
+    .table-responsive
+      table.table
+        thead
+          tr
+            th colspan=2
+              - unless @benchmark.details['remote_ip'].blank?
+                span.ip-country
+                  = _('IP: ')
+                  span.ip
+                    = "#{@benchmark.details['remote_ip']} "
+                  span.country
+              - if @benchmark.using_ulab_prs?
+                div
+                  | Using ULAB PRS
+              - unless @benchmark.app_name_version.blank?
+                div
+                  = "From app: #{@benchmark.app_name_version}"
+          tr
+            th = "Original: #{@origin[:file_size]}"
+            th = "Cropped: #{@cropped[:file_size]}"
+        tbody
+          tr.user_photo
+            td.col-xs-6
+              h4 = "Size: #{@origin[:dimension]}"
+              .origin-photo data={sub_results: @sub_results.to_json}
+                = image_tag @origin[:image_url]
+            td.col-xs-6
+              h4 = "Size: #{@cropped[:dimension]}"
+              = image_tag @cropped[:image_url]
+              = render 'keywords', {image_url: @cropped_image_url}
+
+    = render 'profiling'
+
+    hr id='recognized-items'
+    h3
+      b = _('Recognized items ')
+      - if @is_multi_crops
+        = _('(click to view details)')
+    - if @is_multi_crops
+      = render 'panel/benchmarks/multi', {benchmark: @benchmark, areas: @recognized_areas, selected_area: @selected_area}
+    - else
+      = render 'panel/benchmarks/single', {benchmark: @benchmark}
+
+    - if !@is_multi_crops or @is_area_selected
+      - unless @box_image_url.blank?
+        = render 'keywords', {image_url: @box_image_url}
+      = render 'panel/benchmarks/info', { predicted_categories: @predicted_categories, search_categories: @search_categories,
+              response_message: @response_message, response_keywords: @response_keywords }
+
+  - if !@is_multi_crops or @is_area_selected
+    = simple_form_for @form, as: :benchmark_form, url: panel_benchmark_path(@benchmark, @search_params), method: :patch do |f|
+      .fields
+        h3
+          b = _('Assessment')
+        .assetment
+          = f.input :review, collection: @assessments,
+                  label: _('')
+          = f.input :retrained_category, collection: @trained_categories,
+                  as: :grouped_select, group_method: :subcategories,
+                  class: 'form-control',
+                  selected: @retrained_category&.id,
+                  include_blank: 'No category selected',
+                  disabled: @benchmark.review != 'PRS_W_CATE',
+                  label: "Train this image to category: #{@retrained_category&.imaging_category}"
+          = f.input :comment, as: :text, label: _('Comment')
+        .actions
+          = link_to _('Back'), panel_benchmarks_path(@search_params), class: 'btn btn-default'
+          = f.submit _('Save'), class: 'btn btn-primary'
+
+    .fields.products-search
+      .row
+        .col-md-6
+          .form-group
+            h3
+              b = "Recognized products (#{@products.size})"
+
+          .form-group
+            - if @pids.blank?
+              | No product returned
+            - else
+              - if @products.size != @pids.size
+                b
+                  | Notice:
+                = " #{@pids.size} product IDs returned by PRS but #{@products.size} found in HS DB"
+              .row
+                .col-md-12
+                  - @products.each do |product|
+                    .result.product-detail-trigger data-id="#{product.id}"
+                      label.result__content.benchmark-tab
+                        .result__content__image
+                          - unless product.image_display_url.blank?
+                            = image_tag product.image_display_url
+        - unless @using_ulab_prs
+          .col-md-6
+            .form-group
+              h3
+                b = "PRS Recognized products (#{@prs_products.size})"
+
+            .form-group
+              - if @prs_pids.blank?
+                | No product returned
+              - else
+                - if @prs_products.size != @prs_pids.size
+                  b
+                    | Notice:
+                  = " #{@prs_pids.size} product IDs returned by PRS but #{@prs_products.size} found in HS DB"
+                .row
+                  .col-md-12
+                    - @prs_products.each do |product|
+                      .result.product-detail-trigger data-id="#{product.id}"
+                        label.result__content.benchmark-tab
+                          .result__content__image
+                            - unless product.image_display_url.blank?
+                              = image_tag product.image_display_url

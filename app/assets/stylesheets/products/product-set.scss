@@ -1,0 +1,14 @@
+.locale-wrapper {
+    .enabled:before {
+        content: "\2713";
+    }
+    .disabled {
+        color: grey;
+    }
+    .active {
+        font-weight: 700;
+    }
+    .inactive {
+        font-weight: 100;
+    }
+}

@@ -1,0 +1,10 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+    = link_to _('Event Sets'), panel_events_containers_path
+    span.path-separator
+  h1 = _('Edit Event Set')
+= render 'layouts/alerts'
+= simple_form_for @form, as: :events_container_form, url: panel_events_container_path(@events_container), method: :patch do |f|
+  == render partial: 'fields', locals: {f: f}

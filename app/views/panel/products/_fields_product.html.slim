@@ -1,0 +1,34 @@
+= f.error_notification
+.fields
+  .row
+    .col-md-5
+      .form-inputs
+        = f.input :name, label: 'Product Name', placeholder: 'Product Name'
+        = f.input :brand, placeholder: 'Brand Name'
+        .form-group
+          label.control-label Category
+          = f.input_field :category_ids, label: 'Category', class: 'js-category-type', collection: @presenter.category_main_options, as: :grouped_select, multiple: 'multiple',   group_method: :subcategories, include_blank: false, prompt: false
+        .form-group
+          label.control-label
+            | Vendor link
+            span.optional
+              |  (optional)&nbsp;
+              i.hs-icon-ic-info-circle
+          .input-group
+            span.input-group-addon
+              | http://
+            = f.input_field :vendor_url, label: 'Vendor link (optional)', class: 'form-control', placeholder: 'Paste link'
+        = f.input :shipping_info, as: :text, label: 'Shipping information', placeholder: 'Shipping method and costs', rows: 5
+    .col-md-7
+      .field.enabled-checkbox
+        .form-group
+          = f.label :containers_placement, class: "control-label", label: _('Containers Placement')
+          .status-checkbox-wrapper
+            = f.input_field :containers_placement, as: :boolean, boolean_style: :inline
+            = f.label :containers_placement
+            .for-active
+.actions
+  .row
+    .col-md-5
+      = link_to _('Cancel'), panel_products_path, class: 'btn btn-default'
+      = f.submit _('Next'), class: 'btn btn-primary'

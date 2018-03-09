@@ -1,0 +1,130 @@
+DEVISE_MAILER_SENDER: 'no-reply@hotspotting.com'
+ACTION_MAILER_HOST: 'localhost:3000'
+ACTION_MAILER_ASSET_HOST: 'http://localhost:3000'
+
+AWS_ACCESS_KEY_ID: xxx
+AWS_SECRET_ACCESS_KEY: xxx
+
+AIRBRAKE_API_KEY: 'api key'
+AIRBRAKE_HOST: 'host'
+AIRBRAKE_PORT: '80'
+AIRBRAKE_ENV_NAME: 'development'
+
+CAROUSEL_ICONS_TRENDING: 's3_trending_url'
+CAROUSEL_ICONS_TV: 's3_tv_url'
+CAROUSEL_ICONS_MAGAZINE: 's3_magazine_url'
+
+IMAGE_METRY_API_KEY: 'api_key'
+IMAGE_METRY_API_PRIVATE_KEY: 'api_private_key'
+IMAGE_METRY_API_SECRET: 'api_secret'
+
+PRS_ULAB_PROXY_URL: 'http://localhost:8080'
+PRS_ULAB_URL: 'prs ulab url'
+# This defines the default PRS system/mode. Can be overidden via request parameters:
+#   v=2 (only): always use multi-object recog. BB system will be used
+#   v=2&prs=ulab: always use multi-object recog, calling to ULAB PRS
+#   prs=ulab (only): always use single object recog calling to ULAB PRS
+#
+# one of following values:
+#   ulab_single: use Ulab PRS, with single object recognition
+#   ulab_multi: use Ulab PRS, with multi object recognition
+#   bb_single: single object recognition
+#   bb_multi: multi-object recognition
+PRS_USE_SYSTEM: 'bb_single'
+# 0: no compression
+PRS_IMAGE_COMPRESSION_LEVEL: "0"
+# just for testing the multi-object classifier
+PRS_MULTI_OBJ_CLASSIFIER_URL: 'http://localhost'
+PRS_NUMBER_OF_RETURN_PRODUCTS: '24'
+KACHING_CROP_SHOP_APP_NAME: 'KachingGo'
+
+FACEBOOK_KEY: 'xxx'
+FACEBOOK_SECRET: 'xxx'
+
+ULAB_CLIENT_SECRET: 'api_secret'
+ULAB_API_URL: 'http://search.ulab.com'
+
+ULAB_PDF2IMG_CONVERTER_URL: 'upload_url'
+
+# image version to be deliver to mobile apps
+# for supported versions, see issue_page_uploader.rb
+# default (remove this config) is original quality
+# note: quality_100 is not the original quality. It's
+#       100% quality of the jpeg format
+MAGAZINE_ISSUE_PAGE_IMAGE_DEF_VERSION: 'quality_100'
+
+WIKITUBE_HOST: 'https://api.wikitude.com'
+WIKITUBE_TARGET_COLLECTION_ID: ''
+WIKITUDE_API_TOKEN_FOR_CMS: ''
+WIKITUBE_MOBILE_TOKEN: ''
+WIKITUDE_VERSION: '2'
+
+OR_FEATURE_COUNT_THRESHOLD: '5'
+
+CURRENCY_LAYER_API_KEY: 'xxxx'
+
+VISENZE_URL: ''
+VISENZE_MANUAL_APP_ACCESS_KEY: ''
+VISENZE_MANUAL_APP_SECRETE_KEY: ''
+
+CRYPT_KEEPER_SECRET_KEY: 'xxx'
+
+CRAWLER_URL: 'http://xxx'
+
+PRODUCT_IMAGE_EXPORT_ENABLED: 'false'
+
+EXT_PRODUCT_KEYWORDS_URL: 'http://xxx'
+
+MOVIE_GRACENOTE_ASSET_BASE_URL: 'http://ulab.tmsimg.com'
+MOVIE_GRACENOTE_API_BASE_URL: 'http://data.tmsapi.com/v1.1'
+MOVIE_GRACENOTE_API_KEY: ''
+# Maximum 100 mi (160 km)
+MOVIE_SEARCH_RADIUS_KM: '100'
+MOVIE_SEARCH_DISTANCE_UNIT: 'mi'
+#max 90
+MOVIE_SEARCH_NUM_SCHEDULE_DAY: '90'
+MOVIE_API_CACHE_DEF_MAX_AGE_HOUR: '4'
+MOVIE_FALLBACK_TIMEZONE: 'US/Eastern'
+MOVIE_FALLBACK_ZIPCODE: '90001'
+
+development:
+  AWS_STORE_DIRECTORY: 'bucket1'
+  AWS_STORE_REGION: 'eu-west-1'
+
+  BRAINTREE_MERCHANT_ID: 'xxx'
+  BRAINTREE_PUBLIC_KEY: 'xxx'
+  BRAINTREE_PRIVATE_KEY: 'xxx'
+
+  MAIL_SMTP_SETTINGS_ADDRESS: '52.76.39.203'
+  MAIL_SMTP_SETTINGS_PORT: '25'
+  MAIL_SMTP_SETTINGS_ENABLE_STARTTLS_AUTO: 'false'
+  MAIL_SMTP_SETTINGS_DOMAIN: 'hotspotting.com'
+  MAIL_SMTP_SETTINGS_AUTHENTICATION: 'login'
+  MAIL_SMTP_SETTINGS_USERNAME: 'no-reply@hotspotting.com'
+  MAIL_SMTP_SETTINGS_PASSWORD: 'uLab123'
+staging:
+  AWS_STORE_DIRECTORY: 'bucket1'
+  AWS_STORE_REGION: 'eu-west-1'
+  # for example: xyz.cloudfront.net
+  # if this config is removed, S3 will be accessed directly
+  AWS_CDN_HOST: 'cnd-host'
+  BRAINTREE_MERCHANT_ID: 'xxx'
+  BRAINTREE_PUBLIC_KEY: 'xxx'
+  BRAINTREE_PRIVATE_KEY: 'xxx'
+
+  MAIL_SMTP_SETTINGS_ADDRESS: 'localhost'
+  MAIL_SMTP_SETTINGS_PORT: '1025'
+  MAIL_SMTP_SETTINGS_ENABLE_STARTTLS_AUTO: 'false'
+  MAIL_SMTP_SETTINGS_DOMAIN: 'gmail.com'
+  MAIL_SMTP_SETTINGS_AUTHENTICATION: 'plain'
+  MAIL_SMTP_SETTINGS_USERNAME: 'xxx'
+  MAIL_SMTP_SETTINGS_PASSWORD: 'xxx'
+production:
+  AWS_STORE_DIRECTORY: 'bucket2'
+  AAWS_STORE_REGION: 'eu-west-1'
+  BRAINTREE_MERCHANT_ID: 'xxx'
+  BRAINTREE_PUBLIC_KEY: 'xxx'
+  BRAINTREE_PRIVATE_KEY: 'xxx'
+  RAILS_LOG_LEVEL: 'debug'
+
+  ELASTICSEARCH_URL: 'http://domain.com'

@@ -1,0 +1,64 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+    = link_to _('Products'), panel_products_path
+    span.path-separator
+  h1 = _('Add New Product')
+  .tabs
+    = link_to edit_panel_product_path(@product, step: 'product') do
+      span.step 1
+      = _('Details')
+      span.underline
+    = link_to edit_panel_product_path(@product, step: 'variants') do
+      span.step 2
+      = _('Parameters')
+      span.underline
+    = link_to edit_panel_product_path(@product, step: :similars), class: 'active' do
+      span.step 3
+      = _('SIMILAR PRODUCTS')
+      span.underline
+= render 'layouts/alerts'
+= simple_form_for @form, as: :similar_products_form, url: panel_product_path(@product), method: :patch do |f|
+  .form-inputs
+    = hidden_field_tag(:step, 'similars')
+  .fields.products-search
+    = f.error_notification
+    - if @form.errors.any?
+      #error_notification
+        ul
+          - @form.errors.full_messages.each do |msg|
+            li= msg
+    .row
+      .col-md-12.container-name-col
+        /- f.object.linked_products.each do | linked_product |
+        .linked-products-collection data={template: similar_product_template_fields(f).gsub("\n", "")}
+          = f.simple_fields_for :similar_products, include_id: false  do |ff|
+            = render 'panel/product_similarities/fields', f: ff
+
+    .row
+      .row.search__filters
+        .col-md-4
+          .form-group.search
+            = f.input_field :vendor, collection: Store.list_stores_having_products, value_method: :name, include_blank: 'All Merchants', class: 'products-vendor-filter__query-field form-control', selected: params[:vendor]
+        .col-md-4
+          = select_tag :category_id, option_groups_from_collection_for_select(@presenter.category_main_options, :subcategories, :name, :id, :name), class: 'products-category-filter__query-field form-control', prompt: 'All Categories'
+        .col-md-4.search__field
+          = text_field_tag :search, '', class: 'string search form-control products-search__query-field', placeholder: 'Search product'
+      .col-md-12.products-search__selected-products-col
+        h2.products-search__label
+          = _('Similar products')
+          span.products-search__label-counter.js-selected-products-counter<= ''
+        .col-md-8.pull-right
+        .products-search__selection
+          ul.js-product-selection
+        p.products-search__help-text
+    .row
+      .col-md-12.products-search__search-products-col
+
+        .products-search__results
+  .actions
+    = link_to _('Back'), edit_panel_product_path(@product, step: 'variants'), class: 'btn btn-default'
+    = f.button :submit, _('Save'), class: 'btn btn-success'
+
+= render partial: 'shared/popup_product_detail'

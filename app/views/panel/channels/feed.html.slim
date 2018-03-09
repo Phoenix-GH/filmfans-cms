@@ -1,0 +1,57 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+    = link_to _('Media Owners'), panel_channels_path
+    span.path-separator
+  h1 = _('Add New Channel')
+  .clearfix
+  .tabs
+    = link_to new_panel_channel_path do
+      .step-number 1
+      = _('Details')
+      span.underline
+
+    = link_to feed_panel_channels_path, class: 'active' do
+      .step-number 2
+      = _('Feed')
+      span.underline
+
+    = link_to '' do
+      .step-number 3
+      = _('Trending')
+      span.underline
+
+    = link_to '' do
+      .step-number 4
+      = _('Videos')
+      span.underline
+
+    = link_to '' do
+      .step-number 5
+      = _('TV shows')
+      span.underline
+
+    = link_to '' do
+      .step-number 6
+      = _('Magazines')
+      span.underline
+= render 'layouts/alerts'
+.fields
+  .social-feed
+    = image_tag 'icons/ic-social-feed-empty.svg', class: 'ic-social-feed'
+    div
+      span.blue MTV
+      span Channel has no Social
+    'Media Feeds linked yet
+    br
+    br
+    .actions
+      = link_to _('Skip'), panel_channels_path, class: 'btn btn-default'
+      .media-social-btn.btn.btn-primary
+          'Manage Social Media Feed
+.actions
+  = link_to _('Next'), panel_channels_path, class: 'btn btn-default'
+  .btn.btn-primary Save
+
+= render partial: 'shared/toggle_feed_popup'

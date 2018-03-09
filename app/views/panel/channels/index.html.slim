@@ -1,0 +1,73 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+  h1.pull-left
+    = _('Channels')
+    span.counter
+      | (
+      = @channels.length
+      | )
+  = link_to new_panel_channel_path, class: 'btn btn-primary pull-right' do
+    = image_tag("icons/ic-add.svg")
+    = _('Add Channel')
+  = link_to order_panel_channels_path, class: 'btn btn-primary pull-right' ,style: 'margin-right:15px' do
+    = _('Order Channel')
+  .clearfix
+= render 'layouts/alerts'
+.table-responsive
+  = simple_form_for '', url: panel_channels_path, method: :get, html: { class: 'form-inline' } do |f|
+    table.table
+      thead
+        tr
+          th= _('Picture')
+          th
+            = sortable 'name', _('Channel Name')
+            == render partial: 'shared/search_panel', locals: { f: f }
+          th
+            = _('Country')
+            .form-group.search
+              input type="hidden" value="#{params[:country]}" id="current_filter_country"
+              = f.input_field :country, collection: @presenter.channel_countries,
+                      class: 'form-control', selected: params[:country], include_blank: 'All'
+          th = sortable 'media_owners', _('Linked Celebrities')
+          th = sortable 'feed_active', _('Social Media Feed')
+          th = sortable 'visibility', _('Visibility')
+          th = _('Actions')
+
+      tbody
+        - @channels.each do |channel|
+          tr
+            td.picture = image_tag channel.try(:picture).try(:custom_url)
+            td = channel.name
+            td
+              - if channel.countries.blank?
+                = _('Global')
+              - else
+                - channel.countries.each do |c_code|
+                  div
+                    = @country_code_to_name[c_code]
+            td
+              - if channel.key.blank?
+                = channel.media_owners.count
+              - else
+                = _('-')
+            td
+              - if can?(:update, channel) and channel.key.blank?
+                div id = "toggle_#{channel.id}"
+                  = render 'toggle_feed_active', channel: channel
+            td
+              - if can?(:update, channel) and channel.key.blank?
+                div id = "channel_visibility_#{channel.id}"
+                  = render 'channel_visibility', channel: channel
+            td.actions
+              - if can?(:update, channel)
+                = link_to edit_panel_channel_path(channel) do
+                  = image_tag("icons/ic-edit.svg")
+              - if can?(:destroy, channel) and channel.key.blank?
+                = link_to [:panel, channel], data: { confirm: _('Are you sure?') }, method: :delete do
+                  = image_tag("icons/ic-delete.svg")
+
+= render partial: 'shared/toggle_feed_popup'
+.text-center
+  = paginate @channels if @channels.length > 0

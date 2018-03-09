@@ -1,0 +1,48 @@
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+  h1.pull-left
+    = _('Movie Celebrities')
+    span.counter
+      | (
+      = @entries.total_count
+      | )
+  .clearfix
+= render 'layouts/alerts'
+.table-responsive.movie-celebrities-table
+  table.table
+    thead
+      = simple_form_for '', url: panel_movie_celebrities_path, method: :get, html: {class: 'form-inline'} do |f|
+
+        tr
+          th = _('Avatar')
+          th
+            = sortable 'name', _('Name')
+            == render partial: 'shared/search_panel', locals: { f: f, field: :name, second_search: true }
+          th
+            = sortable 'instagram', _('Instagram')
+            .form-group.search
+              = f.input_field :instagram_status, collection: @instagram_status, include_blank: 'All', class: 'form-control', selected: params[:instagram_status]
+          th = _('Actions')
+    tbody
+      - @entries.each do |c|
+        tr
+          td.image = image_tag GracenoteMoveDetailSerializer::full_image_url(c.image_uri)
+          td
+            = c.name
+          td
+            -if c.instagram_status == MovieCelebrityMapping::INSTAGRAM_STATUS_NO_ACCOUNT
+              | No Instagram account found
+            -elsif c.instagram_status == MovieCelebrityMapping::INSTAGRAM_STATUS_NOT_FOLLOWED
+              | Not yet followed
+            -unless c.instagram_id.blank?
+              div
+                = link_to _('Go To Site'), "https://www.instagram.com/#{c.instagram_id}", target: '_blank'
+          td.actions
+            - if can?(:update, c)
+              = link_to edit_panel_movie_celebrity_path(c) do
+                = image_tag("icons/ic-edit.svg")
+
+  .text-center
+    = paginate @entries if @entries.count > 0

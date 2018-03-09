@@ -1,0 +1,28 @@
+- set_var 'mediaContainerId', @media_container.id
+- set_var 'mediaContainerTags', tags_array(@media_container)
+
+.header
+  .breadcrumbs
+    = link_to _('Home'), "/"
+    span.path-separator
+    = link_to _('Containers'), panel_media_containers_path
+    span.path-separator
+  h1 = _('Edit Media Container')
+  .tabs
+    = link_to edit_panel_media_container_path(@media_container) do
+      = _('Details')
+      span.underline
+    = link_to new_panel_media_container_tag_path(@media_container), class: 'active' do
+      = _('Tags')
+      span.underline
+
+.form-content
+  label.control-label
+    = _('Click to add tags: ')
+  #tags-alert.h5
+  = image_tag @media_container.media_content.file, class: 'image-with-tags'
+
+.actions
+  = link_to _('Back'), panel_media_containers_path, class: 'btn btn-default'
+  .btn.btn-primary#add-all-tags
+    = _('Submit')

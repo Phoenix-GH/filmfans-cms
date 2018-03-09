@@ -1,0 +1,7 @@
+.row.content-container
+  .col-sm-5
+    = f.input :size, label: false, input_html: { class: 'container-type-selector' }
+  .col-sm-5
+    = f.input :price, label: false, input_html: { class: 'container-name-selector', value: number_with_precision(f.object.price, precision: 2)}
+  .col-sm-2
+    = link_to_remove_fields "<i class='fa fa-times'></i>".html_safe, f

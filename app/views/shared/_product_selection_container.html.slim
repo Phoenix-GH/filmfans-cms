@@ -1,0 +1,19 @@
+.row
+  .col-md-12.products-search__selected-products-col
+    h2.products-search__label
+      = "#{title}"
+      span.products-search__label-counter.js-selected-products-counter<= ''
+    .products-search__selection
+      ul.js-product-selection
+    .col-md-8.pull-right
+      .row.search__filters
+        .col-md-4
+          = select_tag :vendor, options_from_collection_for_select(Store.all, 'name', 'name'), class: 'products-vendor-filter__query-field', include_blank: 'All Merchants'
+        .col-md-4
+          = select_tag :category_id, option_groups_from_collection_for_select(@presenter.category_main_options, :subcategories, :name, :id, :name), class: 'products-category-filter__query-field', prompt: 'All Categories'
+        .col-md-4.search__field
+          = text_field_tag :search, '', class: 'string search form-control products-search__query-field', placeholder: 'Search product'
+    p.products-search__help-text
+.row
+  .col-md-12.products-search__search-products-col
+    .products-search__results
